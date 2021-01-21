@@ -1,0 +1,379 @@
+\hypertarget{class_conflux_1_1_hdmi_tools}{}\doxysection{Conflux\+::Hdmi\+Tools Class Reference}
+\label{class_conflux_1_1_hdmi_tools}\index{Conflux::HdmiTools@{Conflux::HdmiTools}}
+
+
+This class is a singleton that contains the full developer-\/facing interface for developing applications that leverage some of the internal H\+D\+MI kits for original Xbox. Currently supported devices are indexed by Conflux\+::\+Hdmi\+Hardware\+Id.  
+
+
+
+
+{\ttfamily \#include $<$Hdmi\+Tools.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{class_conflux_1_1_hdmi_tools_a8d93776554ab8040265f4287c9df2dda}{Initialize}} ()
+\begin{DoxyCompactList}\small\item\em Initializes the singleton object. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_conflux_1_1_hdmi_tools_a5c0faf727bc12dc6ede3272cfc849624}{Is\+Feature\+Supported}} (Supported\+Features feature)
+\begin{DoxyCompactList}\small\item\em Check feature support on the current platform. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_conflux_1_1_hdmi_tools_a1cfe97c697a70ee5900c87bfd0afa723}{Get\+All\+Supported\+Features}} (std\+::vector$<$ Supported\+Features $>$ $\ast$features)
+\begin{DoxyCompactList}\small\item\em Gets all configurable features supported by the installed H\+D\+MI hardware. \end{DoxyCompactList}\item 
+const std\+::map$<$ Supported\+Features, \mbox{\hyperlink{class_conflux_1_1_ranged_int_value}{Ranged\+Int\+Value}} $\ast$ $>$ \& \mbox{\hyperlink{class_conflux_1_1_hdmi_tools_a215620c0d7615c95a370dbd5004819f0}{Get\+Const\+Feature\+Map}} ()
+\begin{DoxyCompactList}\small\item\em Gets a read only reference to the map of supported features and values. \end{DoxyCompactList}\item 
+const char $\ast$ \mbox{\hyperlink{class_conflux_1_1_hdmi_tools_a9bd807c5efb7b32344bcfdb7b4d42f1a}{Get\+Hdmi\+Name}} ()
+\begin{DoxyCompactList}\small\item\em Get the name of the installed H\+D\+MI device. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_conflux_1_1_version_code}{Version\+Code}} \mbox{\hyperlink{class_conflux_1_1_hdmi_tools_a6b032f1c575fcdb0f05b7e43c48ef9c6}{Get\+Firmware\+Version}} ()
+\begin{DoxyCompactList}\small\item\em Gets a \mbox{\hyperlink{class_conflux_1_1_version_code}{Version\+Code}} object filled out with the firmware version. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_conflux_1_1_version_code}{Version\+Code}} \mbox{\hyperlink{class_conflux_1_1_hdmi_tools_ada3a2e6ca14e6c97f7c36ba77ee70195}{Get\+Kernel\+Patch\+Version}} ()
+\begin{DoxyCompactList}\small\item\em Gets a \mbox{\hyperlink{class_conflux_1_1_version_code}{Version\+Code}} object filled out with the kernel version. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_conflux_1_1_hdmi_tools_a93c5ca76dac15bf9565d201944659405}{Is\+Update\+Available}} (Update\+Source update\+Source)
+\begin{DoxyCompactList}\small\item\em Checks to see if a firmware update is available via the provided update source. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_conflux_1_1_hdmi_tools_ac71a1ba6798e61dae0ed5da70466781d}{Update\+Firmware}} (Update\+Source update\+Source)
+\begin{DoxyCompactList}\small\item\em Perform firmware update via the proviced update source. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_conflux_1_1_hdmi_tools_a3faee2a140637f44ee64d640c7914cd4}{Get\+Feature\+Values}} (Supported\+Features feature, int $\ast$value, int $\ast$min, int $\ast$max)
+\begin{DoxyCompactList}\small\item\em Get the current value of a given feature, as well as the valid value range. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_conflux_1_1_hdmi_tools_aca5e65f2e911ea486ed6975bf8ddb5e9}{Set\+Feature\+Value}} (Supported\+Features feature, int value)
+\begin{DoxyCompactList}\small\item\em Sets the current value of a configurable feature. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_conflux_1_1_hdmi_tools_a82d97492a55c51b8c54c57b101da68e4}{Update\+Feature\+Config}} ()
+\begin{DoxyCompactList}\small\item\em Updates all feature values in the hardware configuration of the H\+D\+MI hardware. \end{DoxyCompactList}\item 
+const char $\ast$ \mbox{\hyperlink{class_conflux_1_1_hdmi_tools_aef5d704ee068cbfb83306941786680e3}{Get\+Feature\+Name}} (Supported\+Features feature)
+\begin{DoxyCompactList}\small\item\em Gets the name of the feature requested. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_conflux_1_1_hdmi_tools_a7e946789580b249b4959e112850631eb}{Save\+Settings}} ()
+\begin{DoxyCompactList}\small\item\em Save all configurable features. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_conflux_1_1_hdmi_tools}{Hdmi\+Tools}} $\ast$ \mbox{\hyperlink{class_conflux_1_1_hdmi_tools_a8f89271575bf3ed668e153b764e58bb8}{Get\+Instance}} ()
+\begin{DoxyCompactList}\small\item\em Get the singleton Instance object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This class is a singleton that contains the full developer-\/facing interface for developing applications that leverage some of the internal H\+D\+MI kits for original Xbox. Currently supported devices are indexed by Conflux\+::\+Hdmi\+Hardware\+Id. 
+
+
+
+Definition at line 40 of file Hdmi\+Tools.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_conflux_1_1_hdmi_tools_a1cfe97c697a70ee5900c87bfd0afa723}\label{class_conflux_1_1_hdmi_tools_a1cfe97c697a70ee5900c87bfd0afa723}} 
+\index{Conflux::HdmiTools@{Conflux::HdmiTools}!GetAllSupportedFeatures@{GetAllSupportedFeatures}}
+\index{GetAllSupportedFeatures@{GetAllSupportedFeatures}!Conflux::HdmiTools@{Conflux::HdmiTools}}
+\doxysubsubsection{\texorpdfstring{GetAllSupportedFeatures()}{GetAllSupportedFeatures()}}
+{\footnotesize\ttfamily void Conflux\+::\+Hdmi\+Tools\+::\+Get\+All\+Supported\+Features (\begin{DoxyParamCaption}\item[{std\+::vector$<$ Supported\+Features $>$ $\ast$}]{features }\end{DoxyParamCaption})}
+
+
+
+Gets all configurable features supported by the installed H\+D\+MI hardware. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em features} & enumeration of possible supported features. Indexed by Conflux\+::\+Supported\+Features. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 115 of file Hdmi\+Tools.\+cpp.
+
+\mbox{\Hypertarget{class_conflux_1_1_hdmi_tools_a215620c0d7615c95a370dbd5004819f0}\label{class_conflux_1_1_hdmi_tools_a215620c0d7615c95a370dbd5004819f0}} 
+\index{Conflux::HdmiTools@{Conflux::HdmiTools}!GetConstFeatureMap@{GetConstFeatureMap}}
+\index{GetConstFeatureMap@{GetConstFeatureMap}!Conflux::HdmiTools@{Conflux::HdmiTools}}
+\doxysubsubsection{\texorpdfstring{GetConstFeatureMap()}{GetConstFeatureMap()}}
+{\footnotesize\ttfamily const std\+::map$<$ Supported\+Features, \mbox{\hyperlink{class_conflux_1_1_ranged_int_value}{Ranged\+Int\+Value}} $\ast$ $>$ \& Conflux\+::\+Hdmi\+Tools\+::\+Get\+Const\+Feature\+Map (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Gets a read only reference to the map of supported features and values. 
+
+\begin{DoxyReturn}{Returns}
+const std\+::map$<$\+Supported\+Features, Ranged\+Int\+Value$\ast$$>$\& feature map. 
+\end{DoxyReturn}
+
+
+Definition at line 126 of file Hdmi\+Tools.\+cpp.
+
+\mbox{\Hypertarget{class_conflux_1_1_hdmi_tools_aef5d704ee068cbfb83306941786680e3}\label{class_conflux_1_1_hdmi_tools_aef5d704ee068cbfb83306941786680e3}} 
+\index{Conflux::HdmiTools@{Conflux::HdmiTools}!GetFeatureName@{GetFeatureName}}
+\index{GetFeatureName@{GetFeatureName}!Conflux::HdmiTools@{Conflux::HdmiTools}}
+\doxysubsubsection{\texorpdfstring{GetFeatureName()}{GetFeatureName()}}
+{\footnotesize\ttfamily const char $\ast$ Conflux\+::\+Hdmi\+Tools\+::\+Get\+Feature\+Name (\begin{DoxyParamCaption}\item[{Supported\+Features}]{feature }\end{DoxyParamCaption})}
+
+
+
+Gets the name of the feature requested. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em feature} & enumeration of possible supported features. Indexed by Conflux\+::\+Supported\+Features. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+const char$\ast$ name of the feature. 
+\end{DoxyReturn}
+
+
+Definition at line 246 of file Hdmi\+Tools.\+cpp.
+
+\mbox{\Hypertarget{class_conflux_1_1_hdmi_tools_a3faee2a140637f44ee64d640c7914cd4}\label{class_conflux_1_1_hdmi_tools_a3faee2a140637f44ee64d640c7914cd4}} 
+\index{Conflux::HdmiTools@{Conflux::HdmiTools}!GetFeatureValues@{GetFeatureValues}}
+\index{GetFeatureValues@{GetFeatureValues}!Conflux::HdmiTools@{Conflux::HdmiTools}}
+\doxysubsubsection{\texorpdfstring{GetFeatureValues()}{GetFeatureValues()}}
+{\footnotesize\ttfamily bool Conflux\+::\+Hdmi\+Tools\+::\+Get\+Feature\+Values (\begin{DoxyParamCaption}\item[{Supported\+Features}]{feature,  }\item[{int $\ast$}]{value,  }\item[{int $\ast$}]{min,  }\item[{int $\ast$}]{max }\end{DoxyParamCaption})}
+
+
+
+Get the current value of a given feature, as well as the valid value range. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em feature} & enumeration of possible supported features. Indexed by Conflux\+::\+Supported\+Features. \\
+\hline
+{\em value} & current value of this configurable feature. \\
+\hline
+{\em min} & minimum valid range of this configurable feature. \\
+\hline
+{\em max} & maximum valid range of this configurable feature. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the feature values were retrieved successfully. 
+
+false otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line 203 of file Hdmi\+Tools.\+cpp.
+
+\mbox{\Hypertarget{class_conflux_1_1_hdmi_tools_a6b032f1c575fcdb0f05b7e43c48ef9c6}\label{class_conflux_1_1_hdmi_tools_a6b032f1c575fcdb0f05b7e43c48ef9c6}} 
+\index{Conflux::HdmiTools@{Conflux::HdmiTools}!GetFirmwareVersion@{GetFirmwareVersion}}
+\index{GetFirmwareVersion@{GetFirmwareVersion}!Conflux::HdmiTools@{Conflux::HdmiTools}}
+\doxysubsubsection{\texorpdfstring{GetFirmwareVersion()}{GetFirmwareVersion()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_conflux_1_1_version_code}{Version\+Code}} Conflux\+::\+Hdmi\+Tools\+::\+Get\+Firmware\+Version (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Gets a \mbox{\hyperlink{class_conflux_1_1_version_code}{Version\+Code}} object filled out with the firmware version. 
+
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_conflux_1_1_version_code}{Version\+Code}} object containing version information. 
+\end{DoxyReturn}
+
+
+Definition at line 145 of file Hdmi\+Tools.\+cpp.
+
+\mbox{\Hypertarget{class_conflux_1_1_hdmi_tools_a9bd807c5efb7b32344bcfdb7b4d42f1a}\label{class_conflux_1_1_hdmi_tools_a9bd807c5efb7b32344bcfdb7b4d42f1a}} 
+\index{Conflux::HdmiTools@{Conflux::HdmiTools}!GetHdmiName@{GetHdmiName}}
+\index{GetHdmiName@{GetHdmiName}!Conflux::HdmiTools@{Conflux::HdmiTools}}
+\doxysubsubsection{\texorpdfstring{GetHdmiName()}{GetHdmiName()}}
+{\footnotesize\ttfamily const char $\ast$ Conflux\+::\+Hdmi\+Tools\+::\+Get\+Hdmi\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get the name of the installed H\+D\+MI device. 
+
+\begin{DoxyReturn}{Returns}
+const char$\ast$ name of the H\+D\+MI device. 
+\end{DoxyReturn}
+
+
+Definition at line 135 of file Hdmi\+Tools.\+cpp.
+
+\mbox{\Hypertarget{class_conflux_1_1_hdmi_tools_a8f89271575bf3ed668e153b764e58bb8}\label{class_conflux_1_1_hdmi_tools_a8f89271575bf3ed668e153b764e58bb8}} 
+\index{Conflux::HdmiTools@{Conflux::HdmiTools}!GetInstance@{GetInstance}}
+\index{GetInstance@{GetInstance}!Conflux::HdmiTools@{Conflux::HdmiTools}}
+\doxysubsubsection{\texorpdfstring{GetInstance()}{GetInstance()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_conflux_1_1_hdmi_tools}{Hdmi\+Tools}} $\ast$ Conflux\+::\+Hdmi\+Tools\+::\+Get\+Instance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Get the singleton Instance object. 
+
+\begin{DoxyReturn}{Returns}
+Hdmi\+Tools$\ast$ pointer to the singleton object. 
+\end{DoxyReturn}
+
+
+Definition at line 70 of file Hdmi\+Tools.\+cpp.
+
+\mbox{\Hypertarget{class_conflux_1_1_hdmi_tools_ada3a2e6ca14e6c97f7c36ba77ee70195}\label{class_conflux_1_1_hdmi_tools_ada3a2e6ca14e6c97f7c36ba77ee70195}} 
+\index{Conflux::HdmiTools@{Conflux::HdmiTools}!GetKernelPatchVersion@{GetKernelPatchVersion}}
+\index{GetKernelPatchVersion@{GetKernelPatchVersion}!Conflux::HdmiTools@{Conflux::HdmiTools}}
+\doxysubsubsection{\texorpdfstring{GetKernelPatchVersion()}{GetKernelPatchVersion()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_conflux_1_1_version_code}{Version\+Code}} Conflux\+::\+Hdmi\+Tools\+::\+Get\+Kernel\+Patch\+Version (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Gets a \mbox{\hyperlink{class_conflux_1_1_version_code}{Version\+Code}} object filled out with the kernel version. 
+
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_conflux_1_1_version_code}{Version\+Code}} object containing version information. 
+\end{DoxyReturn}
+
+
+Definition at line 164 of file Hdmi\+Tools.\+cpp.
+
+\mbox{\Hypertarget{class_conflux_1_1_hdmi_tools_a8d93776554ab8040265f4287c9df2dda}\label{class_conflux_1_1_hdmi_tools_a8d93776554ab8040265f4287c9df2dda}} 
+\index{Conflux::HdmiTools@{Conflux::HdmiTools}!Initialize@{Initialize}}
+\index{Initialize@{Initialize}!Conflux::HdmiTools@{Conflux::HdmiTools}}
+\doxysubsubsection{\texorpdfstring{Initialize()}{Initialize()}}
+{\footnotesize\ttfamily bool Conflux\+::\+Hdmi\+Tools\+::\+Initialize (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Initializes the singleton object. 
+
+\begin{DoxyReturn}{Returns}
+true iF the object was initialized. 
+
+false otherwise. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+The singleton must be initialized before other member functions are called. 
+\end{DoxyNote}
+
+
+Definition at line 80 of file Hdmi\+Tools.\+cpp.
+
+\mbox{\Hypertarget{class_conflux_1_1_hdmi_tools_a5c0faf727bc12dc6ede3272cfc849624}\label{class_conflux_1_1_hdmi_tools_a5c0faf727bc12dc6ede3272cfc849624}} 
+\index{Conflux::HdmiTools@{Conflux::HdmiTools}!IsFeatureSupported@{IsFeatureSupported}}
+\index{IsFeatureSupported@{IsFeatureSupported}!Conflux::HdmiTools@{Conflux::HdmiTools}}
+\doxysubsubsection{\texorpdfstring{IsFeatureSupported()}{IsFeatureSupported()}}
+{\footnotesize\ttfamily bool Conflux\+::\+Hdmi\+Tools\+::\+Is\+Feature\+Supported (\begin{DoxyParamCaption}\item[{Supported\+Features}]{feature }\end{DoxyParamCaption})}
+
+
+
+Check feature support on the current platform. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em feature} & enumeration of possible supported features. Indexed by Conflux\+::\+Supported\+Features. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the feature is supported. 
+
+false otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line 106 of file Hdmi\+Tools.\+cpp.
+
+\mbox{\Hypertarget{class_conflux_1_1_hdmi_tools_a93c5ca76dac15bf9565d201944659405}\label{class_conflux_1_1_hdmi_tools_a93c5ca76dac15bf9565d201944659405}} 
+\index{Conflux::HdmiTools@{Conflux::HdmiTools}!IsUpdateAvailable@{IsUpdateAvailable}}
+\index{IsUpdateAvailable@{IsUpdateAvailable}!Conflux::HdmiTools@{Conflux::HdmiTools}}
+\doxysubsubsection{\texorpdfstring{IsUpdateAvailable()}{IsUpdateAvailable()}}
+{\footnotesize\ttfamily bool Conflux\+::\+Hdmi\+Tools\+::\+Is\+Update\+Available (\begin{DoxyParamCaption}\item[{Update\+Source}]{update\+Source }\end{DoxyParamCaption})}
+
+
+
+Checks to see if a firmware update is available via the provided update source. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em update\+Source} & Enumeration of possible update sources. Indexed by Conflux\+::\+Update\+Source. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if an update is available. 
+
+false otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line 182 of file Hdmi\+Tools.\+cpp.
+
+\mbox{\Hypertarget{class_conflux_1_1_hdmi_tools_a7e946789580b249b4959e112850631eb}\label{class_conflux_1_1_hdmi_tools_a7e946789580b249b4959e112850631eb}} 
+\index{Conflux::HdmiTools@{Conflux::HdmiTools}!SaveSettings@{SaveSettings}}
+\index{SaveSettings@{SaveSettings}!Conflux::HdmiTools@{Conflux::HdmiTools}}
+\doxysubsubsection{\texorpdfstring{SaveSettings()}{SaveSettings()}}
+{\footnotesize\ttfamily bool Conflux\+::\+Hdmi\+Tools\+::\+Save\+Settings (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Save all configurable features. 
+
+\begin{DoxyReturn}{Returns}
+true if successful. 
+
+false otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line 194 of file Hdmi\+Tools.\+cpp.
+
+\mbox{\Hypertarget{class_conflux_1_1_hdmi_tools_aca5e65f2e911ea486ed6975bf8ddb5e9}\label{class_conflux_1_1_hdmi_tools_aca5e65f2e911ea486ed6975bf8ddb5e9}} 
+\index{Conflux::HdmiTools@{Conflux::HdmiTools}!SetFeatureValue@{SetFeatureValue}}
+\index{SetFeatureValue@{SetFeatureValue}!Conflux::HdmiTools@{Conflux::HdmiTools}}
+\doxysubsubsection{\texorpdfstring{SetFeatureValue()}{SetFeatureValue()}}
+{\footnotesize\ttfamily bool Conflux\+::\+Hdmi\+Tools\+::\+Set\+Feature\+Value (\begin{DoxyParamCaption}\item[{Supported\+Features}]{feature,  }\item[{int}]{value }\end{DoxyParamCaption})}
+
+
+
+Sets the current value of a configurable feature. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em feature} & enumeration of possible supported features. Indexed by Conflux\+::\+Supported\+Features. \\
+\hline
+{\em value} & current value of this configurable feature. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the value was set successfully. 
+
+false otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line 225 of file Hdmi\+Tools.\+cpp.
+
+\mbox{\Hypertarget{class_conflux_1_1_hdmi_tools_a82d97492a55c51b8c54c57b101da68e4}\label{class_conflux_1_1_hdmi_tools_a82d97492a55c51b8c54c57b101da68e4}} 
+\index{Conflux::HdmiTools@{Conflux::HdmiTools}!UpdateFeatureConfig@{UpdateFeatureConfig}}
+\index{UpdateFeatureConfig@{UpdateFeatureConfig}!Conflux::HdmiTools@{Conflux::HdmiTools}}
+\doxysubsubsection{\texorpdfstring{UpdateFeatureConfig()}{UpdateFeatureConfig()}}
+{\footnotesize\ttfamily bool Conflux\+::\+Hdmi\+Tools\+::\+Update\+Feature\+Config (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Updates all feature values in the hardware configuration of the H\+D\+MI hardware. 
+
+\begin{DoxyReturn}{Returns}
+true if the operation was successful. 
+
+false otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line 237 of file Hdmi\+Tools.\+cpp.
+
+\mbox{\Hypertarget{class_conflux_1_1_hdmi_tools_ac71a1ba6798e61dae0ed5da70466781d}\label{class_conflux_1_1_hdmi_tools_ac71a1ba6798e61dae0ed5da70466781d}} 
+\index{Conflux::HdmiTools@{Conflux::HdmiTools}!UpdateFirmware@{UpdateFirmware}}
+\index{UpdateFirmware@{UpdateFirmware}!Conflux::HdmiTools@{Conflux::HdmiTools}}
+\doxysubsubsection{\texorpdfstring{UpdateFirmware()}{UpdateFirmware()}}
+{\footnotesize\ttfamily bool Conflux\+::\+Hdmi\+Tools\+::\+Update\+Firmware (\begin{DoxyParamCaption}\item[{Update\+Source}]{update\+Source }\end{DoxyParamCaption})}
+
+
+
+Perform firmware update via the proviced update source. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em update\+Source} & Enumeration of possible update sources. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if update was successful. 
+
+false otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line 188 of file Hdmi\+Tools.\+cpp.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Hdmi\+Tools.\+h\item 
+Hdmi\+Tools.\+cpp\end{DoxyCompactItemize}

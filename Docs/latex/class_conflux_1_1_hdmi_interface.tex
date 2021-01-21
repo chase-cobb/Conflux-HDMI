@@ -1,0 +1,403 @@
+\hypertarget{class_conflux_1_1_hdmi_interface}{}\doxysection{Conflux\+::Hdmi\+Interface Class Reference}
+\label{class_conflux_1_1_hdmi_interface}\index{Conflux::HdmiInterface@{Conflux::HdmiInterface}}
+
+
+Interface for H\+D\+MI device A\+P\+Is to implement.  
+
+
+
+
+{\ttfamily \#include $<$Hdmi\+Interface.\+h$>$}
+
+
+
+Inheritance diagram for Conflux\+::Hdmi\+Interface\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=209pt]{class_conflux_1_1_hdmi_interface__inherit__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual bool \mbox{\hyperlink{class_conflux_1_1_hdmi_interface_a02289e378ce706bb61fabd4363addb61}{Is\+Firmware\+Update\+Available}} (Update\+Source update\+Source)=0
+\begin{DoxyCompactList}\small\item\em Checks to see if a firmware update is available via the provided update source. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_conflux_1_1_hdmi_interface_a2c1aea6b6098efcc6a034251eb427f00}{Update\+Firmware}} (Update\+Source update\+Source)=0
+\begin{DoxyCompactList}\small\item\em Calling this function with a valid update source will begin the process of updating the firmware. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_conflux_1_1_hdmi_interface_a2565a8917e01bc8826340006a5b7289a}{Is\+Feature\+Supported}} (Supported\+Features feature)=0
+\begin{DoxyCompactList}\small\item\em Check to see if this H\+D\+MI device supports a specific feature. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_conflux_1_1_hdmi_interface_a4e4b15ce3e6cdf868efc114ad32d663a}{Get\+Firmware\+Version}} (\mbox{\hyperlink{class_conflux_1_1_version_code}{Version\+Code}} $\ast$version\+Code)=0
+\begin{DoxyCompactList}\small\item\em Fills out the provided \mbox{\hyperlink{class_conflux_1_1_version_code}{Conflux\+::\+Version\+Code}} object with the firmware of the installed H\+D\+MI hardware. \end{DoxyCompactList}\item 
+virtual const char $\ast$ \mbox{\hyperlink{class_conflux_1_1_hdmi_interface_afdb0d03b3401104a22c01791e845f3d5}{Get\+Name}} ()=0
+\begin{DoxyCompactList}\small\item\em Gets the name of the installed H\+D\+MI hardware. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_conflux_1_1_hdmi_interface_a42a2003309b2ba35b3bc73245bc27a2f}{Load\+Config}} ()=0
+\begin{DoxyCompactList}\small\item\em Loads persistent configuration data for the currently installed H\+D\+MI hardware. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_conflux_1_1_hdmi_interface_a96c5d0e291b1fa4ca31854527ba55349}{Update\+Config\+Values}} ()=0
+\begin{DoxyCompactList}\small\item\em Update the current configuration of the hardware in a way that they are applied in the current session. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_conflux_1_1_hdmi_interface_ad4fdc728c318567be06a212fef597d9a}{Save\+Config}} ()=0
+\begin{DoxyCompactList}\small\item\em Write configuration data to persistent storage. (E\+E\+P\+R\+OM or config file) \end{DoxyCompactList}\item 
+Hdmi\+Hardware\+Id \mbox{\hyperlink{class_conflux_1_1_hdmi_interface_a0eee7e3b10cfcf010d73f14023ad5773}{Get\+Hardware\+Id}} ()
+\begin{DoxyCompactList}\small\item\em Gets the ID of the current hardware. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_conflux_1_1_hdmi_interface_a470567169cc5fbac07ba6f57957003a0}{Get\+Feature\+Current\+Value}} (Supported\+Features feature, int $\ast$current\+Value)
+\begin{DoxyCompactList}\small\item\em Fills out the int$\ast$ provided with the current value of the feature specified. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_conflux_1_1_hdmi_interface_a5dd3510c986211d2dd61c143f6702b43}{Get\+Feature\+Value\+Range}} (Supported\+Features feature, int $\ast$min\+Value, int $\ast$max\+Value)
+\begin{DoxyCompactList}\small\item\em Fills out the min\+Value and max\+Value params with the minimum and maximum range of the feature specified. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_conflux_1_1_hdmi_interface_a5decc0a42c5160593b37a4b5114c2889}{Set\+Feature\+Current\+Value}} (Supported\+Features feature, int current\+Value)
+\begin{DoxyCompactList}\small\item\em Sets the new current value of the feature specified. \end{DoxyCompactList}\item 
+const char $\ast$ \mbox{\hyperlink{class_conflux_1_1_hdmi_interface_a0ec171091b3b97063829ac7d4b5d090d}{Get\+Feature\+Name}} (Supported\+Features feature)
+\begin{DoxyCompactList}\small\item\em Gets the name of the feature specified. \end{DoxyCompactList}\item 
+const std\+::map$<$ Supported\+Features, \mbox{\hyperlink{class_conflux_1_1_ranged_int_value}{Ranged\+Int\+Value}} $\ast$ $>$ \& \mbox{\hyperlink{class_conflux_1_1_hdmi_interface_ac5bc2f75fafb86d3213a62cc7e1ef222}{Get\+Const\+Feature\+Map}} ()
+\begin{DoxyCompactList}\small\item\em Gets a const reference to the map of features supported by the currently installed H\+D\+MI hardware, and the feature values. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_conflux_1_1_hdmi_interface_ae9e64e87db9fc350e7b3150c205052e9}\label{class_conflux_1_1_hdmi_interface_ae9e64e87db9fc350e7b3150c205052e9}} 
+void {\bfseries Set\+Hardware\+Id} (Hdmi\+Hardware\+Id iD)
+\item 
+\mbox{\Hypertarget{class_conflux_1_1_hdmi_interface_ad917cb9c9c6fddd2d8c231072a40e556}\label{class_conflux_1_1_hdmi_interface_ad917cb9c9c6fddd2d8c231072a40e556}} 
+bool {\bfseries Is\+Feature\+Supported\+And\+Values\+Populated} (Supported\+Features feature)
+\item 
+\mbox{\Hypertarget{class_conflux_1_1_hdmi_interface_ae79a8f10c969190911335c6a87355171}\label{class_conflux_1_1_hdmi_interface_ae79a8f10c969190911335c6a87355171}} 
+void {\bfseries Clear\+Feature\+Map} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_conflux_1_1_hdmi_interface_a68cf631612a75569ec607e0e1cd3c4ae}\label{class_conflux_1_1_hdmi_interface_a68cf631612a75569ec607e0e1cd3c4ae}} 
+short {\bfseries m\+\_\+supported\+Features}
+\item 
+\mbox{\Hypertarget{class_conflux_1_1_hdmi_interface_a7edc2e43b85b2473441e5464218565d9}\label{class_conflux_1_1_hdmi_interface_a7edc2e43b85b2473441e5464218565d9}} 
+Hdmi\+Hardware\+Id {\bfseries m\+\_\+hardware\+Id}
+\item 
+\mbox{\Hypertarget{class_conflux_1_1_hdmi_interface_a0c15f1d2414767d8574532348ee7bbd1}\label{class_conflux_1_1_hdmi_interface_a0c15f1d2414767d8574532348ee7bbd1}} 
+std\+::map$<$ Supported\+Features, \mbox{\hyperlink{class_conflux_1_1_ranged_int_value}{Ranged\+Int\+Value}} $\ast$ $>$ {\bfseries m\+\_\+feature\+Values}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Interface for H\+D\+MI device A\+P\+Is to implement. 
+
+
+
+Definition at line 33 of file Hdmi\+Interface.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_conflux_1_1_hdmi_interface_ac5bc2f75fafb86d3213a62cc7e1ef222}\label{class_conflux_1_1_hdmi_interface_ac5bc2f75fafb86d3213a62cc7e1ef222}} 
+\index{Conflux::HdmiInterface@{Conflux::HdmiInterface}!GetConstFeatureMap@{GetConstFeatureMap}}
+\index{GetConstFeatureMap@{GetConstFeatureMap}!Conflux::HdmiInterface@{Conflux::HdmiInterface}}
+\doxysubsubsection{\texorpdfstring{GetConstFeatureMap()}{GetConstFeatureMap()}}
+{\footnotesize\ttfamily const std\+::map$<$ Supported\+Features, \mbox{\hyperlink{class_conflux_1_1_ranged_int_value}{Ranged\+Int\+Value}} $\ast$ $>$ \& Conflux\+::\+Hdmi\+Interface\+::\+Get\+Const\+Feature\+Map (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Gets a const reference to the map of features supported by the currently installed H\+D\+MI hardware, and the feature values. 
+
+\begin{DoxyReturn}{Returns}
+const std\+::map$<$\+Supported\+Features, Ranged\+Int\+Value$\ast$$>$\& map of currently supported feature and their values. 
+\end{DoxyReturn}
+
+
+Definition at line 70 of file Hdmi\+Interface.\+cpp.
+
+\mbox{\Hypertarget{class_conflux_1_1_hdmi_interface_a470567169cc5fbac07ba6f57957003a0}\label{class_conflux_1_1_hdmi_interface_a470567169cc5fbac07ba6f57957003a0}} 
+\index{Conflux::HdmiInterface@{Conflux::HdmiInterface}!GetFeatureCurrentValue@{GetFeatureCurrentValue}}
+\index{GetFeatureCurrentValue@{GetFeatureCurrentValue}!Conflux::HdmiInterface@{Conflux::HdmiInterface}}
+\doxysubsubsection{\texorpdfstring{GetFeatureCurrentValue()}{GetFeatureCurrentValue()}}
+{\footnotesize\ttfamily bool Conflux\+::\+Hdmi\+Interface\+::\+Get\+Feature\+Current\+Value (\begin{DoxyParamCaption}\item[{Supported\+Features}]{feature,  }\item[{int $\ast$}]{current\+Value }\end{DoxyParamCaption})}
+
+
+
+Fills out the int$\ast$ provided with the current value of the feature specified. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em feature} & enumeration of possible supported features. Indexed by Conflux\+::\+Supported\+Features. \\
+\hline
+{\em current\+Value} & filled out with the current value of the specified feature. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the current value was found and the current\+Value param was filled out. 
+
+false otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line 21 of file Hdmi\+Interface.\+cpp.
+
+\mbox{\Hypertarget{class_conflux_1_1_hdmi_interface_a0ec171091b3b97063829ac7d4b5d090d}\label{class_conflux_1_1_hdmi_interface_a0ec171091b3b97063829ac7d4b5d090d}} 
+\index{Conflux::HdmiInterface@{Conflux::HdmiInterface}!GetFeatureName@{GetFeatureName}}
+\index{GetFeatureName@{GetFeatureName}!Conflux::HdmiInterface@{Conflux::HdmiInterface}}
+\doxysubsubsection{\texorpdfstring{GetFeatureName()}{GetFeatureName()}}
+{\footnotesize\ttfamily const char $\ast$ Conflux\+::\+Hdmi\+Interface\+::\+Get\+Feature\+Name (\begin{DoxyParamCaption}\item[{Supported\+Features}]{feature }\end{DoxyParamCaption})}
+
+
+
+Gets the name of the feature specified. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em feature} & enumeration of possible supported features. Indexed by Conflux\+::\+Supported\+Features. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+const char$\ast$ feature name. 
+\end{DoxyReturn}
+
+
+Definition at line 60 of file Hdmi\+Interface.\+cpp.
+
+\mbox{\Hypertarget{class_conflux_1_1_hdmi_interface_a5dd3510c986211d2dd61c143f6702b43}\label{class_conflux_1_1_hdmi_interface_a5dd3510c986211d2dd61c143f6702b43}} 
+\index{Conflux::HdmiInterface@{Conflux::HdmiInterface}!GetFeatureValueRange@{GetFeatureValueRange}}
+\index{GetFeatureValueRange@{GetFeatureValueRange}!Conflux::HdmiInterface@{Conflux::HdmiInterface}}
+\doxysubsubsection{\texorpdfstring{GetFeatureValueRange()}{GetFeatureValueRange()}}
+{\footnotesize\ttfamily bool Conflux\+::\+Hdmi\+Interface\+::\+Get\+Feature\+Value\+Range (\begin{DoxyParamCaption}\item[{Supported\+Features}]{feature,  }\item[{int $\ast$}]{min\+Value,  }\item[{int $\ast$}]{max\+Value }\end{DoxyParamCaption})}
+
+
+
+Fills out the min\+Value and max\+Value params with the minimum and maximum range of the feature specified. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em feature} & enumeration of possible supported features. Indexed by Conflux\+::\+Supported\+Features. \\
+\hline
+{\em min\+Value} & filled out with the minimum value range of the specified feature. \\
+\hline
+{\em max\+Value} & filled out with the maximum value range of the specified feature. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the range was found and the min\+Value and max\+Value params were filled out. 
+
+false otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line 35 of file Hdmi\+Interface.\+cpp.
+
+\mbox{\Hypertarget{class_conflux_1_1_hdmi_interface_a4e4b15ce3e6cdf868efc114ad32d663a}\label{class_conflux_1_1_hdmi_interface_a4e4b15ce3e6cdf868efc114ad32d663a}} 
+\index{Conflux::HdmiInterface@{Conflux::HdmiInterface}!GetFirmwareVersion@{GetFirmwareVersion}}
+\index{GetFirmwareVersion@{GetFirmwareVersion}!Conflux::HdmiInterface@{Conflux::HdmiInterface}}
+\doxysubsubsection{\texorpdfstring{GetFirmwareVersion()}{GetFirmwareVersion()}}
+{\footnotesize\ttfamily virtual bool Conflux\+::\+Hdmi\+Interface\+::\+Get\+Firmware\+Version (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_conflux_1_1_version_code}{Version\+Code}} $\ast$}]{version\+Code }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Fills out the provided \mbox{\hyperlink{class_conflux_1_1_version_code}{Conflux\+::\+Version\+Code}} object with the firmware of the installed H\+D\+MI hardware. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em version\+Code} & class object that contains the version information for H\+D\+MI devices. \mbox{\hyperlink{class_conflux_1_1_version_code}{Conflux\+::\+Version\+Code}}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the version number was found. 
+
+false otherwise. 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi_ae94c89f2a13da3d6d4d58c9090381f4c}{Conflux\+::\+Xbox\+H\+D\+M\+I\+::\+Xbox\+Hdmi}}.
+
+\mbox{\Hypertarget{class_conflux_1_1_hdmi_interface_a0eee7e3b10cfcf010d73f14023ad5773}\label{class_conflux_1_1_hdmi_interface_a0eee7e3b10cfcf010d73f14023ad5773}} 
+\index{Conflux::HdmiInterface@{Conflux::HdmiInterface}!GetHardwareId@{GetHardwareId}}
+\index{GetHardwareId@{GetHardwareId}!Conflux::HdmiInterface@{Conflux::HdmiInterface}}
+\doxysubsubsection{\texorpdfstring{GetHardwareId()}{GetHardwareId()}}
+{\footnotesize\ttfamily Hdmi\+Hardware\+Id Conflux\+::\+Hdmi\+Interface\+::\+Get\+Hardware\+Id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the ID of the current hardware. 
+
+\begin{DoxyReturn}{Returns}
+Hdmi\+Hardware\+Id hardware ID, indexed by Conflux\+::\+Hdmi\+Hardware\+Id. 
+\end{DoxyReturn}
+
+
+Definition at line 128 of file Hdmi\+Interface.\+h.
+
+\mbox{\Hypertarget{class_conflux_1_1_hdmi_interface_afdb0d03b3401104a22c01791e845f3d5}\label{class_conflux_1_1_hdmi_interface_afdb0d03b3401104a22c01791e845f3d5}} 
+\index{Conflux::HdmiInterface@{Conflux::HdmiInterface}!GetName@{GetName}}
+\index{GetName@{GetName}!Conflux::HdmiInterface@{Conflux::HdmiInterface}}
+\doxysubsubsection{\texorpdfstring{GetName()}{GetName()}}
+{\footnotesize\ttfamily virtual const char$\ast$ Conflux\+::\+Hdmi\+Interface\+::\+Get\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Gets the name of the installed H\+D\+MI hardware. 
+
+\begin{DoxyReturn}{Returns}
+const char$\ast$ H\+D\+MI hardware name. 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi_a13c3b7bb5788f90dc007760a12398c18}{Conflux\+::\+Xbox\+H\+D\+M\+I\+::\+Xbox\+Hdmi}}.
+
+\mbox{\Hypertarget{class_conflux_1_1_hdmi_interface_a2565a8917e01bc8826340006a5b7289a}\label{class_conflux_1_1_hdmi_interface_a2565a8917e01bc8826340006a5b7289a}} 
+\index{Conflux::HdmiInterface@{Conflux::HdmiInterface}!IsFeatureSupported@{IsFeatureSupported}}
+\index{IsFeatureSupported@{IsFeatureSupported}!Conflux::HdmiInterface@{Conflux::HdmiInterface}}
+\doxysubsubsection{\texorpdfstring{IsFeatureSupported()}{IsFeatureSupported()}}
+{\footnotesize\ttfamily virtual bool Conflux\+::\+Hdmi\+Interface\+::\+Is\+Feature\+Supported (\begin{DoxyParamCaption}\item[{Supported\+Features}]{feature }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Check to see if this H\+D\+MI device supports a specific feature. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em feature} & enumeration of possible supported features. Indexed by Conflux\+::\+Supported\+Features. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the feature is supported. 
+
+false otherwise. 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi_adba53da201dc7743bce34aad63e29229}{Conflux\+::\+Xbox\+H\+D\+M\+I\+::\+Xbox\+Hdmi}}.
+
+\mbox{\Hypertarget{class_conflux_1_1_hdmi_interface_a02289e378ce706bb61fabd4363addb61}\label{class_conflux_1_1_hdmi_interface_a02289e378ce706bb61fabd4363addb61}} 
+\index{Conflux::HdmiInterface@{Conflux::HdmiInterface}!IsFirmwareUpdateAvailable@{IsFirmwareUpdateAvailable}}
+\index{IsFirmwareUpdateAvailable@{IsFirmwareUpdateAvailable}!Conflux::HdmiInterface@{Conflux::HdmiInterface}}
+\doxysubsubsection{\texorpdfstring{IsFirmwareUpdateAvailable()}{IsFirmwareUpdateAvailable()}}
+{\footnotesize\ttfamily virtual bool Conflux\+::\+Hdmi\+Interface\+::\+Is\+Firmware\+Update\+Available (\begin{DoxyParamCaption}\item[{Update\+Source}]{update\+Source }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Checks to see if a firmware update is available via the provided update source. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em update\+Source} & Enumeration of possible update sources. Indexed by Conflux\+::\+Update\+Source. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if an update is available. 
+
+false otherwise. 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi_a328d8137acfff5df87997b16434ab996}{Conflux\+::\+Xbox\+H\+D\+M\+I\+::\+Xbox\+Hdmi}}.
+
+\mbox{\Hypertarget{class_conflux_1_1_hdmi_interface_a42a2003309b2ba35b3bc73245bc27a2f}\label{class_conflux_1_1_hdmi_interface_a42a2003309b2ba35b3bc73245bc27a2f}} 
+\index{Conflux::HdmiInterface@{Conflux::HdmiInterface}!LoadConfig@{LoadConfig}}
+\index{LoadConfig@{LoadConfig}!Conflux::HdmiInterface@{Conflux::HdmiInterface}}
+\doxysubsubsection{\texorpdfstring{LoadConfig()}{LoadConfig()}}
+{\footnotesize\ttfamily virtual bool Conflux\+::\+Hdmi\+Interface\+::\+Load\+Config (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Loads persistent configuration data for the currently installed H\+D\+MI hardware. 
+
+\begin{DoxyReturn}{Returns}
+true if the configuration was loaded and applied. 
+
+false otherwise. 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi_ac9f64faedf6f2f0e9fe90127295dcd48}{Conflux\+::\+Xbox\+H\+D\+M\+I\+::\+Xbox\+Hdmi}}.
+
+\mbox{\Hypertarget{class_conflux_1_1_hdmi_interface_ad4fdc728c318567be06a212fef597d9a}\label{class_conflux_1_1_hdmi_interface_ad4fdc728c318567be06a212fef597d9a}} 
+\index{Conflux::HdmiInterface@{Conflux::HdmiInterface}!SaveConfig@{SaveConfig}}
+\index{SaveConfig@{SaveConfig}!Conflux::HdmiInterface@{Conflux::HdmiInterface}}
+\doxysubsubsection{\texorpdfstring{SaveConfig()}{SaveConfig()}}
+{\footnotesize\ttfamily virtual bool Conflux\+::\+Hdmi\+Interface\+::\+Save\+Config (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Write configuration data to persistent storage. (E\+E\+P\+R\+OM or config file) 
+
+\begin{DoxyReturn}{Returns}
+true if the configuration was saved. 
+
+false otherwise. 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi_ae71df45ed93b90c6eefa0d07e572e46f}{Conflux\+::\+Xbox\+H\+D\+M\+I\+::\+Xbox\+Hdmi}}.
+
+\mbox{\Hypertarget{class_conflux_1_1_hdmi_interface_a5decc0a42c5160593b37a4b5114c2889}\label{class_conflux_1_1_hdmi_interface_a5decc0a42c5160593b37a4b5114c2889}} 
+\index{Conflux::HdmiInterface@{Conflux::HdmiInterface}!SetFeatureCurrentValue@{SetFeatureCurrentValue}}
+\index{SetFeatureCurrentValue@{SetFeatureCurrentValue}!Conflux::HdmiInterface@{Conflux::HdmiInterface}}
+\doxysubsubsection{\texorpdfstring{SetFeatureCurrentValue()}{SetFeatureCurrentValue()}}
+{\footnotesize\ttfamily bool Conflux\+::\+Hdmi\+Interface\+::\+Set\+Feature\+Current\+Value (\begin{DoxyParamCaption}\item[{Supported\+Features}]{feature,  }\item[{int}]{current\+Value }\end{DoxyParamCaption})}
+
+
+
+Sets the new current value of the feature specified. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em feature} & enumeration of possible supported features. Indexed by Conflux\+::\+Supported\+Features. \\
+\hline
+{\em current\+Value} & the new current value of the feature specified. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the new current value was applied. 
+
+false otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line 50 of file Hdmi\+Interface.\+cpp.
+
+\mbox{\Hypertarget{class_conflux_1_1_hdmi_interface_a96c5d0e291b1fa4ca31854527ba55349}\label{class_conflux_1_1_hdmi_interface_a96c5d0e291b1fa4ca31854527ba55349}} 
+\index{Conflux::HdmiInterface@{Conflux::HdmiInterface}!UpdateConfigValues@{UpdateConfigValues}}
+\index{UpdateConfigValues@{UpdateConfigValues}!Conflux::HdmiInterface@{Conflux::HdmiInterface}}
+\doxysubsubsection{\texorpdfstring{UpdateConfigValues()}{UpdateConfigValues()}}
+{\footnotesize\ttfamily virtual bool Conflux\+::\+Hdmi\+Interface\+::\+Update\+Config\+Values (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Update the current configuration of the hardware in a way that they are applied in the current session. 
+
+\begin{DoxyReturn}{Returns}
+true if the config data was applied. 
+
+false otherwise. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+It is expected that developers will call \mbox{\hyperlink{class_conflux_1_1_hdmi_interface_ad4fdc728c318567be06a212fef597d9a}{Save\+Config()}} to write out persistent configuration data sometime after calling this function. 
+\end{DoxyNote}
+
+
+Implemented in \mbox{\hyperlink{class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi_ab9da3d657fc416b7eb19f252df7397e6}{Conflux\+::\+Xbox\+H\+D\+M\+I\+::\+Xbox\+Hdmi}}.
+
+\mbox{\Hypertarget{class_conflux_1_1_hdmi_interface_a2c1aea6b6098efcc6a034251eb427f00}\label{class_conflux_1_1_hdmi_interface_a2c1aea6b6098efcc6a034251eb427f00}} 
+\index{Conflux::HdmiInterface@{Conflux::HdmiInterface}!UpdateFirmware@{UpdateFirmware}}
+\index{UpdateFirmware@{UpdateFirmware}!Conflux::HdmiInterface@{Conflux::HdmiInterface}}
+\doxysubsubsection{\texorpdfstring{UpdateFirmware()}{UpdateFirmware()}}
+{\footnotesize\ttfamily virtual bool Conflux\+::\+Hdmi\+Interface\+::\+Update\+Firmware (\begin{DoxyParamCaption}\item[{Update\+Source}]{update\+Source }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Calling this function with a valid update source will begin the process of updating the firmware. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em update\+Source} & Enumeration of possible update sources. Indexed by Conflux\+::\+Update\+Source. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the update process was started. 
+
+false otherwise. 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi_af6a9d0171891dc0b1462718df980a834}{Conflux\+::\+Xbox\+H\+D\+M\+I\+::\+Xbox\+Hdmi}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+H\+D\+M\+I\+\_\+\+Implementations/Hdmi\+Interface.\+h\item 
+H\+D\+M\+I\+\_\+\+Implementations/Hdmi\+Interface.\+cpp\end{DoxyCompactItemize}

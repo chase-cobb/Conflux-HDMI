@@ -1,0 +1,133 @@
+\hypertarget{class_conflux_1_1_version_code}{}\doxysection{Conflux\+::Version\+Code Class Reference}
+\label{class_conflux_1_1_version_code}\index{Conflux::VersionCode@{Conflux::VersionCode}}
+
+
+This class contains functionality for getting and setting version numbers. Used mainly by the H\+D\+MI implementations for storing their firmware versions.  
+
+
+
+
+{\ttfamily \#include $<$Version\+Code.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{class_conflux_1_1_version_code_a323a41214ce9c25ff310a3ccb3f442a2}{Get\+Major}} ()
+\begin{DoxyCompactList}\small\item\em Gets the major version. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{class_conflux_1_1_version_code_a0ab2985acc21a4570f90c38a46a7f7e0}{Get\+Minor}} ()
+\begin{DoxyCompactList}\small\item\em Gets the minor version. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{class_conflux_1_1_version_code_ad3930512fd18cbba90cfb8b1927ec776}{Get\+Patch}} ()
+\begin{DoxyCompactList}\small\item\em Gets the patch version. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_conflux_1_1_version_code_a388f5530dae4daa40ccf68e70bc2a54d}{Set\+Version}} (uint8\+\_\+t major, uint8\+\_\+t minor, uint8\+\_\+t patch)
+\begin{DoxyCompactList}\small\item\em Sets the Version. \end{DoxyCompactList}\item 
+const char $\ast$ \mbox{\hyperlink{class_conflux_1_1_version_code_a1159cc6de44d765f63401ef2fb586a97}{Get\+Version\+Code\+As\+C\+String}} ()
+\begin{DoxyCompactList}\small\item\em Gets the full concatinated version as a c style string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This class contains functionality for getting and setting version numbers. Used mainly by the H\+D\+MI implementations for storing their firmware versions. 
+
+
+
+Definition at line 30 of file Version\+Code.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_conflux_1_1_version_code_a323a41214ce9c25ff310a3ccb3f442a2}\label{class_conflux_1_1_version_code_a323a41214ce9c25ff310a3ccb3f442a2}} 
+\index{Conflux::VersionCode@{Conflux::VersionCode}!GetMajor@{GetMajor}}
+\index{GetMajor@{GetMajor}!Conflux::VersionCode@{Conflux::VersionCode}}
+\doxysubsubsection{\texorpdfstring{GetMajor()}{GetMajor()}}
+{\footnotesize\ttfamily uint8\+\_\+t Conflux\+::\+Version\+Code\+::\+Get\+Major (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the major version. 
+
+\begin{DoxyReturn}{Returns}
+uint8\+\_\+t major version. 
+\end{DoxyReturn}
+
+
+Definition at line 41 of file Version\+Code.\+h.
+
+\mbox{\Hypertarget{class_conflux_1_1_version_code_a0ab2985acc21a4570f90c38a46a7f7e0}\label{class_conflux_1_1_version_code_a0ab2985acc21a4570f90c38a46a7f7e0}} 
+\index{Conflux::VersionCode@{Conflux::VersionCode}!GetMinor@{GetMinor}}
+\index{GetMinor@{GetMinor}!Conflux::VersionCode@{Conflux::VersionCode}}
+\doxysubsubsection{\texorpdfstring{GetMinor()}{GetMinor()}}
+{\footnotesize\ttfamily uint8\+\_\+t Conflux\+::\+Version\+Code\+::\+Get\+Minor (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the minor version. 
+
+\begin{DoxyReturn}{Returns}
+uint8\+\_\+t minor version. 
+\end{DoxyReturn}
+
+
+Definition at line 48 of file Version\+Code.\+h.
+
+\mbox{\Hypertarget{class_conflux_1_1_version_code_ad3930512fd18cbba90cfb8b1927ec776}\label{class_conflux_1_1_version_code_ad3930512fd18cbba90cfb8b1927ec776}} 
+\index{Conflux::VersionCode@{Conflux::VersionCode}!GetPatch@{GetPatch}}
+\index{GetPatch@{GetPatch}!Conflux::VersionCode@{Conflux::VersionCode}}
+\doxysubsubsection{\texorpdfstring{GetPatch()}{GetPatch()}}
+{\footnotesize\ttfamily uint8\+\_\+t Conflux\+::\+Version\+Code\+::\+Get\+Patch (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the patch version. 
+
+\begin{DoxyReturn}{Returns}
+uint8\+\_\+t patch version. 
+\end{DoxyReturn}
+
+
+Definition at line 55 of file Version\+Code.\+h.
+
+\mbox{\Hypertarget{class_conflux_1_1_version_code_a1159cc6de44d765f63401ef2fb586a97}\label{class_conflux_1_1_version_code_a1159cc6de44d765f63401ef2fb586a97}} 
+\index{Conflux::VersionCode@{Conflux::VersionCode}!GetVersionCodeAsCString@{GetVersionCodeAsCString}}
+\index{GetVersionCodeAsCString@{GetVersionCodeAsCString}!Conflux::VersionCode@{Conflux::VersionCode}}
+\doxysubsubsection{\texorpdfstring{GetVersionCodeAsCString()}{GetVersionCodeAsCString()}}
+{\footnotesize\ttfamily const char $\ast$ Conflux\+::\+Version\+Code\+::\+Get\+Version\+Code\+As\+C\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Gets the full concatinated version as a c style string. 
+
+\begin{DoxyReturn}{Returns}
+const char$\ast$ full version number. 
+\end{DoxyReturn}
+
+
+Definition at line 62 of file Version\+Code.\+cpp.
+
+\mbox{\Hypertarget{class_conflux_1_1_version_code_a388f5530dae4daa40ccf68e70bc2a54d}\label{class_conflux_1_1_version_code_a388f5530dae4daa40ccf68e70bc2a54d}} 
+\index{Conflux::VersionCode@{Conflux::VersionCode}!SetVersion@{SetVersion}}
+\index{SetVersion@{SetVersion}!Conflux::VersionCode@{Conflux::VersionCode}}
+\doxysubsubsection{\texorpdfstring{SetVersion()}{SetVersion()}}
+{\footnotesize\ttfamily void Conflux\+::\+Version\+Code\+::\+Set\+Version (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{major,  }\item[{uint8\+\_\+t}]{minor,  }\item[{uint8\+\_\+t}]{patch }\end{DoxyParamCaption})}
+
+
+
+Sets the Version. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em major} & major version. \\
+\hline
+{\em minor} & minor version. \\
+\hline
+{\em patch} & patch version. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 55 of file Version\+Code.\+cpp.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Common/\+Types/Version\+Code.\+h\item 
+Common/\+Types/Version\+Code.\+cpp\end{DoxyCompactItemize}

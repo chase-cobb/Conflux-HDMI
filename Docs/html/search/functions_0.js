@@ -1,0 +1,22 @@
+var searchData=
+[
+  ['getallsupportedfeatures_44',['GetAllSupportedFeatures',['../class_conflux_1_1_hdmi_tools.html#a1cfe97c697a70ee5900c87bfd0afa723',1,'Conflux::HdmiTools']]],
+  ['getconstfeaturemap_45',['GetConstFeatureMap',['../class_conflux_1_1_hdmi_interface.html#ac5bc2f75fafb86d3213a62cc7e1ef222',1,'Conflux::HdmiInterface::GetConstFeatureMap()'],['../class_conflux_1_1_hdmi_tools.html#a215620c0d7615c95a370dbd5004819f0',1,'Conflux::HdmiTools::GetConstFeatureMap()']]],
+  ['getfeaturecurrentvalue_46',['GetFeatureCurrentValue',['../class_conflux_1_1_hdmi_interface.html#a470567169cc5fbac07ba6f57957003a0',1,'Conflux::HdmiInterface']]],
+  ['getfeaturename_47',['GetFeatureName',['../class_conflux_1_1_hdmi_interface.html#a0ec171091b3b97063829ac7d4b5d090d',1,'Conflux::HdmiInterface::GetFeatureName()'],['../class_conflux_1_1_hdmi_tools.html#aef5d704ee068cbfb83306941786680e3',1,'Conflux::HdmiTools::GetFeatureName()']]],
+  ['getfeaturevaluerange_48',['GetFeatureValueRange',['../class_conflux_1_1_hdmi_interface.html#a5dd3510c986211d2dd61c143f6702b43',1,'Conflux::HdmiInterface']]],
+  ['getfeaturevalues_49',['GetFeatureValues',['../class_conflux_1_1_hdmi_tools.html#a3faee2a140637f44ee64d640c7914cd4',1,'Conflux::HdmiTools']]],
+  ['getfirmwareversion_50',['GetFirmwareVersion',['../class_conflux_1_1_hdmi_interface.html#a4e4b15ce3e6cdf868efc114ad32d663a',1,'Conflux::HdmiInterface::GetFirmwareVersion()'],['../class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi.html#ae94c89f2a13da3d6d4d58c9090381f4c',1,'Conflux::XboxHDMI::XboxHdmi::GetFirmwareVersion()'],['../class_conflux_1_1_hdmi_tools.html#a6b032f1c575fcdb0f05b7e43c48ef9c6',1,'Conflux::HdmiTools::GetFirmwareVersion()']]],
+  ['gethardwareid_51',['GetHardwareId',['../class_conflux_1_1_hdmi_interface.html#a0eee7e3b10cfcf010d73f14023ad5773',1,'Conflux::HdmiInterface']]],
+  ['gethdminame_52',['GetHdmiName',['../class_conflux_1_1_hdmi_tools.html#a9bd807c5efb7b32344bcfdb7b4d42f1a',1,'Conflux::HdmiTools']]],
+  ['getinstance_53',['GetInstance',['../class_conflux_1_1_hdmi_tools.html#a8f89271575bf3ed668e153b764e58bb8',1,'Conflux::HdmiTools']]],
+  ['getkernelpatchversion_54',['GetKernelPatchVersion',['../class_conflux_1_1_hdmi_tools.html#ada3a2e6ca14e6c97f7c36ba77ee70195',1,'Conflux::HdmiTools']]],
+  ['getmajor_55',['GetMajor',['../class_conflux_1_1_version_code.html#a323a41214ce9c25ff310a3ccb3f442a2',1,'Conflux::VersionCode']]],
+  ['getmaxvalue_56',['GetMaxValue',['../class_conflux_1_1_ranged_int_value.html#abc5ccf346dae81dc246ed68c408d421a',1,'Conflux::RangedIntValue']]],
+  ['getminor_57',['GetMinor',['../class_conflux_1_1_version_code.html#a0ab2985acc21a4570f90c38a46a7f7e0',1,'Conflux::VersionCode']]],
+  ['getminvalue_58',['GetMinValue',['../class_conflux_1_1_ranged_int_value.html#a0f6502b87e1a8c026be5e560e8b984b3',1,'Conflux::RangedIntValue']]],
+  ['getname_59',['GetName',['../class_conflux_1_1_ranged_int_value.html#a9df8cddda8494c3c874e5083b0c40a74',1,'Conflux::RangedIntValue::GetName()'],['../class_conflux_1_1_hdmi_interface.html#afdb0d03b3401104a22c01791e845f3d5',1,'Conflux::HdmiInterface::GetName()'],['../class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi.html#a13c3b7bb5788f90dc007760a12398c18',1,'Conflux::XboxHDMI::XboxHdmi::GetName()']]],
+  ['getpatch_60',['GetPatch',['../class_conflux_1_1_version_code.html#ad3930512fd18cbba90cfb8b1927ec776',1,'Conflux::VersionCode']]],
+  ['getvalue_61',['GetValue',['../class_conflux_1_1_ranged_int_value.html#a84f53503cd63ce7edc03c14230f23b0c',1,'Conflux::RangedIntValue']]],
+  ['getversioncodeascstring_62',['GetVersionCodeAsCString',['../class_conflux_1_1_version_code.html#a1159cc6de44d765f63401ef2fb586a97',1,'Conflux::VersionCode']]]
+];
