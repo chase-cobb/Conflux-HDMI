@@ -9,6 +9,10 @@ Inside the "Examples" directory, there are multiple examples showing how simple 
 
 #### Supported Devices
 Currently the only supported HDMI device is the XboxHDMI kit from MakeMHz. If any other hardware developers would like to leverage this API, please reach out to me and I can help support your integration.
+
+#### Special Thanks
+Thank you to [kooscode](https://github.com/kooscode) for helping me get up and running with NXDK and makefiles!! Your help is much appreciated.
+
 #### License
    Copyright 2021 Chase Cobb
 
