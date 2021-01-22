@@ -39,6 +39,7 @@ namespace Conflux
         HDD = 1,
         DVD,
         INTERNET,
+        WORKING_DIRECTORY
     };
 
     /**

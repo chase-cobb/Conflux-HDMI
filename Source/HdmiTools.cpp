@@ -185,9 +185,21 @@ namespace Conflux
         return false;
     }
 
-    bool HdmiTools::UpdateFirmware(UpdateSource updateSource)
+    bool HdmiTools::UpdateFirmware(UpdateSource updateSource, void (*currentProcess)(const char* currentProcess)
+                                                            , void (*percentComplete)(int percentageComplete)
+                                                            , void (*errorMessage)(const char* errorMessage)
+                                                            , void (*updateComplete)(void)
+                                                            , const char* pathToFirmware)
     {
-        // TODO 
+        if(m_hdmiInterface != nullptr)
+        {
+            return m_hdmiInterface->UpdateFirmware( updateSource, 
+                                                    currentProcess, 
+                                                    percentComplete, 
+                                                    errorMessage, 
+                                                    updateComplete, 
+                                                    pathToFirmware);
+        }
         return false;
     }
 

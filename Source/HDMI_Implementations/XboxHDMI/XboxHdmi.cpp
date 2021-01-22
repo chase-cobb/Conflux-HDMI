@@ -16,6 +16,7 @@ Copyright 2021 Chase Cobb
 
 #include "XboxHdmi.h"
 #include <stdint.h>
+#include <windows.h>
 #include <xboxkrnl/xboxkrnl.h>
 #include "XboxHDMI_Config.h"
 #include "VersionCode.h"
@@ -34,11 +35,23 @@ namespace Conflux
                                 SupportedFeatures::VIDEO_MODE_ADJUST;
             SetHardwareId(HdmiHardwareId::XBOXHDMI);
 
+            //m_firmwareUpdateThread = nullptr;
+
+            m_currentUpdateProcess = nullptr;
+            m_currentPercentComplete = nullptr;
+            m_currentErrorMessage = nullptr;
+            m_updateComplete = nullptr;
+
             // TODO : Fill map with supported features
         }
 
         XboxHdmi::~XboxHdmi()
         {
+            // if(m_firmwareUpdateThread != nullptr)
+            // {
+            //     delete m_firmwareUpdateThread;
+            //     m_firmwareUpdateThread = nullptr;
+            // }
             ClearFeatureMap();
         }
 
@@ -48,10 +61,20 @@ namespace Conflux
             return false;
         }
 
-        bool XboxHdmi::UpdateFirmware(UpdateSource updateSource)
+        bool XboxHdmi::UpdateFirmware(UpdateSource updateSource, void (*currentProcess)(const char* currentProcess)
+                                                               , void (*percentComplete)(int percentageComplete)
+                                                               , void (*errorMessage)(const char* errorMessage)
+                                                               , void (*updateComplete)(void)
+                                                               , const char* pathToFirmware)
         {
-            // TODO
-            return false;
+            m_currentUpdateProcess = currentProcess;
+            m_currentPercentComplete = percentComplete;
+            m_currentErrorMessage = errorMessage;
+            m_updateComplete = updateComplete;
+
+            m_firmwareUpdateThread = std::thread(&XboxHdmi::StartFirmwareUpdateProcess, this);
+
+            return m_firmwareUpdateThread.joinable();
         }
 
         bool XboxHdmi::IsFeatureSupported(SupportedFeatures feature)
@@ -250,7 +273,16 @@ namespace Conflux
 
         void XboxHdmi::StartFirmwareUpdateProcess()
         {
-            // TODO
+            // TODO : placeholder!!
+            m_currentUpdateProcess("Flashing");
+
+            for(int i = 0; i <= 100; ++i)
+            {
+                m_currentPercentComplete(i);
+                Sleep(500);
+            }
+
+            m_updateComplete();
         }
 
         bool XboxHdmi::LoadFirmwareImage(UpdateSource updateSource, uint8_t* firmwareImage)

@@ -19,6 +19,7 @@ Copyright 2021 Chase Cobb
 
 #include "HdmiInterface.h"
 #include <time.h>
+#include <thread>
 
 namespace Conflux
 {
@@ -37,7 +38,11 @@ namespace Conflux
             ~XboxHdmi();
             
             bool IsFirmwareUpdateAvailable(UpdateSource updateSource);
-            bool UpdateFirmware(UpdateSource updateSource);
+            bool UpdateFirmware(UpdateSource updateSource, void (*currentProcess)(const char* currentProcess)
+                                                         , void (*percentComplete)(int percentageComplete)
+                                                         , void (*errorMessage)(const char* errorMessage)
+                                                         , void (*updateComplete)(void)
+                                                         , const char* pathToFirmware = "");
             bool IsFeatureSupported(SupportedFeatures feature);
             bool GetFirmwareVersion(VersionCode* versionCode);
             const char* GetName();
@@ -47,9 +52,14 @@ namespace Conflux
             bool SaveConfig();
 
         private:
+            std::thread m_firmwareUpdateThread;
+
+            void (*m_currentUpdateProcess)(const char* currentProcess);
+            void (*m_currentPercentComplete)(int percentComplete);
+            void (*m_currentErrorMessage)(const char* errorMessage);
+            void (*m_updateComplete)(void);
+
             bool GetFirmwareCompileTime(time_t* compileTime);
-
-
             bool GetBootMode(BootMode* mode);
             bool SwitchBootMode(BootMode switchToMode);
 

@@ -120,14 +120,32 @@ namespace Conflux
         bool IsUpdateAvailable(UpdateSource updateSource);
 
         /**
-         * @brief Perform firmware update via the proviced update 
-         * source.
+         * @brief Calling this function with a valid update source
+         * will begin the process of updating the firmware. This is an 
+         * async process and updates to the process are provided via 
+         * callbacks.
          * 
-         * @param updateSource Enumeration of possible update sources.
-         * @return true if update was successful.
+         * @param updateSource Enumeration of possible update sources. 
+         * Indexed by Conflux::UpdateSource.
+         * @param currentProcess Callback that provides updates
+         * on the current update process.
+         * @param percentComplete Callback that provides the 
+         * current percentage complete.
+         * @param errorMessage Callback that provides any errors
+         * encountered during the process.
+         * @param updateComplete Callback that notifies that the
+         * update has completed successfully.
+         * @param pathToFirmware Allows the location of the update
+         * to be provided by absolute path, if the update source is 
+         * Conflux::UpdateSource::WORKING_DIRECTORY.
+         * @return true if the Process was started successfully.
          * @return false otherwise.
          */
-        bool UpdateFirmware(UpdateSource updateSource);
+        bool UpdateFirmware(UpdateSource updateSource, void (*currentProcess)(const char* currentProcess)
+                                                     , void (*percentComplete)(int percentageComplete)
+                                                     , void (*errorMessage)(const char* errorMessage)
+                                                     , void (*updateComplete)(void)
+                                                     , const char* pathToFirmware = " ");
 
         /**
          * @brief Get the current value of a given feature, as well

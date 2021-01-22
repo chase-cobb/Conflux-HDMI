@@ -48,14 +48,31 @@ namespace Conflux
 
         /**
          * @brief Calling this function with a valid update source
-         * will begin the process of updating the firmware.
+         * will begin the process of updating the firmware. This is an 
+         * async process and updates to the process are provided via 
+         * callbacks.
          * 
          * @param updateSource Enumeration of possible update sources. 
          * Indexed by Conflux::UpdateSource.
-         * @return true if the update process was started.
+         * @param currentProcess Callback that provides updates
+         * on the current update process.
+         * @param percentComplete Callback that provides the 
+         * current percentage complete.
+         * @param errorMessage Callback that provides any errors
+         * encountered during the process.
+         * @param updateComplete Callback that notifies that the
+         * update has completed successfully.
+         * @param pathToFirmware Allows the location of the update
+         * to be provided by absolute path, if the update source is 
+         * Conflux::UpdateSource::WORKING_DIRECTORY.
+         * @return true if the Process was started successfully.
          * @return false otherwise.
          */
-        virtual bool UpdateFirmware(UpdateSource updateSource) = 0;
+        virtual bool UpdateFirmware(UpdateSource updateSource, void (*currentProcess)(const char* currentProcess)
+                                                             , void (*percentComplete)(int percentageComplete)
+                                                             , void (*errorMessage)(const char* errorMessage)
+                                                             , void (*updateComplete)(void)
+                                                             , const char* pathToFirmware = "") = 0;
 
          /**
           * @brief Check to see if this HDMI device supports
