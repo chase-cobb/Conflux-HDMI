@@ -21,7 +21,14 @@ namespace Conflux
 {
     namespace XboxHDMI
     {
-        const char* const FirmwareUpdateUrl = "TODO";
+        const char* const I2C_PROG_ERROR_CRC_MESSAGE = "Failed to verify CRC";
+        const char* const I2C_PROG_ERROR_WRITE_MESSAGE = "Failed to write flash";
+        const char* const I2C_PROG_ERROR_ERASE_MESSAGE = "Failed to erase flash";
+
+        const unsigned short PROGRAMMABLE_PAGES = 38;
+        const unsigned short PAGE_SIZE = 1024;
+
+        const unsigned int CRC_INIT = 0xffffffff;
 
         // XboxHDMI addresses were changed to const values from
         // preprocessor defines to allow them to be properly

@@ -41,10 +41,12 @@ namespace Conflux
          * 
          * @param updateSource Enumeration of possible update sources. 
          * Indexed by Conflux::UpdateSource.
+         * @param firmwareFilePath absolution path to where the firmware
+         * file should be located.
          * @return true if an update is available.
          * @return false otherwise.
          */
-        virtual bool IsFirmwareUpdateAvailable(UpdateSource updateSource) = 0;
+        virtual bool IsFirmwareUpdateAvailable(UpdateSource updateSource, const char* firmwareFilePath = "") = 0;
 
         /**
          * @brief Calling this function with a valid update source

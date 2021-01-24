@@ -20,6 +20,7 @@ Copyright 2021 Chase Cobb
 #include "HdmiInterface.h"
 #include <time.h>
 #include <thread>
+#include <windows.h>
 
 namespace Conflux
 {
@@ -37,7 +38,7 @@ namespace Conflux
             XboxHdmi();
             ~XboxHdmi();
             
-            bool IsFirmwareUpdateAvailable(UpdateSource updateSource);
+            bool IsFirmwareUpdateAvailable(UpdateSource updateSource, const char* firmwareFilePath = "");
             bool UpdateFirmware(UpdateSource updateSource, void (*currentProcess)(const char* currentProcess)
                                                          , void (*percentComplete)(int percentageComplete)
                                                          , void (*errorMessage)(const char* errorMessage)
@@ -52,6 +53,7 @@ namespace Conflux
             bool SaveConfig();
 
         private:
+            uint8_t* m_loadedFirmware;
             std::thread m_firmwareUpdateThread;
 
             void (*m_currentUpdateProcess)(const char* currentProcess);
@@ -63,14 +65,17 @@ namespace Conflux
             bool GetBootMode(BootMode* mode);
             bool SwitchBootMode(BootMode switchToMode);
 
-            void StartFirmwareUpdateProcess();
-            bool LoadFirmwareImage(UpdateSource updateSource, uint8_t* firmwareImage);
-
-            // TODO : Check program status // 2 version of this??
-            //bool CheckProgramStatus();
+            void StartFirmwareUpdateProcess(UpdateSource updateSource);
+            bool LoadFirmwareImage(UpdateSource updateSource, uint8_t* firmwareImage, long* fileSize, const char* firmwareFilePath = "");
             
-            bool WritePageCrc(int* firmwareFile, uint32_t offset);
-            bool WritePageData(int* firmwareFile, uint32_t offset);
+            void GeneratePageCrc(uint32_t* CrcValue, uint8_t* firmwareFile, uint32_t offset, long fileSize);
+            bool WritePageCrc(uint32_t CrcValue);
+            bool WritePageData(uint8_t* firmwareFile, uint32_t offset, long fileSize);
+            bool CheckForProgrammingErrors(ULONG* statusValue);
+
+            uint32_t CrcAddByte(uint32_t crc, uint8_t addByte);
+            uint32_t CrcResult(uint32_t crc);
+            uint32_t ReverseU32(uint32_t dataToReverse);
         };
     } // XboxHDMI
 } // Conflux

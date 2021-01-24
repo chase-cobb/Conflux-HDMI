@@ -16,7 +16,6 @@ Copyright 2021 Chase Cobb
 
 #include "XboxHdmi.h"
 #include <stdint.h>
-#include <windows.h>
 #include <xboxkrnl/xboxkrnl.h>
 #include "XboxHDMI_Config.h"
 #include "VersionCode.h"
@@ -35,30 +34,56 @@ namespace Conflux
                                 SupportedFeatures::VIDEO_MODE_ADJUST;
             SetHardwareId(HdmiHardwareId::XBOXHDMI);
 
-            //m_firmwareUpdateThread = nullptr;
+            m_loadedFirmware = nullptr;
 
             m_currentUpdateProcess = nullptr;
             m_currentPercentComplete = nullptr;
             m_currentErrorMessage = nullptr;
             m_updateComplete = nullptr;
-
-            // TODO : Fill map with supported features
         }
 
         XboxHdmi::~XboxHdmi()
         {
-            // if(m_firmwareUpdateThread != nullptr)
-            // {
-            //     delete m_firmwareUpdateThread;
-            //     m_firmwareUpdateThread = nullptr;
-            // }
             ClearFeatureMap();
         }
 
-        bool XboxHdmi::IsFirmwareUpdateAvailable(UpdateSource updateSource)
-        {
-            // TODO
-            return false;
+        bool XboxHdmi::IsFirmwareUpdateAvailable(UpdateSource updateSource, const char* firmwareFilePath)
+        {            
+            bool firmwareWasFound = false;
+
+            switch (updateSource)
+            {
+                case UpdateSource::HDD:
+                {
+                    // TODO
+                    break;
+                }
+                case UpdateSource::DVD:
+                {
+                    // TODO
+                    break;
+                }
+                case UpdateSource::INTERNET:
+                {
+                    // TODO
+                    break;
+                }
+                case UpdateSource::WORKING_DIRECTORY:
+                {
+                    FILE* firmwareFile= fopen("D:\\firmware.bin", "rb");
+
+                    if(firmwareFile)
+                    {
+                        fclose(firmwareFile);
+                        firmwareWasFound = true;
+                    }
+                    break;
+                }
+                default:
+                    break;
+            }
+
+            return firmwareWasFound;
         }
 
         bool XboxHdmi::UpdateFirmware(UpdateSource updateSource, void (*currentProcess)(const char* currentProcess)
@@ -72,7 +97,7 @@ namespace Conflux
             m_currentErrorMessage = errorMessage;
             m_updateComplete = updateComplete;
 
-            m_firmwareUpdateThread = std::thread(&XboxHdmi::StartFirmwareUpdateProcess, this);
+            m_firmwareUpdateThread = std::thread(&XboxHdmi::StartFirmwareUpdateProcess, this, updateSource);
 
             return m_firmwareUpdateThread.joinable();
         }
@@ -271,25 +296,134 @@ namespace Conflux
             return readSuccessful;
         }
 
-        void XboxHdmi::StartFirmwareUpdateProcess()
+        void XboxHdmi::StartFirmwareUpdateProcess(UpdateSource updateSource)
         {
-            // TODO : placeholder!!
-            m_currentUpdateProcess("Flashing");
+            BootMode bootMode;
+            ULONG errorStatus;
+            uint8_t* loadedFirmware = nullptr;
+            long firmwareFileSize;
 
-            for(int i = 0; i <= 100; ++i)
+            // Load Firmware
+            if(!LoadFirmwareImage(updateSource, loadedFirmware, &firmwareFileSize))
             {
-                m_currentPercentComplete(i);
-                Sleep(500);
+                // Something went wrong!!
+            }
+            
+            // Switch to bootloader
+            m_currentUpdateProcess("Switching to bootrom");
+            SwitchBootMode(BootMode::BOOTROM);
+
+            Sleep(2000);
+
+            if(GetBootMode(&bootMode) && bootMode == BootMode::HDMI_PROGRAM)
+            {
+                // TODO : unable to switch to boot rom
+            }
+
+            m_currentUpdateProcess("Flashing");
+            for(uint32_t pageIndex = 0; pageIndex < PROGRAMMABLE_PAGES; ++pageIndex)
+            {
+                uint32_t pageOffset = pageIndex * PAGE_SIZE;
+                uint32_t crcValue = CRC_INIT;
+                uint32_t firmwareOffset = 0;
+                for(uint32_t index = 0; index < PAGE_SIZE; ++index)
+                {
+                    firmwareOffset = index + pageOffset;
+
+                    // Generate page CRC
+                    GeneratePageCrc(&crcValue, loadedFirmware, firmwareOffset, firmwareFileSize);
+                    
+                    // Check program status
+                    if(CheckForProgrammingErrors(&errorStatus))
+                    {
+                        switch (errorStatus)
+                        {
+                        case I2C_PROG_ERROR_ERASE:
+                            m_currentErrorMessage(I2C_PROG_ERROR_ERASE_MESSAGE);
+                            break;
+                        case I2C_PROG_ERROR_WRITE:
+                            m_currentErrorMessage(I2C_PROG_ERROR_WRITE_MESSAGE);
+                            break;
+                        case I2C_PROG_ERROR_CRC:
+                            m_currentErrorMessage(I2C_PROG_ERROR_CRC_MESSAGE);
+                            break;
+                        default:
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        // TODO : unable to check error status
+                    }
+                    float currentPercentage = (float)index/(float)PROGRAMMABLE_PAGES;
+                    m_currentPercentComplete((int)currentPercentage);
+                }
+                crcValue = CrcResult(crcValue);
+                if(!WritePageCrc(crcValue))
+                {
+                    // TODO
+                }
+
+                // Write page data
+                if(!WritePageData(loadedFirmware, firmwareOffset, firmwareFileSize))
+                {
+                    // TODO
+                }
+            }
+
+            if(loadedFirmware != nullptr)
+            {
+                delete [] loadedFirmware;
+                loadedFirmware = nullptr;
             }
 
             m_updateComplete();
         }
 
-        bool XboxHdmi::LoadFirmwareImage(UpdateSource updateSource, uint8_t* firmwareImage)
+        bool XboxHdmi::LoadFirmwareImage(UpdateSource updateSource, uint8_t* firmwareImage, long* fileSize, const char* firmwareFilePath)
         {
-            // TODO 
+            bool imageWasLoaded = false;
 
-            return false;
+            switch (updateSource)
+            {
+            case UpdateSource::HDD:
+                // TODO
+                break;
+            case UpdateSource::DVD:
+                // TODO
+                break;
+            case UpdateSource::INTERNET:
+                // TODO
+                break;
+            case UpdateSource::WORKING_DIRECTORY:
+            {
+                FILE* firmwareFile= fopen("D:\\firmware.bin", "rb");
+
+                if(firmwareFile)
+                {
+                    fseek(firmwareFile, 0, SEEK_END);
+                    *fileSize = ftell(firmwareFile);
+                    rewind(firmwareFile);
+
+                    if(firmwareImage != nullptr)
+                    {
+                        delete [] firmwareImage;
+                        firmwareImage = nullptr;
+                    }
+
+                    firmwareImage = new uint8_t[*fileSize + 1];
+
+                    fread(firmwareImage, 1, *fileSize, firmwareFile);
+                    fclose(firmwareFile);
+                    imageWasLoaded = true;
+                }
+                break;
+            }
+            default:
+                break;
+            }
+
+            return imageWasLoaded;
         }
 
         bool XboxHdmi::SwitchBootMode(BootMode switchToMode)
@@ -314,18 +448,109 @@ namespace Conflux
             return writeSuccessful;
         }
 
-        bool XboxHdmi::WritePageCrc(int* firmwareFile, uint32_t offset)
+        void XboxHdmi::GeneratePageCrc(uint32_t* crcValue, uint8_t* firmwareFile, uint32_t offset, long fileSize)
         {
-            // TODO 
+            if (offset < fileSize)
+            {
+                *crcValue = CrcAddByte(*crcValue, firmwareFile[offset]);
+            }
+            else
+            {
+                *crcValue = CrcAddByte(*crcValue, 0x00);
+            }
 
+            return;
+        }
+
+        bool XboxHdmi::WritePageCrc(uint32_t crcValue)
+        {
+            bool writeWasSuccessful = false;
+
+            writeWasSuccessful = HalWriteSMBusValue(I2C_HDMI_ADRESS, I2C_PROG_CRC3, 0,
+                                                    (crcValue >> 24) & 0xFF) == 0;
+            
+            if(writeWasSuccessful)
+            {
+            writeWasSuccessful = HalWriteSMBusValue(I2C_HDMI_ADRESS, I2C_PROG_CRC2, 0,
+                                                    (crcValue >> 16) & 0xFF) == 0;
+            }
+
+            if(writeWasSuccessful)
+            {
+            writeWasSuccessful = HalWriteSMBusValue(I2C_HDMI_ADRESS, I2C_PROG_CRC1, 0,
+                                                    (crcValue >> 8) & 0xFF) == 0;
+            }
+
+            if(writeWasSuccessful)
+            {
+            writeWasSuccessful = HalWriteSMBusValue(I2C_HDMI_ADRESS, I2C_PROG_CRC0, 0, 
+                                                    (crcValue)&0xFF) == 0;
+            }
+
+            return writeWasSuccessful;
+        }
+
+        bool XboxHdmi::WritePageData(uint8_t* firmwareFile, uint32_t offset, long fileSize)
+        {
+            if (offset < fileSize)
+            {
+                if(HalWriteSMBusValue(I2C_HDMI_ADRESS, I2C_PROG_DATA, 0, firmwareFile[offset]) == 0)
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                if(HalWriteSMBusValue(I2C_HDMI_ADRESS, I2C_PROG_DATA, 0, 0x00) == 0)
+                {
+                    return true;
+                }
+            }
             return false;
         }
 
-        bool XboxHdmi::WritePageData(int* firmwareFile, uint32_t offset)
+        bool XboxHdmi::CheckForProgrammingErrors(ULONG* statusValue)
         {
-            // TODO 
-            
-            return false;
+            return (HalReadSMBusValue(I2C_HDMI_ADRESS, I2C_PROG_ERROR, false, statusValue) == 0);
+        }
+
+        uint32_t XboxHdmi::CrcAddByte(uint32_t crc, uint8_t addByte)
+        {
+            for (uint8_t bitPosition = 0x01; bitPosition; bitPosition <<= 1)
+            {
+                uint32_t mostSignificantBit = crc & 0x80000000;
+                if (addByte & bitPosition)
+                {
+                    mostSignificantBit ^= 0x80000000;
+                } 
+
+                if (mostSignificantBit)
+                {
+                    crc = (crc << 1) ^ 0x4C11DB7;
+                }
+                else
+                {
+                    crc = (crc << 1);
+                }
+            }
+            return crc;
+        }
+
+        uint32_t XboxHdmi::CrcResult(uint32_t crc)
+        {
+            return (ReverseU32(crc) ^ 0xFFFFFFFF);
+        }
+        
+        uint32_t XboxHdmi::ReverseU32(uint32_t dataToReverse)
+        {
+            uint32_t reversed = 0;
+            for (size_t iter = 0; iter < 32; ++iter)
+            {
+                reversed <<= 1;
+                reversed |= (dataToReverse & 0x01);
+                dataToReverse >>= 1;
+            }
+            return reversed;
         }
     } // XboxHDMI
 } // Conflux
