@@ -28,8 +28,10 @@ namespace Conflux
     {
         enum BootMode
         {
+            INVALID,
             BOOTROM,
             HDMI_PROGRAM,
+            HDMI_FIRMWARE,
         };
 
         class XboxHdmi : public HdmiInterface

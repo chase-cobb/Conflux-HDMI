@@ -145,15 +145,15 @@ int main(void)
           oss << spin << spin << spin << "  Flashing firmware  " << spin << spin << spin << "\n";
           oss << "Do NOT power off your console!!\n\n";
 
-          mutexObject.lock();
+          //mutexObject.lock();
           oss << "Flash status     : " << currentProgress << "\n";
-          mutexObject.unlock();
+          //mutexObject.unlock();
 
           oss << "Overall progress : " << updateCompletionPercentage << " percent complete" << "\n";
           
-          mutexObject.lock();
+          //mutexObject.lock();
           oss << "Error detected   : " << errorMessage << "\n";
-          mutexObject.unlock();
+          //mutexObject.unlock();
 
           // TODO : Update spinner timer with delta time in milliseconds.
           Duration deltaTime = Clock::now() - previousTime;
@@ -205,8 +205,8 @@ int main(void)
     while (pb_busy());
     while (pb_finished());
 
-    // Yield to firmware update, if it is ready.
-    Sleep(0);
+    // Yield to firmware update
+    Sleep(20);
   }
 
   Sleep(2000);
@@ -239,9 +239,9 @@ inside these functions!!
 
 void ProgressUpdate(const char* progressUpdate)
 {
-  mutexObject.lock();
+  //mutexObject.lock();
     currentProgress = std::string(progressUpdate);
-  mutexObject.unlock();
+  //mutexObject.unlock();
 }
 
 void PercentComplete(int percentComplete)
@@ -252,18 +252,18 @@ void PercentComplete(int percentComplete)
 
 void ErrorMessage(const char* currentErrorMessage)
 {
-  mutexObject.lock();
-    errorMessage = std::string(errorMessage);
-  mutexObject.unlock();
+  //mutexObject.lock();
+    errorMessage = std::string(currentErrorMessage);
+  //mutexObject.unlock();
 }
 
 void FirmwareUpdateComplete()
 {
-  mutexObject.lock();
+  //mutexObject.lock();
     firmwareFlashInProgress = false;
     firmwareWasUpdatedSuccessfully = true;
     updateCompletionPercentage = 0;
     currentProgress = "Firmware successfully flashed!! Reboot your console.";
     errorMessage.clear();
-  mutexObject.unlock();
+  //mutexObject.unlock();
 }

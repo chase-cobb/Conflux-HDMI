@@ -292,9 +292,17 @@ namespace Conflux
                 {
                     *mode = BootMode::HDMI_PROGRAM;
                 }
-                else
+                else if(currentBootMode == BOOT_HDMI_BOOTROM)
                 {
                     *mode = BootMode::BOOTROM;
+                }
+                else if(currentBootMode == BOOT_HDMI_FIRMWARE)
+                {
+                    *mode = BootMode::HDMI_FIRMWARE;
+                }
+                else if(currentBootMode == BOOT_HDMI_INVALID)
+                {
+                    *mode = BootMode::INVALID;
                 }
             }
 
@@ -309,6 +317,7 @@ namespace Conflux
             long firmwareFileSize;
             int sleepBetweenOpsInSeconds = 2;
 
+            m_currentErrorMessage("None");
 
             // Load Firmware
             m_currentUpdateProcess(PROG_PROCESS_LOADING_FIRMWARE);
@@ -329,8 +338,35 @@ namespace Conflux
             std::this_thread::sleep_for (std::chrono::seconds(sleepBetweenOpsInSeconds));
             
             // Switch to bootloader
-            m_currentUpdateProcess(PROG_SWITCHING_TO_BOOTROM);
-            if(!SwitchBootMode(BootMode::BOOTROM))
+            m_currentUpdateProcess("Checking boot mode");
+            if(!GetBootMode(&bootMode))
+            {
+                m_currentErrorMessage("Unable to get boot mode!!");
+                std::this_thread::sleep_for (std::chrono::seconds(sleepBetweenOpsInSeconds));
+            }
+            else
+            {
+                if(bootMode == BootMode::HDMI_PROGRAM)
+                {
+                    m_currentUpdateProcess("Boot rom needs to be loaded from HDMI program");
+                }
+                else if(bootMode == BootMode::BOOTROM)
+                {
+                    m_currentUpdateProcess("Boot rom is already loaded");
+                }
+                else if(bootMode == BootMode::HDMI_FIRMWARE)
+                {
+                    m_currentUpdateProcess("Boot rom needs to be loaded from HDMI firmware");
+                }
+                else if(bootMode == BootMode::INVALID)
+                {
+                    m_currentUpdateProcess("Invalid boot mode detected");
+                }
+            }
+            std::this_thread::sleep_for (std::chrono::seconds(sleepBetweenOpsInSeconds));
+            
+
+            if(!SwitchBootMode(BootMode::HDMI_PROGRAM)) // HACK : XboxHDMI actually expects this to switch to bootrom
             {
                 m_currentErrorMessage(PROG_ERROR_UNABLE_TO_SIGNAL_BOOT_MODE);
             }
@@ -342,14 +378,15 @@ namespace Conflux
             m_currentUpdateProcess(PROG_CHECKING_BOOT_MODE);
             if(GetBootMode(&bootMode))
             {
-                if(bootMode == BootMode::HDMI_PROGRAM)
-                {
-                    m_currentErrorMessage(PROG_ERROR_UNABLE_TO_SWAP_TO_BOOTROM);
-                }
-                else if(bootMode == BootMode::BOOTROM)
+                if(bootMode == BootMode::BOOTROM)
                 {
                     m_currentUpdateProcess(PROG_SWAPPED_TO_BOOTROM);
                 }
+                else
+                {
+                    m_currentErrorMessage(PROG_ERROR_UNABLE_TO_SWAP_TO_BOOTROM);
+                }
+                
             }
             std::this_thread::sleep_for (std::chrono::seconds(sleepBetweenOpsInSeconds));
 
@@ -377,6 +414,9 @@ namespace Conflux
                 {
                     m_currentErrorMessage(PROG_ERROR_UNABLE_TO_WRITE_CRC_DATA);
                 }
+
+                // Sleeping here is required to avoid CRC verification errors.
+                std::this_thread::sleep_for (std::chrono::milliseconds(200));
                 
                 for(uint32_t index = 0; index < PAGE_SIZE; ++index)
                 {
@@ -415,9 +455,6 @@ namespace Conflux
                     // Update percentage complete
                     float currentPercentage = ((float)firmwareOffset/(float)totalBytesToWrite) * 100.0f;
                     m_currentPercentComplete((int)currentPercentage);
-
-                    // Yield to main thread, if it is ready.
-                    std::this_thread::yield();
                 }
 
                 // Check for i2c errors and send them to the client app
@@ -425,6 +462,9 @@ namespace Conflux
                 {
                     m_currentErrorMessage(I2C_PROG_ERROR_CRC_MESSAGE);
                 }
+
+                // Sleeping here is required to avoid "failed to erase flash" errors
+                std::this_thread::sleep_for (std::chrono::milliseconds(200));
             }
 
             // Clean up the loaded firmware
