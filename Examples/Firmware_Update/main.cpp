@@ -1,5 +1,6 @@
 #include <hal/debug.h>
 #include <hal/video.h>
+#include <hal/xbox.h>
 #include <SDL.h>
 #include <windows.h>
 #include <pbkit/pbkit.h>
@@ -7,6 +8,7 @@
 #include <map>
 #include <sstream>
 #include <mutex>
+#include <chrono>
 
 #include "HdmiTools.h"
 #include "RangedIntValue.h"
@@ -28,16 +30,25 @@ std::string errorMessage;
 
 std::mutex mutexObject;
 
+typedef std::chrono::high_resolution_clock Clock;
+typedef std::chrono::duration<float, std::milli> Duration;
+
 int main(void)
 {
   SDL_GameController *pad = NULL;
   Conflux::HdmiTools* hdmiTools = Conflux::HdmiTools::GetInstance();
   bool pbkInit = false, sdlInit = false, isRunning = true;
+  bool newFirmwareIsAvailable = false;
 
   const char* flashingSpinner[SPINNER_LENGTH] = {"/\0", "-\0", "\\\0", "|\0"};
   int spinnerIndex = 0;
 
-  int sleepTime = 200; // milliseconds
+  // Start time
+  Clock::time_point previousTime = Clock::now();
+
+  // Loading spinner timer
+  int spinnerTimer = 0;
+  int loadingSpinnerRotateTime = 200; // milliseconds
 
   XVideoSetMode(640, 480, 32, REFRESH_DEFAULT);
 
@@ -63,10 +74,14 @@ int main(void)
 
   if(isRunning)
   {
-    isRunning = Conflux::HdmiTools::GetInstance()->Initialize();
+    isRunning = hdmiTools->Initialize();
     if(!isRunning)
     {
       debugPrint("Conflux detected no supported HDMI hardware!!\nClosing app...");
+    }
+    else
+    {
+      newFirmwareIsAvailable = hdmiTools->IsUpdateAvailable(Conflux::UpdateSource::WORKING_DIRECTORY);
     }
   }
 
@@ -95,63 +110,88 @@ int main(void)
     {
       std::ostringstream oss;
 
-      mutexObject.lock();
-        bool tempFirmwareFlashInProgress = firmwareFlashInProgress;
-      mutexObject.unlock();
+      bool tempFirmwareFlashInProgress = firmwareFlashInProgress;
 
       oss << "Conflux HDMI async firmware update example \n";
       oss << "Firmware: " << hdmiTools->GetFirmwareVersion().GetVersionCodeAsCString() << "\n";
       oss << "Kernel : " << hdmiTools->GetKernelPatchVersion().GetVersionCodeAsCString() << "\n\n";
 
-      // If the firmware is not being flashed, allow
-      // the user to start the process by pressing "A"
-      if(!tempFirmwareFlashInProgress)
+      if(newFirmwareIsAvailable && !firmwareWasUpdatedSuccessfully)
       {
-        oss << "\n----Press A:Update Firmware       Press B: Exit----\n";
-        if(SDL_GameControllerGetButton(pad, SDL_CONTROLLER_BUTTON_A) == 1)
+        // If the firmware is not being flashed, allow
+        // the user to start the process by pressing "A"
+        if(!tempFirmwareFlashInProgress)
         {
-          // This will flash a firmware located in the directory
-          // of the currently executing program.
-          if(hdmiTools->UpdateFirmware(Conflux::UpdateSource::WORKING_DIRECTORY,
-                                    (*ProgressUpdate),
-                                    (*PercentComplete),
-                                    (*ErrorMessage),
-                                    (*FirmwareUpdateComplete)))
+          oss << "\n----Press A:Update Firmware       Press B: Exit----\n";
+          if(SDL_GameControllerGetButton(pad, SDL_CONTROLLER_BUTTON_A) == 1)
           {
-            mutexObject.lock();
+            // This will flash a firmware located in the directory
+            // of the currently executing program.
+            if(hdmiTools->UpdateFirmware(Conflux::UpdateSource::WORKING_DIRECTORY,
+                                      (*ProgressUpdate),
+                                      (*PercentComplete),
+                                      (*ErrorMessage),
+                                      (*FirmwareUpdateComplete)))
+            {
               firmwareFlashInProgress = true;
-            mutexObject.unlock();
+              previousTime = Clock::now();
+            }
           }
         }
-        else if(SDL_GameControllerGetButton(pad, SDL_CONTROLLER_BUTTON_B) == 1)
+        else if(tempFirmwareFlashInProgress)
         {
-          isRunning = false;
-        }
+          // FLASHING FIRMWARE!! DO NOT POWER OFF YOUR CONSOLE!!
+          const char* spin = flashingSpinner[spinnerIndex];
+          oss << spin << spin << spin << "  Flashing firmware  " << spin << spin << spin << "\n";
+          oss << "Do NOT power off your console!!\n\n";
 
-        if(firmwareWasUpdatedSuccessfully)
-        {
-          oss << "\nFirmware was flashed successfully!\n";
+          mutexObject.lock();
+          oss << "Flash status     : " << currentProgress << "\n";
+          mutexObject.unlock();
+
+          oss << "Overall progress : " << updateCompletionPercentage << " percent complete" << "\n";
+          
+          mutexObject.lock();
+          oss << "Error detected   : " << errorMessage << "\n";
+          mutexObject.unlock();
+
+          // TODO : Update spinner timer with delta time in milliseconds.
+          Duration deltaTime = Clock::now() - previousTime;
+          spinnerTimer += (int)deltaTime.count();
+
+          // Update the flashing spinner
+          if(spinnerTimer >= loadingSpinnerRotateTime)
+          {
+            if(++spinnerIndex >= SPINNER_LENGTH)
+            {
+              spinnerIndex = 0;
+            }
+            spinnerTimer = 0;
+          }
+
+          previousTime = Clock::now();
         }
       }
-      else
+      else if(!newFirmwareIsAvailable)
       {
-        // FLASHING FIRMWARE!! DO NOT POWER OFF YOUR CONSOLE!!
-        const char* spin = flashingSpinner[spinnerIndex];
-        oss << spin << spin << spin << "  Flashing firmware  " << spin << spin << spin << "\n";
-        oss << "Do NOT power off your console!!\n\n";
+        oss << "\nNo Firmware Updates Available :(\n";
+        oss << "\n----Press B: Exit----\n";
+      }
 
-        mutexObject.lock();
-          oss << "Flash status     : " << currentProgress << "\n";
-          oss << "Overall progress : " << updateCompletionPercentage << "\n";
-        mutexObject.unlock();
-
-        // update the flashing spinner
-        if(++spinnerIndex >= SPINNER_LENGTH)
-        {
-          spinnerIndex = 0;
-        }
+      if(firmwareWasUpdatedSuccessfully)
+      {
+        oss << "\nFirmware was flashed successfully!\n";
+        oss << "\nPress B to reboot console\n";
       }
       
+      if(SDL_GameControllerGetButton(pad, SDL_CONTROLLER_BUTTON_B) == 1 && !tempFirmwareFlashInProgress)
+      {
+        if(firmwareWasUpdatedSuccessfully)
+        {
+          XReboot();
+        }
+        isRunning = false;
+      }
 
       pb_print(oss.str().c_str());
     }
@@ -164,7 +204,9 @@ int main(void)
     pb_draw_text_screen();
     while (pb_busy());
     while (pb_finished());
-    Sleep(sleepTime);
+
+    // Yield to firmware update, if it is ready.
+    Sleep(0);
   }
 
   Sleep(2000);
@@ -187,6 +229,14 @@ int main(void)
   return 0;
 }
 
+/*
+The mutex locks below may not be necessary in this specific
+implementation, but they are included to inform application
+developers that these callbacks are coming from a different 
+thread. So make sure to be safe with any operations you run
+inside these functions!!
+*/
+
 void ProgressUpdate(const char* progressUpdate)
 {
   mutexObject.lock();
@@ -196,9 +246,8 @@ void ProgressUpdate(const char* progressUpdate)
 
 void PercentComplete(int percentComplete)
 {
-  mutexObject.lock();
-    updateCompletionPercentage = percentComplete;
-  mutexObject.unlock();
+  // no need to lock an int assignment  
+  updateCompletionPercentage = percentComplete;
 }
 
 void ErrorMessage(const char* currentErrorMessage)

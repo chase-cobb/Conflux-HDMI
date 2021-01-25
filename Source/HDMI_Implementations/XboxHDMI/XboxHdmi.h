@@ -66,7 +66,7 @@ namespace Conflux
             bool SwitchBootMode(BootMode switchToMode);
 
             void StartFirmwareUpdateProcess(UpdateSource updateSource);
-            bool LoadFirmwareImage(UpdateSource updateSource, uint8_t* firmwareImage, long* fileSize, const char* firmwareFilePath = "");
+            bool LoadFirmwareImage(UpdateSource updateSource, uint8_t*& firmwareImage, long* fileSize, const char* firmwareFilePath = "");
             
             void GeneratePageCrc(uint32_t* CrcValue, uint8_t* firmwareFile, uint32_t offset, long fileSize);
             bool WritePageCrc(uint32_t CrcValue);

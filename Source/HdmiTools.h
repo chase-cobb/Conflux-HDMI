@@ -114,10 +114,13 @@ namespace Conflux
          * 
          * @param updateSource Enumeration of possible update sources. 
          * Indexed by Conflux::UpdateSource.
+         * @param pathToFirmware Allows the location of the update
+         * to be provided by absolute path, if the update source is 
+         * Conflux::UpdateSource::WORKING_DIRECTORY.
          * @return true if an update is available.
          * @return false otherwise.
          */
-        bool IsUpdateAvailable(UpdateSource updateSource);
+        bool IsUpdateAvailable(UpdateSource updateSource, const char* pathToFirmware = "");
 
         /**
          * @brief Calling this function with a valid update source

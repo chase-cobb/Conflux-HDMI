@@ -15,6 +15,7 @@ Copyright 2021 Chase Cobb
 */
 
 #include "XboxHdmi.h"
+#include <chrono>
 #include <stdint.h>
 #include <xboxkrnl/xboxkrnl.h>
 #include "XboxHDMI_Config.h"
@@ -70,7 +71,8 @@ namespace Conflux
                 }
                 case UpdateSource::WORKING_DIRECTORY:
                 {
-                    FILE* firmwareFile= fopen("D:\\firmware.bin", "rb");
+                    FILE* firmwareFile= fopen(DEFAULT_FIRMWARE_WORKING_DIRECTORY,
+                                              DEFAULT_FIRMWARE_WORKING_DIRECTORY_OPEN_MODE);
 
                     if(firmwareFile)
                     {
@@ -96,6 +98,11 @@ namespace Conflux
             m_currentPercentComplete = percentComplete;
             m_currentErrorMessage = errorMessage;
             m_updateComplete = updateComplete;
+
+            if(m_firmwareUpdateThread.joinable())
+            {
+                m_firmwareUpdateThread.join();
+            }
 
             m_firmwareUpdateThread = std::thread(&XboxHdmi::StartFirmwareUpdateProcess, this, updateSource);
 
@@ -146,8 +153,6 @@ namespace Conflux
             ULONG crSetting = 0;
 
             // If one read fails it will cause all to fail
-            // TODO : Refactor this so that it's less ugly and lowers the
-            //        cost of change.
             bool readSuccessful = true;
 
             readSuccessful = (HalReadSMBusValue(I2C_HDMI_ADRESS, I2C_EEPROM_WIDESCREEN, false,
@@ -302,85 +307,138 @@ namespace Conflux
             ULONG errorStatus;
             uint8_t* loadedFirmware = nullptr;
             long firmwareFileSize;
+            int sleepBetweenOpsInSeconds = 2;
+
 
             // Load Firmware
+            m_currentUpdateProcess(PROG_PROCESS_LOADING_FIRMWARE);
             if(!LoadFirmwareImage(updateSource, loadedFirmware, &firmwareFileSize))
             {
-                // Something went wrong!!
+                m_currentErrorMessage(PROG_ERROR_FAILED_TO_LOAD_FIRMWARE);
             }
+            std::this_thread::sleep_for (std::chrono::seconds(sleepBetweenOpsInSeconds));
+
+            // Output the firmware file size
+            std::string firmwareSizeToString = PROG_PROCESS_FIRMWARE_FILE_SIZE;
+            firmwareSizeToString.append(std::to_string(firmwareFileSize));
+            m_currentUpdateProcess(firmwareSizeToString.c_str());
+            std::this_thread::sleep_for (std::chrono::seconds(sleepBetweenOpsInSeconds));
+
+            // Output firmware loaded!
+            m_currentUpdateProcess(PROG_PROCESS_LOADED_FIRMWARE);
+            std::this_thread::sleep_for (std::chrono::seconds(sleepBetweenOpsInSeconds));
             
             // Switch to bootloader
-            m_currentUpdateProcess("Switching to bootrom");
-            SwitchBootMode(BootMode::BOOTROM);
-
-            Sleep(2000);
-
-            if(GetBootMode(&bootMode) && bootMode == BootMode::HDMI_PROGRAM)
+            m_currentUpdateProcess(PROG_SWITCHING_TO_BOOTROM);
+            if(!SwitchBootMode(BootMode::BOOTROM))
             {
-                // TODO : unable to switch to boot rom
+                m_currentErrorMessage(PROG_ERROR_UNABLE_TO_SIGNAL_BOOT_MODE);
             }
+            // Waiting for boot rom
+            m_currentUpdateProcess(PROG_WAITING_FOR_BOOTROM);
+            std::this_thread::sleep_for (std::chrono::seconds(sleepBetweenOpsInSeconds));
 
-            m_currentUpdateProcess("Flashing");
+            // Verifying current boot mode
+            m_currentUpdateProcess(PROG_CHECKING_BOOT_MODE);
+            if(GetBootMode(&bootMode))
+            {
+                if(bootMode == BootMode::HDMI_PROGRAM)
+                {
+                    m_currentErrorMessage(PROG_ERROR_UNABLE_TO_SWAP_TO_BOOTROM);
+                }
+                else if(bootMode == BootMode::BOOTROM)
+                {
+                    m_currentUpdateProcess(PROG_SWAPPED_TO_BOOTROM);
+                }
+            }
+            std::this_thread::sleep_for (std::chrono::seconds(sleepBetweenOpsInSeconds));
+
+            int totalBytesToWrite = PROGRAMMABLE_PAGES * PAGE_SIZE;
+
+            // Flashing firmware
+            m_currentUpdateProcess(PROG_FLASHING_FIRMWARE);
             for(uint32_t pageIndex = 0; pageIndex < PROGRAMMABLE_PAGES; ++pageIndex)
             {
                 uint32_t pageOffset = pageIndex * PAGE_SIZE;
                 uint32_t crcValue = CRC_INIT;
                 uint32_t firmwareOffset = 0;
+
+                // Generate CRC and write it for this page
                 for(uint32_t index = 0; index < PAGE_SIZE; ++index)
                 {
                     firmwareOffset = index + pageOffset;
 
                     // Generate page CRC
                     GeneratePageCrc(&crcValue, loadedFirmware, firmwareOffset, firmwareFileSize);
+                }
+
+                crcValue = CrcResult(crcValue);
+                if(!WritePageCrc(crcValue))
+                {
+                    m_currentErrorMessage(PROG_ERROR_UNABLE_TO_WRITE_CRC_DATA);
+                }
+                
+                for(uint32_t index = 0; index < PAGE_SIZE; ++index)
+                {
+                    firmwareOffset = index + pageOffset;
                     
+                    // Write page data
+                    if(!WritePageData(loadedFirmware, firmwareOffset, firmwareFileSize))
+                    {
+                        m_currentErrorMessage(PROG_ERROR_UNABLE_TO_WRITE_PAGE_DATA);
+                    }
+
                     // Check program status
                     if(CheckForProgrammingErrors(&errorStatus))
                     {
                         switch (errorStatus)
                         {
-                        case I2C_PROG_ERROR_ERASE:
-                            m_currentErrorMessage(I2C_PROG_ERROR_ERASE_MESSAGE);
-                            break;
-                        case I2C_PROG_ERROR_WRITE:
-                            m_currentErrorMessage(I2C_PROG_ERROR_WRITE_MESSAGE);
-                            break;
-                        case I2C_PROG_ERROR_CRC:
-                            m_currentErrorMessage(I2C_PROG_ERROR_CRC_MESSAGE);
-                            break;
-                        default:
-                            break;
+                            case I2C_PROG_ERROR_ERASE:
+                            {
+                                m_currentErrorMessage(I2C_PROG_ERROR_ERASE_MESSAGE);
+                                break;
+                            }
+                            case I2C_PROG_ERROR_WRITE:
+                            {
+                                m_currentErrorMessage(I2C_PROG_ERROR_WRITE_MESSAGE);
+                                break;
+                            }
+                            default:
+                                break;
                         }
                     }
                     else
                     {
-                        // TODO : unable to check error status
+                        m_currentErrorMessage(PROG_ERROR_UNABLE_TO_CHECK_ERROR_STATUS);
                     }
-                    float currentPercentage = (float)index/(float)PROGRAMMABLE_PAGES;
+
+                    // Update percentage complete
+                    float currentPercentage = ((float)firmwareOffset/(float)totalBytesToWrite) * 100.0f;
                     m_currentPercentComplete((int)currentPercentage);
-                }
-                crcValue = CrcResult(crcValue);
-                if(!WritePageCrc(crcValue))
-                {
-                    // TODO
+
+                    // Yield to main thread, if it is ready.
+                    std::this_thread::yield();
                 }
 
-                // Write page data
-                if(!WritePageData(loadedFirmware, firmwareOffset, firmwareFileSize))
+                // Check for i2c errors and send them to the client app
+                if(errorStatus == I2C_PROG_ERROR_CRC)
                 {
-                    // TODO
+                    m_currentErrorMessage(I2C_PROG_ERROR_CRC_MESSAGE);
                 }
             }
 
+            // Clean up the loaded firmware
             if(loadedFirmware != nullptr)
             {
                 delete [] loadedFirmware;
                 loadedFirmware = nullptr;
             }
 
+            // Inform the client application that the update is complete.
             m_updateComplete();
         }
 
-        bool XboxHdmi::LoadFirmwareImage(UpdateSource updateSource, uint8_t* firmwareImage, long* fileSize, const char* firmwareFilePath)
+        bool XboxHdmi::LoadFirmwareImage(UpdateSource updateSource, uint8_t*& firmwareImage, long* fileSize, const char* firmwareFilePath)
         {
             bool imageWasLoaded = false;
 
@@ -516,7 +574,7 @@ namespace Conflux
 
         uint32_t XboxHdmi::CrcAddByte(uint32_t crc, uint8_t addByte)
         {
-            for (uint8_t bitPosition = 0x01; bitPosition; bitPosition <<= 1)
+            for (uint8_t bitPosition = 0x01; bitPosition > 0; bitPosition <<= 1)
             {
                 uint32_t mostSignificantBit = crc & 0x80000000;
                 if (addByte & bitPosition)
