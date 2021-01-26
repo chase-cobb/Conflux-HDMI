@@ -400,6 +400,7 @@ namespace Conflux
                 uint32_t crcValue = CRC_INIT;
                 uint32_t firmwareOffset = 0;
 
+                m_currentUpdateProcess(PROG_WRITING_PAGE_CRC);
                 // Generate CRC and write it for this page
                 for(uint32_t index = 0; index < PAGE_SIZE; ++index)
                 {
@@ -416,17 +417,22 @@ namespace Conflux
                 }
 
                 // Sleeping here is required to avoid CRC verification errors.
-                std::this_thread::sleep_for (std::chrono::milliseconds(200));
+                std::this_thread::sleep_for (std::chrono::milliseconds(750));
                 
+                m_currentUpdateProcess(PROG_WRITING_PAGE_DATA);
                 for(uint32_t index = 0; index < PAGE_SIZE; ++index)
                 {
                     firmwareOffset = index + pageOffset;
                     
                     // Write page data
+                    m_currentUpdateProcess(PROG_WRITING_PAGE_DATA);
                     if(!WritePageData(loadedFirmware, firmwareOffset, firmwareFileSize))
                     {
                         m_currentErrorMessage(PROG_ERROR_UNABLE_TO_WRITE_PAGE_DATA);
                     }
+
+                    // Attempt to yield to other threads
+                    std::this_thread::yield();
 
                     // Check program status
                     if(CheckForProgrammingErrors(&errorStatus))
@@ -464,7 +470,7 @@ namespace Conflux
                 }
 
                 // Sleeping here is required to avoid "failed to erase flash" errors
-                std::this_thread::sleep_for (std::chrono::milliseconds(200));
+                std::this_thread::sleep_for (std::chrono::milliseconds(750));
             }
 
             // Clean up the loaded firmware

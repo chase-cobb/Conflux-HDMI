@@ -206,7 +206,7 @@ int main(void)
     while (pb_finished());
 
     // Yield to firmware update
-    Sleep(20);
+    Sleep(0);
   }
 
   Sleep(2000);
