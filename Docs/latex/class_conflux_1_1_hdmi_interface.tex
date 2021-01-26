@@ -22,10 +22,10 @@ Inheritance diagram for Conflux\+::Hdmi\+Interface\+:
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-virtual bool \mbox{\hyperlink{class_conflux_1_1_hdmi_interface_a02289e378ce706bb61fabd4363addb61}{Is\+Firmware\+Update\+Available}} (Update\+Source update\+Source)=0
+virtual bool \mbox{\hyperlink{class_conflux_1_1_hdmi_interface_a292122028da631927fff766155f9a912}{Is\+Firmware\+Update\+Available}} (Update\+Source update\+Source, const char $\ast$firmware\+File\+Path=\char`\"{}\char`\"{})=0
 \begin{DoxyCompactList}\small\item\em Checks to see if a firmware update is available via the provided update source. \end{DoxyCompactList}\item 
-virtual bool \mbox{\hyperlink{class_conflux_1_1_hdmi_interface_a2c1aea6b6098efcc6a034251eb427f00}{Update\+Firmware}} (Update\+Source update\+Source)=0
-\begin{DoxyCompactList}\small\item\em Calling this function with a valid update source will begin the process of updating the firmware. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_conflux_1_1_hdmi_interface_a4c4b72786018fb1329d81762376ea10e}{Update\+Firmware}} (Update\+Source update\+Source, void($\ast$current\+Process)(const char $\ast$current\+Process), void($\ast$percent\+Complete)(int percentage\+Complete), void($\ast$error\+Message)(const char $\ast$error\+Message), void($\ast$update\+Complete)(bool flash\+Successful), const char $\ast$path\+To\+Firmware=\char`\"{}\char`\"{})=0
+\begin{DoxyCompactList}\small\item\em Calling this function with a valid update source will begin the process of updating the firmware. This is an async process and updates to the process are provided via callbacks. \end{DoxyCompactList}\item 
 virtual bool \mbox{\hyperlink{class_conflux_1_1_hdmi_interface_a2565a8917e01bc8826340006a5b7289a}{Is\+Feature\+Supported}} (Supported\+Features feature)=0
 \begin{DoxyCompactList}\small\item\em Check to see if this H\+D\+MI device supports a specific feature. \end{DoxyCompactList}\item 
 virtual bool \mbox{\hyperlink{class_conflux_1_1_hdmi_interface_a4e4b15ce3e6cdf868efc114ad32d663a}{Get\+Firmware\+Version}} (\mbox{\hyperlink{class_conflux_1_1_version_code}{Version\+Code}} $\ast$version\+Code)=0
@@ -218,7 +218,7 @@ Hdmi\+Hardware\+Id hardware ID, indexed by Conflux\+::\+Hdmi\+Hardware\+Id.
 \end{DoxyReturn}
 
 
-Definition at line 128 of file Hdmi\+Interface.\+h.
+Definition at line 147 of file Hdmi\+Interface.\+h.
 
 \mbox{\Hypertarget{class_conflux_1_1_hdmi_interface_afdb0d03b3401104a22c01791e845f3d5}\label{class_conflux_1_1_hdmi_interface_afdb0d03b3401104a22c01791e845f3d5}} 
 \index{Conflux::HdmiInterface@{Conflux::HdmiInterface}!GetName@{GetName}}
@@ -261,11 +261,11 @@ false otherwise.
 
 Implemented in \mbox{\hyperlink{class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi_adba53da201dc7743bce34aad63e29229}{Conflux\+::\+Xbox\+H\+D\+M\+I\+::\+Xbox\+Hdmi}}.
 
-\mbox{\Hypertarget{class_conflux_1_1_hdmi_interface_a02289e378ce706bb61fabd4363addb61}\label{class_conflux_1_1_hdmi_interface_a02289e378ce706bb61fabd4363addb61}} 
+\mbox{\Hypertarget{class_conflux_1_1_hdmi_interface_a292122028da631927fff766155f9a912}\label{class_conflux_1_1_hdmi_interface_a292122028da631927fff766155f9a912}} 
 \index{Conflux::HdmiInterface@{Conflux::HdmiInterface}!IsFirmwareUpdateAvailable@{IsFirmwareUpdateAvailable}}
 \index{IsFirmwareUpdateAvailable@{IsFirmwareUpdateAvailable}!Conflux::HdmiInterface@{Conflux::HdmiInterface}}
 \doxysubsubsection{\texorpdfstring{IsFirmwareUpdateAvailable()}{IsFirmwareUpdateAvailable()}}
-{\footnotesize\ttfamily virtual bool Conflux\+::\+Hdmi\+Interface\+::\+Is\+Firmware\+Update\+Available (\begin{DoxyParamCaption}\item[{Update\+Source}]{update\+Source }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual bool Conflux\+::\+Hdmi\+Interface\+::\+Is\+Firmware\+Update\+Available (\begin{DoxyParamCaption}\item[{Update\+Source}]{update\+Source,  }\item[{const char $\ast$}]{firmware\+File\+Path = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -275,6 +275,8 @@ Checks to see if a firmware update is available via the provided update source.
 \begin{DoxyParams}{Parameters}
 {\em update\+Source} & Enumeration of possible update sources. Indexed by Conflux\+::\+Update\+Source. \\
 \hline
+{\em firmware\+File\+Path} & absolution path to where the firmware file should be located. \\
+\hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 true if an update is available. 
@@ -283,7 +285,7 @@ false otherwise.
 \end{DoxyReturn}
 
 
-Implemented in \mbox{\hyperlink{class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi_a328d8137acfff5df87997b16434ab996}{Conflux\+::\+Xbox\+H\+D\+M\+I\+::\+Xbox\+Hdmi}}.
+Implemented in \mbox{\hyperlink{class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi_a033c6d63e513858c910aee0ef9e9dd63}{Conflux\+::\+Xbox\+H\+D\+M\+I\+::\+Xbox\+Hdmi}}.
 
 \mbox{\Hypertarget{class_conflux_1_1_hdmi_interface_a42a2003309b2ba35b3bc73245bc27a2f}\label{class_conflux_1_1_hdmi_interface_a42a2003309b2ba35b3bc73245bc27a2f}} 
 \index{Conflux::HdmiInterface@{Conflux::HdmiInterface}!LoadConfig@{LoadConfig}}
@@ -371,33 +373,43 @@ It is expected that developers will call \mbox{\hyperlink{class_conflux_1_1_hdmi
 
 Implemented in \mbox{\hyperlink{class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi_ab9da3d657fc416b7eb19f252df7397e6}{Conflux\+::\+Xbox\+H\+D\+M\+I\+::\+Xbox\+Hdmi}}.
 
-\mbox{\Hypertarget{class_conflux_1_1_hdmi_interface_a2c1aea6b6098efcc6a034251eb427f00}\label{class_conflux_1_1_hdmi_interface_a2c1aea6b6098efcc6a034251eb427f00}} 
+\mbox{\Hypertarget{class_conflux_1_1_hdmi_interface_a4c4b72786018fb1329d81762376ea10e}\label{class_conflux_1_1_hdmi_interface_a4c4b72786018fb1329d81762376ea10e}} 
 \index{Conflux::HdmiInterface@{Conflux::HdmiInterface}!UpdateFirmware@{UpdateFirmware}}
 \index{UpdateFirmware@{UpdateFirmware}!Conflux::HdmiInterface@{Conflux::HdmiInterface}}
 \doxysubsubsection{\texorpdfstring{UpdateFirmware()}{UpdateFirmware()}}
-{\footnotesize\ttfamily virtual bool Conflux\+::\+Hdmi\+Interface\+::\+Update\+Firmware (\begin{DoxyParamCaption}\item[{Update\+Source}]{update\+Source }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual bool Conflux\+::\+Hdmi\+Interface\+::\+Update\+Firmware (\begin{DoxyParamCaption}\item[{Update\+Source}]{update\+Source,  }\item[{void($\ast$)(const char $\ast$current\+Process)}]{current\+Process,  }\item[{void($\ast$)(int percentage\+Complete)}]{percent\+Complete,  }\item[{void($\ast$)(const char $\ast$error\+Message)}]{error\+Message,  }\item[{void($\ast$)(bool flash\+Successful)}]{update\+Complete,  }\item[{const char $\ast$}]{path\+To\+Firmware = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
-Calling this function with a valid update source will begin the process of updating the firmware. 
+Calling this function with a valid update source will begin the process of updating the firmware. This is an async process and updates to the process are provided via callbacks. 
 
 
 \begin{DoxyParams}{Parameters}
 {\em update\+Source} & Enumeration of possible update sources. Indexed by Conflux\+::\+Update\+Source. \\
 \hline
+{\em current\+Process} & Callback that provides updates on the current update process. \\
+\hline
+{\em percent\+Complete} & Callback that provides the current percentage complete. \\
+\hline
+{\em error\+Message} & Callback that provides any errors encountered during the process. \\
+\hline
+{\em update\+Complete} & Callback that notifies that the update has completed successfully, or otherwise. \\
+\hline
+{\em path\+To\+Firmware} & Allows the location of the update to be provided by absolute path, if the update source is Conflux\+::\+Update\+Source\+::\+W\+O\+R\+K\+I\+N\+G\+\_\+\+D\+I\+R\+E\+C\+T\+O\+RY. \\
+\hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-true if the update process was started. 
+true if the Process was started successfully. 
 
 false otherwise. 
 \end{DoxyReturn}
 
 
-Implemented in \mbox{\hyperlink{class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi_af6a9d0171891dc0b1462718df980a834}{Conflux\+::\+Xbox\+H\+D\+M\+I\+::\+Xbox\+Hdmi}}.
+Implemented in \mbox{\hyperlink{class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi_a363d3a182bf3d400b890366fc98251da}{Conflux\+::\+Xbox\+H\+D\+M\+I\+::\+Xbox\+Hdmi}}.
 
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-H\+D\+M\+I\+\_\+\+Implementations/Hdmi\+Interface.\+h\item 
-H\+D\+M\+I\+\_\+\+Implementations/Hdmi\+Interface.\+cpp\end{DoxyCompactItemize}
+Source/\+H\+D\+M\+I\+\_\+\+Implementations/Hdmi\+Interface.\+h\item 
+Source/\+H\+D\+M\+I\+\_\+\+Implementations/Hdmi\+Interface.\+cpp\end{DoxyCompactItemize}

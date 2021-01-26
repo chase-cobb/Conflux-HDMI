@@ -22,9 +22,9 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Conflux HDMI
-   &#160;<span id="projectnumber">0.0.1</span>
+   &#160;<span id="projectnumber">0.0.2</span>
    </div>
-   <div id="projectbrief">Hardware abstraction layer for internal HDMI devices for the original Xbox.</div>
+   <div id="projectbrief">Hardware abstraction layer for internal HDMI kits for original Xbox</div>
   </td>
  </tr>
  </tbody>
@@ -84,11 +84,11 @@ $(function() {
   <tr><td class="entry"><a class="el" href="class_conflux_1_1_hdmi_tools.html#ada3a2e6ca14e6c97f7c36ba77ee70195">GetKernelPatchVersion</a>()</td><td class="entry"><a class="el" href="class_conflux_1_1_hdmi_tools.html">Conflux::HdmiTools</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_conflux_1_1_hdmi_tools.html#a8d93776554ab8040265f4287c9df2dda">Initialize</a>()</td><td class="entry"><a class="el" href="class_conflux_1_1_hdmi_tools.html">Conflux::HdmiTools</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="class_conflux_1_1_hdmi_tools.html#a5c0faf727bc12dc6ede3272cfc849624">IsFeatureSupported</a>(SupportedFeatures feature)</td><td class="entry"><a class="el" href="class_conflux_1_1_hdmi_tools.html">Conflux::HdmiTools</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_conflux_1_1_hdmi_tools.html#a93c5ca76dac15bf9565d201944659405">IsUpdateAvailable</a>(UpdateSource updateSource)</td><td class="entry"><a class="el" href="class_conflux_1_1_hdmi_tools.html">Conflux::HdmiTools</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_conflux_1_1_hdmi_tools.html#a6ad32b9741962f1c1d15a68d784a57df">IsUpdateAvailable</a>(UpdateSource updateSource, const char *pathToFirmware=&quot;&quot;)</td><td class="entry"><a class="el" href="class_conflux_1_1_hdmi_tools.html">Conflux::HdmiTools</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="class_conflux_1_1_hdmi_tools.html#a7e946789580b249b4959e112850631eb">SaveSettings</a>()</td><td class="entry"><a class="el" href="class_conflux_1_1_hdmi_tools.html">Conflux::HdmiTools</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_conflux_1_1_hdmi_tools.html#aca5e65f2e911ea486ed6975bf8ddb5e9">SetFeatureValue</a>(SupportedFeatures feature, int value)</td><td class="entry"><a class="el" href="class_conflux_1_1_hdmi_tools.html">Conflux::HdmiTools</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="class_conflux_1_1_hdmi_tools.html#a82d97492a55c51b8c54c57b101da68e4">UpdateFeatureConfig</a>()</td><td class="entry"><a class="el" href="class_conflux_1_1_hdmi_tools.html">Conflux::HdmiTools</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_conflux_1_1_hdmi_tools.html#ac71a1ba6798e61dae0ed5da70466781d">UpdateFirmware</a>(UpdateSource updateSource)</td><td class="entry"><a class="el" href="class_conflux_1_1_hdmi_tools.html">Conflux::HdmiTools</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_conflux_1_1_hdmi_tools.html#a4ce3a945d139b9202b4a10c185012aef">UpdateFirmware</a>(UpdateSource updateSource, void(*currentProcess)(const char *currentProcess), void(*percentComplete)(int percentageComplete), void(*errorMessage)(const char *errorMessage), void(*updateComplete)(bool flashSuccessful), const char *pathToFirmware=&quot; &quot;)</td><td class="entry"><a class="el" href="class_conflux_1_1_hdmi_tools.html">Conflux::HdmiTools</a></td><td class="entry"></td></tr>
 </table></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

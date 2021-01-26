@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Conflux HDMI: Common/Enums.h Source File</title>
+<title>Conflux HDMI: Source/Common/Enums.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -22,9 +22,9 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Conflux HDMI
-   &#160;<span id="projectnumber">0.0.1</span>
+   &#160;<span id="projectnumber">0.0.2</span>
    </div>
-   <div id="projectbrief">Hardware abstraction layer for internal HDMI devices for the original Xbox.</div>
+   <div id="projectbrief">Hardware abstraction layer for internal HDMI kits for original Xbox</div>
   </td>
  </tr>
  </tbody>
@@ -63,7 +63,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_4ab6b4cc6a7edbff49100e9123df213f.html">Common</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_74389ed8173ad57b461b9d623a1f3867.html">Source</a></li><li class="navelem"><a class="el" href="dir_573d75420a9527d403ae2af0f90fb3b6.html">Common</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -103,21 +103,22 @@ $(function() {
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        HDD = 1,</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        DVD,</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        INTERNET,</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    };</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keyword">enum</span> SupportedFeatures</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    {</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        NONE = 0X0000,</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        CB_ADJUST = 0x0001,</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        CR_ADJUST = 0x0002,</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        LUMA_ADJUST = 0x0004,</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        WIDESCREEN_ADJUST = 0x0008,</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        VIDEO_MODE_ADJUST = 0x0010,</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        LAST_ENTRY = 0x0020,</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    };</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;}</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor">#endif // ENUMS_H</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        WORKING_DIRECTORY</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    };</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keyword">enum</span> SupportedFeatures</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    {</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        NONE = 0X0000,</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        CB_ADJUST = 0x0001,</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        CR_ADJUST = 0x0002,</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        LUMA_ADJUST = 0x0004,</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        WIDESCREEN_ADJUST = 0x0008,</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        VIDEO_MODE_ADJUST = 0x0010,</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        LAST_ENTRY = 0x0020,</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    };</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;}</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="preprocessor">#endif // ENUMS_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

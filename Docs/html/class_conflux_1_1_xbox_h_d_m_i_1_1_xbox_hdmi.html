@@ -22,9 +22,9 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Conflux HDMI
-   &#160;<span id="projectnumber">0.0.1</span>
+   &#160;<span id="projectnumber">0.0.2</span>
    </div>
-   <div id="projectbrief">Hardware abstraction layer for internal HDMI devices for the original Xbox.</div>
+   <div id="projectbrief">Hardware abstraction layer for internal HDMI kits for original Xbox</div>
   </td>
  </tr>
  </tbody>
@@ -95,12 +95,12 @@ Collaboration diagram for Conflux::XboxHDMI::XboxHdmi:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a328d8137acfff5df87997b16434ab996"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi.html#a328d8137acfff5df87997b16434ab996">IsFirmwareUpdateAvailable</a> (UpdateSource updateSource)</td></tr>
-<tr class="memdesc:a328d8137acfff5df87997b16434ab996"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks to see if a firmware update is available via the provided update source.  <a href="class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi.html#a328d8137acfff5df87997b16434ab996">More...</a><br /></td></tr>
-<tr class="separator:a328d8137acfff5df87997b16434ab996"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af6a9d0171891dc0b1462718df980a834"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi.html#af6a9d0171891dc0b1462718df980a834">UpdateFirmware</a> (UpdateSource updateSource)</td></tr>
-<tr class="memdesc:af6a9d0171891dc0b1462718df980a834"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calling this function with a valid update source will begin the process of updating the firmware.  <a href="class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi.html#af6a9d0171891dc0b1462718df980a834">More...</a><br /></td></tr>
-<tr class="separator:af6a9d0171891dc0b1462718df980a834"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a033c6d63e513858c910aee0ef9e9dd63"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi.html#a033c6d63e513858c910aee0ef9e9dd63">IsFirmwareUpdateAvailable</a> (UpdateSource updateSource, const char *firmwareFilePath=&quot;&quot;)</td></tr>
+<tr class="memdesc:a033c6d63e513858c910aee0ef9e9dd63"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks to see if a firmware update is available via the provided update source.  <a href="class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi.html#a033c6d63e513858c910aee0ef9e9dd63">More...</a><br /></td></tr>
+<tr class="separator:a033c6d63e513858c910aee0ef9e9dd63"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a363d3a182bf3d400b890366fc98251da"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi.html#a363d3a182bf3d400b890366fc98251da">UpdateFirmware</a> (UpdateSource updateSource, void(*currentProcess)(const char *currentProcess), void(*percentComplete)(int percentageComplete), void(*errorMessage)(const char *errorMessage), void(*updateComplete)(bool flashSuccessful), const char *pathToFirmware=&quot;&quot;)</td></tr>
+<tr class="memdesc:a363d3a182bf3d400b890366fc98251da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calling this function with a valid update source will begin the process of updating the firmware. This is an async process and updates to the process are provided via callbacks.  <a href="class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi.html#a363d3a182bf3d400b890366fc98251da">More...</a><br /></td></tr>
+<tr class="separator:a363d3a182bf3d400b890366fc98251da"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adba53da201dc7743bce34aad63e29229"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi.html#adba53da201dc7743bce34aad63e29229">IsFeatureSupported</a> (SupportedFeatures feature)</td></tr>
 <tr class="memdesc:adba53da201dc7743bce34aad63e29229"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check to see if this HDMI device supports a specific feature.  <a href="class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi.html#adba53da201dc7743bce34aad63e29229">More...</a><br /></td></tr>
 <tr class="separator:adba53da201dc7743bce34aad63e29229"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -164,7 +164,7 @@ std::map&lt; SupportedFeatures, <a class="el" href="class_conflux_1_1_ranged_int
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="_xbox_hdmi_8h_source.html#l00033">33</a> of file <a class="el" href="_xbox_hdmi_8h_source.html">XboxHdmi.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_xbox_hdmi_8h_source.html#l00037">37</a> of file <a class="el" href="_xbox_hdmi_8h_source.html">XboxHdmi.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="ae94c89f2a13da3d6d4d58c9090381f4c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae94c89f2a13da3d6d4d58c9090381f4c">&#9670;&nbsp;</a></span>GetFirmwareVersion()</h2>
@@ -203,7 +203,7 @@ false otherwise. </dd></dl>
 
 <p>Implements <a class="el" href="class_conflux_1_1_hdmi_interface.html#a4e4b15ce3e6cdf868efc114ad32d663a">Conflux::HdmiInterface</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_xbox_hdmi_8cpp_source.html#l00062">62</a> of file <a class="el" href="_xbox_hdmi_8cpp_source.html">XboxHdmi.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_xbox_hdmi_8cpp_source.html#l00117">117</a> of file <a class="el" href="_xbox_hdmi_8cpp_source.html">XboxHdmi.cpp</a>.</p>
 
 </div>
 </div>
@@ -235,7 +235,7 @@ false otherwise. </dd></dl>
 
 <p>Implements <a class="el" href="class_conflux_1_1_hdmi_interface.html#afdb0d03b3401104a22c01791e845f3d5">Conflux::HdmiInterface</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_xbox_hdmi_8cpp_source.html#l00087">87</a> of file <a class="el" href="_xbox_hdmi_8cpp_source.html">XboxHdmi.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_xbox_hdmi_8cpp_source.html#l00142">142</a> of file <a class="el" href="_xbox_hdmi_8cpp_source.html">XboxHdmi.cpp</a>.</p>
 
 </div>
 </div>
@@ -276,12 +276,12 @@ false otherwise. </dd></dl>
 
 <p>Implements <a class="el" href="class_conflux_1_1_hdmi_interface.html#a2565a8917e01bc8826340006a5b7289a">Conflux::HdmiInterface</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_xbox_hdmi_8cpp_source.html#l00057">57</a> of file <a class="el" href="_xbox_hdmi_8cpp_source.html">XboxHdmi.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_xbox_hdmi_8cpp_source.html#l00112">112</a> of file <a class="el" href="_xbox_hdmi_8cpp_source.html">XboxHdmi.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a328d8137acfff5df87997b16434ab996"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a328d8137acfff5df87997b16434ab996">&#9670;&nbsp;</a></span>IsFirmwareUpdateAvailable()</h2>
+<a id="a033c6d63e513858c910aee0ef9e9dd63"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a033c6d63e513858c910aee0ef9e9dd63">&#9670;&nbsp;</a></span>IsFirmwareUpdateAvailable()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -293,8 +293,18 @@ false otherwise. </dd></dl>
           <td class="memname">bool Conflux::XboxHDMI::XboxHdmi::IsFirmwareUpdateAvailable </td>
           <td>(</td>
           <td class="paramtype">UpdateSource&#160;</td>
-          <td class="paramname"><em>updateSource</em></td><td>)</td>
+          <td class="paramname"><em>updateSource</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>firmwareFilePath</em> = <code>&quot;&quot;</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -308,6 +318,7 @@ false otherwise. </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">updateSource</td><td>Enumeration of possible update sources. Indexed by Conflux::UpdateSource. </td></tr>
+    <tr><td class="paramname">firmwareFilePath</td><td>absolution path to where the firmware file should be located. </td></tr>
   </table>
   </dd>
 </dl>
@@ -315,9 +326,9 @@ false otherwise. </dd></dl>
 <dd>
 false otherwise. </dd></dl>
 
-<p>Implements <a class="el" href="class_conflux_1_1_hdmi_interface.html#a02289e378ce706bb61fabd4363addb61">Conflux::HdmiInterface</a>.</p>
+<p>Implements <a class="el" href="class_conflux_1_1_hdmi_interface.html#a292122028da631927fff766155f9a912">Conflux::HdmiInterface</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_xbox_hdmi_8cpp_source.html#l00045">45</a> of file <a class="el" href="_xbox_hdmi_8cpp_source.html">XboxHdmi.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_xbox_hdmi_8cpp_source.html#l00051">51</a> of file <a class="el" href="_xbox_hdmi_8cpp_source.html">XboxHdmi.cpp</a>.</p>
 
 </div>
 </div>
@@ -351,7 +362,7 @@ false otherwise. </dd></dl>
 
 <p>Implements <a class="el" href="class_conflux_1_1_hdmi_interface.html#a42a2003309b2ba35b3bc73245bc27a2f">Conflux::HdmiInterface</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_xbox_hdmi_8cpp_source.html#l00092">92</a> of file <a class="el" href="_xbox_hdmi_8cpp_source.html">XboxHdmi.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_xbox_hdmi_8cpp_source.html#l00147">147</a> of file <a class="el" href="_xbox_hdmi_8cpp_source.html">XboxHdmi.cpp</a>.</p>
 
 </div>
 </div>
@@ -385,7 +396,7 @@ false otherwise. </dd></dl>
 
 <p>Implements <a class="el" href="class_conflux_1_1_hdmi_interface.html#ad4fdc728c318567be06a212fef597d9a">Conflux::HdmiInterface</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_xbox_hdmi_8cpp_source.html#l00187">187</a> of file <a class="el" href="_xbox_hdmi_8cpp_source.html">XboxHdmi.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_xbox_hdmi_8cpp_source.html#l00240">240</a> of file <a class="el" href="_xbox_hdmi_8cpp_source.html">XboxHdmi.cpp</a>.</p>
 
 </div>
 </div>
@@ -420,12 +431,12 @@ false otherwise. </dd></dl>
 
 <p>Implements <a class="el" href="class_conflux_1_1_hdmi_interface.html#a96c5d0e291b1fa4ca31854527ba55349">Conflux::HdmiInterface</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_xbox_hdmi_8cpp_source.html#l00156">156</a> of file <a class="el" href="_xbox_hdmi_8cpp_source.html">XboxHdmi.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_xbox_hdmi_8cpp_source.html#l00209">209</a> of file <a class="el" href="_xbox_hdmi_8cpp_source.html">XboxHdmi.cpp</a>.</p>
 
 </div>
 </div>
-<a id="af6a9d0171891dc0b1462718df980a834"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af6a9d0171891dc0b1462718df980a834">&#9670;&nbsp;</a></span>UpdateFirmware()</h2>
+<a id="a363d3a182bf3d400b890366fc98251da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a363d3a182bf3d400b890366fc98251da">&#9670;&nbsp;</a></span>UpdateFirmware()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -437,8 +448,42 @@ false otherwise. </dd></dl>
           <td class="memname">bool Conflux::XboxHDMI::XboxHdmi::UpdateFirmware </td>
           <td>(</td>
           <td class="paramtype">UpdateSource&#160;</td>
-          <td class="paramname"><em>updateSource</em></td><td>)</td>
+          <td class="paramname"><em>updateSource</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">void(*)(const char *currentProcess)&#160;</td>
+          <td class="paramname"><em>currentProcess</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void(*)(int percentageComplete)&#160;</td>
+          <td class="paramname"><em>percentComplete</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void(*)(const char *errorMessage)&#160;</td>
+          <td class="paramname"><em>errorMessage</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void(*)(bool flashSuccessful)&#160;</td>
+          <td class="paramname"><em>updateComplete</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>pathToFirmware</em> = <code>&quot;&quot;</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -448,26 +493,31 @@ false otherwise. </dd></dl>
 </table>
 </div><div class="memdoc">
 
-<p>Calling this function with a valid update source will begin the process of updating the firmware. </p>
+<p>Calling this function with a valid update source will begin the process of updating the firmware. This is an async process and updates to the process are provided via callbacks. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">updateSource</td><td>Enumeration of possible update sources. Indexed by Conflux::UpdateSource. </td></tr>
+    <tr><td class="paramname">currentProcess</td><td>Callback that provides updates on the current update process. </td></tr>
+    <tr><td class="paramname">percentComplete</td><td>Callback that provides the current percentage complete. </td></tr>
+    <tr><td class="paramname">errorMessage</td><td>Callback that provides any errors encountered during the process. </td></tr>
+    <tr><td class="paramname">updateComplete</td><td>Callback that notifies that the update has completed successfully, or otherwise. </td></tr>
+    <tr><td class="paramname">pathToFirmware</td><td>Allows the location of the update to be provided by absolute path, if the update source is Conflux::UpdateSource::WORKING_DIRECTORY. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>true if the update process was started. </dd>
+<dl class="section return"><dt>Returns</dt><dd>true if the Process was started successfully. </dd>
 <dd>
 false otherwise. </dd></dl>
 
-<p>Implements <a class="el" href="class_conflux_1_1_hdmi_interface.html#a2c1aea6b6098efcc6a034251eb427f00">Conflux::HdmiInterface</a>.</p>
+<p>Implements <a class="el" href="class_conflux_1_1_hdmi_interface.html#a4c4b72786018fb1329d81762376ea10e">Conflux::HdmiInterface</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_xbox_hdmi_8cpp_source.html#l00051">51</a> of file <a class="el" href="_xbox_hdmi_8cpp_source.html">XboxHdmi.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_xbox_hdmi_8cpp_source.html#l00091">91</a> of file <a class="el" href="_xbox_hdmi_8cpp_source.html">XboxHdmi.cpp</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>HDMI_Implementations/XboxHDMI/<a class="el" href="_xbox_hdmi_8h_source.html">XboxHdmi.h</a></li>
-<li>HDMI_Implementations/XboxHDMI/<a class="el" href="_xbox_hdmi_8cpp_source.html">XboxHdmi.cpp</a></li>
+<li>Source/HDMI_Implementations/XboxHDMI/<a class="el" href="_xbox_hdmi_8h_source.html">XboxHdmi.h</a></li>
+<li>Source/HDMI_Implementations/XboxHDMI/<a class="el" href="_xbox_hdmi_8cpp_source.html">XboxHdmi.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

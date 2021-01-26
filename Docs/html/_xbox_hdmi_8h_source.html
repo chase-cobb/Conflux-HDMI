@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Conflux HDMI: HDMI_Implementations/XboxHDMI/XboxHdmi.h Source File</title>
+<title>Conflux HDMI: Source/HDMI_Implementations/XboxHDMI/XboxHdmi.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -22,9 +22,9 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Conflux HDMI
-   &#160;<span id="projectnumber">0.0.1</span>
+   &#160;<span id="projectnumber">0.0.2</span>
    </div>
-   <div id="projectbrief">Hardware abstraction layer for internal HDMI devices for the original Xbox.</div>
+   <div id="projectbrief">Hardware abstraction layer for internal HDMI kits for original Xbox</div>
   </td>
  </tr>
  </tbody>
@@ -63,7 +63,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_26b04cdf1e294764ba17b0c13768634a.html">HDMI_Implementations</a></li><li class="navelem"><a class="el" href="dir_9c2aae5cf925a78cb466f80c241acb4e.html">XboxHDMI</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_74389ed8173ad57b461b9d623a1f3867.html">Source</a></li><li class="navelem"><a class="el" href="dir_c5ce0eb7685572f88908696c919bdf50.html">HDMI_Implementations</a></li><li class="navelem"><a class="el" href="dir_c70c53f3cc72ab86f4f4334ab45e62e7.html">XboxHDMI</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -92,64 +92,81 @@ $(function() {
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &quot;HdmiInterface.h&quot;</span></div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &lt;time.h&gt;</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">namespace </span>Conflux</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;{</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keyword">namespace </span>XboxHDMI</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    {</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="keyword">enum</span> BootMode</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        {</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            BOOTROM,</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            HDMI_PROGRAM,</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        };</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi.html">   33</a></span>&#160;        <span class="keyword">class </span><a class="code" href="class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi.html">XboxHdmi</a> : <span class="keyword">public</span> <a class="code" href="class_conflux_1_1_hdmi_interface.html">HdmiInterface</a></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        {</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            <a class="code" href="class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi.html">XboxHdmi</a>();</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            ~<a class="code" href="class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi.html">XboxHdmi</a>();</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            <span class="keywordtype">bool</span> <a class="code" href="class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi.html#a328d8137acfff5df87997b16434ab996">IsFirmwareUpdateAvailable</a>(UpdateSource updateSource);</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            <span class="keywordtype">bool</span> <a class="code" href="class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi.html#af6a9d0171891dc0b1462718df980a834">UpdateFirmware</a>(UpdateSource updateSource);</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            <span class="keywordtype">bool</span> <a class="code" href="class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi.html#adba53da201dc7743bce34aad63e29229">IsFeatureSupported</a>(SupportedFeatures feature);</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;            <span class="keywordtype">bool</span> <a class="code" href="class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi.html#ae94c89f2a13da3d6d4d58c9090381f4c">GetFirmwareVersion</a>(<a class="code" href="class_conflux_1_1_version_code.html">VersionCode</a>* versionCode);</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code" href="class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi.html#a13c3b7bb5788f90dc007760a12398c18">GetName</a>();</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            <span class="keywordtype">bool</span> <a class="code" href="class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi.html#ac9f64faedf6f2f0e9fe90127295dcd48">LoadConfig</a>();</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;            <span class="keywordtype">bool</span> <a class="code" href="class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi.html#ab9da3d657fc416b7eb19f252df7397e6">UpdateConfigValues</a>();</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            <span class="keywordtype">bool</span> <a class="code" href="class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi.html#ae71df45ed93b90c6eefa0d07e572e46f">SaveConfig</a>();</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            <span class="keywordtype">bool</span> GetFirmwareCompileTime(time_t* compileTime);</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &lt;thread&gt;</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &lt;windows.h&gt;</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">namespace </span>Conflux</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;{</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keyword">namespace </span>XboxHDMI</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    {</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="keyword">enum</span> BootMode</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        {</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            INVALID,</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            BOOTROM,</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            HDMI_PROGRAM,</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            HDMI_FIRMWARE,</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        };</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi.html">   37</a></span>&#160;        <span class="keyword">class </span><a class="code" href="class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi.html">XboxHdmi</a> : <span class="keyword">public</span> <a class="code" href="class_conflux_1_1_hdmi_interface.html">HdmiInterface</a></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        {</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            <a class="code" href="class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi.html">XboxHdmi</a>();</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            ~<a class="code" href="class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi.html">XboxHdmi</a>();</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;            </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            <span class="keywordtype">bool</span> <a class="code" href="class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi.html#a033c6d63e513858c910aee0ef9e9dd63">IsFirmwareUpdateAvailable</a>(UpdateSource updateSource, <span class="keyword">const</span> <span class="keywordtype">char</span>* firmwareFilePath = <span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;            <span class="keywordtype">bool</span> <a class="code" href="class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi.html#a363d3a182bf3d400b890366fc98251da">UpdateFirmware</a>(UpdateSource updateSource, <span class="keywordtype">void</span> (*currentProcess)(<span class="keyword">const</span> <span class="keywordtype">char</span>* currentProcess)</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;                                                         , <span class="keywordtype">void</span> (*percentComplete)(<span class="keywordtype">int</span> percentageComplete)</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                                                         , <span class="keywordtype">void</span> (*errorMessage)(<span class="keyword">const</span> <span class="keywordtype">char</span>* errorMessage)</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                                                         , <span class="keywordtype">void</span> (*updateComplete)(<span class="keywordtype">bool</span> flashSuccessful)</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                                                         , <span class="keyword">const</span> <span class="keywordtype">char</span>* pathToFirmware = <span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            <span class="keywordtype">bool</span> <a class="code" href="class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi.html#adba53da201dc7743bce34aad63e29229">IsFeatureSupported</a>(SupportedFeatures feature);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            <span class="keywordtype">bool</span> <a class="code" href="class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi.html#ae94c89f2a13da3d6d4d58c9090381f4c">GetFirmwareVersion</a>(<a class="code" href="class_conflux_1_1_version_code.html">VersionCode</a>* versionCode);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code" href="class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi.html#a13c3b7bb5788f90dc007760a12398c18">GetName</a>();</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            <span class="keywordtype">bool</span> GetBootMode(BootMode* mode);</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            <span class="keywordtype">bool</span> SwitchBootMode(BootMode switchToMode);</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            <span class="keywordtype">void</span> StartFirmwareUpdateProcess();</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            <span class="keywordtype">bool</span> LoadFirmwareImage(UpdateSource updateSource, uint8_t* firmwareImage);</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            <span class="comment">// TODO : Check program status // 2 version of this??</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            <span class="comment">//bool CheckProgramStatus();</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            <span class="keywordtype">bool</span> WritePageCrc(<span class="keywordtype">int</span>* firmwareFile, uint32_t offset);</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;            <span class="keywordtype">bool</span> WritePageData(<span class="keywordtype">int</span>* firmwareFile, uint32_t offset);</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        };</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    } <span class="comment">// XboxHDMI</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;} <span class="comment">// Conflux</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="preprocessor">#endif // XBOXHDMI_H</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            <span class="keywordtype">bool</span> <a class="code" href="class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi.html#ac9f64faedf6f2f0e9fe90127295dcd48">LoadConfig</a>();</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            <span class="keywordtype">bool</span> <a class="code" href="class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi.html#ab9da3d657fc416b7eb19f252df7397e6">UpdateConfigValues</a>();</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            <span class="keywordtype">bool</span> <a class="code" href="class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi.html#ae71df45ed93b90c6eefa0d07e572e46f">SaveConfig</a>();</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            uint8_t* m_loadedFirmware;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            std::thread m_firmwareUpdateThread;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            void (*m_currentUpdateProcess)(<span class="keyword">const</span> <span class="keywordtype">char</span>* currentProcess);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            void (*m_currentPercentComplete)(<span class="keywordtype">int</span> percentComplete);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;            void (*m_currentErrorMessage)(<span class="keyword">const</span> <span class="keywordtype">char</span>* errorMessage);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            void (*m_updateComplete)(<span class="keywordtype">bool</span> flashSuccessful);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            <span class="keywordtype">bool</span> GetFirmwareCompileTime(time_t* compileTime);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            <span class="keywordtype">bool</span> GetBootMode(BootMode* mode);</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            <span class="keywordtype">bool</span> SwitchBootMode(BootMode switchToMode);</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;            <span class="keywordtype">void</span> StartFirmwareUpdateProcess(UpdateSource updateSource);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;            <span class="keywordtype">bool</span> LoadFirmwareImage(UpdateSource updateSource, uint8_t*&amp; firmwareImage, <span class="keywordtype">long</span>* fileSize, <span class="keyword">const</span> <span class="keywordtype">char</span>* firmwareFilePath = <span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;            </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            <span class="keywordtype">void</span> GeneratePageCrc(uint32_t* CrcValue, uint8_t* firmwareFile, uint32_t offset, <span class="keywordtype">long</span> fileSize);</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;            <span class="keywordtype">bool</span> WritePageCrc(uint32_t CrcValue);</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;            <span class="keywordtype">bool</span> WritePageData(uint8_t* firmwareFile, uint32_t offset, <span class="keywordtype">long</span> fileSize);</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;            <span class="keywordtype">bool</span> CheckForProgrammingErrors(ULONG* statusValue);</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            uint32_t CrcAddByte(uint32_t crc, uint8_t addByte);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;            uint32_t CrcResult(uint32_t crc);</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            uint32_t ReverseU32(uint32_t dataToReverse);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        };</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    } <span class="comment">// XboxHDMI</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;} <span class="comment">// Conflux</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="preprocessor">#endif // XBOXHDMI_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclass_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi_html_ac9f64faedf6f2f0e9fe90127295dcd48"><div class="ttname"><a href="class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi.html#ac9f64faedf6f2f0e9fe90127295dcd48">Conflux::XboxHDMI::XboxHdmi::LoadConfig</a></div><div class="ttdeci">bool LoadConfig()</div><div class="ttdoc">Loads persistent configuration data for the currently installed HDMI hardware.</div><div class="ttdef"><b>Definition:</b> <a href="_xbox_hdmi_8cpp_source.html#l00092">XboxHdmi.cpp:92</a></div></div>
-<div class="ttc" id="aclass_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi_html_ae71df45ed93b90c6eefa0d07e572e46f"><div class="ttname"><a href="class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi.html#ae71df45ed93b90c6eefa0d07e572e46f">Conflux::XboxHDMI::XboxHdmi::SaveConfig</a></div><div class="ttdeci">bool SaveConfig()</div><div class="ttdoc">Write configuration data to persistent storage. (EEPROM or config file)</div><div class="ttdef"><b>Definition:</b> <a href="_xbox_hdmi_8cpp_source.html#l00187">XboxHdmi.cpp:187</a></div></div>
-<div class="ttc" id="aclass_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi_html_a13c3b7bb5788f90dc007760a12398c18"><div class="ttname"><a href="class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi.html#a13c3b7bb5788f90dc007760a12398c18">Conflux::XboxHDMI::XboxHdmi::GetName</a></div><div class="ttdeci">const char * GetName()</div><div class="ttdoc">Gets the name of the installed HDMI hardware.</div><div class="ttdef"><b>Definition:</b> <a href="_xbox_hdmi_8cpp_source.html#l00087">XboxHdmi.cpp:87</a></div></div>
-<div class="ttc" id="aclass_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi_html_a328d8137acfff5df87997b16434ab996"><div class="ttname"><a href="class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi.html#a328d8137acfff5df87997b16434ab996">Conflux::XboxHDMI::XboxHdmi::IsFirmwareUpdateAvailable</a></div><div class="ttdeci">bool IsFirmwareUpdateAvailable(UpdateSource updateSource)</div><div class="ttdoc">Checks to see if a firmware update is available via the provided update source.</div><div class="ttdef"><b>Definition:</b> <a href="_xbox_hdmi_8cpp_source.html#l00045">XboxHdmi.cpp:45</a></div></div>
+<div class="ttc" id="aclass_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi_html_ac9f64faedf6f2f0e9fe90127295dcd48"><div class="ttname"><a href="class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi.html#ac9f64faedf6f2f0e9fe90127295dcd48">Conflux::XboxHDMI::XboxHdmi::LoadConfig</a></div><div class="ttdeci">bool LoadConfig()</div><div class="ttdoc">Loads persistent configuration data for the currently installed HDMI hardware.</div><div class="ttdef"><b>Definition:</b> <a href="_xbox_hdmi_8cpp_source.html#l00147">XboxHdmi.cpp:147</a></div></div>
+<div class="ttc" id="aclass_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi_html_ae71df45ed93b90c6eefa0d07e572e46f"><div class="ttname"><a href="class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi.html#ae71df45ed93b90c6eefa0d07e572e46f">Conflux::XboxHDMI::XboxHdmi::SaveConfig</a></div><div class="ttdeci">bool SaveConfig()</div><div class="ttdoc">Write configuration data to persistent storage. (EEPROM or config file)</div><div class="ttdef"><b>Definition:</b> <a href="_xbox_hdmi_8cpp_source.html#l00240">XboxHdmi.cpp:240</a></div></div>
+<div class="ttc" id="aclass_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi_html_a13c3b7bb5788f90dc007760a12398c18"><div class="ttname"><a href="class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi.html#a13c3b7bb5788f90dc007760a12398c18">Conflux::XboxHDMI::XboxHdmi::GetName</a></div><div class="ttdeci">const char * GetName()</div><div class="ttdoc">Gets the name of the installed HDMI hardware.</div><div class="ttdef"><b>Definition:</b> <a href="_xbox_hdmi_8cpp_source.html#l00142">XboxHdmi.cpp:142</a></div></div>
 <div class="ttc" id="aclass_conflux_1_1_hdmi_interface_html"><div class="ttname"><a href="class_conflux_1_1_hdmi_interface.html">Conflux::HdmiInterface</a></div><div class="ttdoc">Interface for HDMI device APIs to implement.</div><div class="ttdef"><b>Definition:</b> <a href="_hdmi_interface_8h_source.html#l00033">HdmiInterface.h:33</a></div></div>
-<div class="ttc" id="aclass_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi_html_af6a9d0171891dc0b1462718df980a834"><div class="ttname"><a href="class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi.html#af6a9d0171891dc0b1462718df980a834">Conflux::XboxHDMI::XboxHdmi::UpdateFirmware</a></div><div class="ttdeci">bool UpdateFirmware(UpdateSource updateSource)</div><div class="ttdoc">Calling this function with a valid update source will begin the process of updating the firmware.</div><div class="ttdef"><b>Definition:</b> <a href="_xbox_hdmi_8cpp_source.html#l00051">XboxHdmi.cpp:51</a></div></div>
-<div class="ttc" id="aclass_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi_html_adba53da201dc7743bce34aad63e29229"><div class="ttname"><a href="class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi.html#adba53da201dc7743bce34aad63e29229">Conflux::XboxHDMI::XboxHdmi::IsFeatureSupported</a></div><div class="ttdeci">bool IsFeatureSupported(SupportedFeatures feature)</div><div class="ttdoc">Check to see if this HDMI device supports a specific feature.</div><div class="ttdef"><b>Definition:</b> <a href="_xbox_hdmi_8cpp_source.html#l00057">XboxHdmi.cpp:57</a></div></div>
-<div class="ttc" id="aclass_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi_html"><div class="ttname"><a href="class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi.html">Conflux::XboxHDMI::XboxHdmi</a></div><div class="ttdef"><b>Definition:</b> <a href="_xbox_hdmi_8h_source.html#l00033">XboxHdmi.h:33</a></div></div>
-<div class="ttc" id="aclass_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi_html_ab9da3d657fc416b7eb19f252df7397e6"><div class="ttname"><a href="class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi.html#ab9da3d657fc416b7eb19f252df7397e6">Conflux::XboxHDMI::XboxHdmi::UpdateConfigValues</a></div><div class="ttdeci">bool UpdateConfigValues()</div><div class="ttdoc">Update the current configuration of the hardware in a way that they are applied in the current sessio...</div><div class="ttdef"><b>Definition:</b> <a href="_xbox_hdmi_8cpp_source.html#l00156">XboxHdmi.cpp:156</a></div></div>
-<div class="ttc" id="aclass_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi_html_ae94c89f2a13da3d6d4d58c9090381f4c"><div class="ttname"><a href="class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi.html#ae94c89f2a13da3d6d4d58c9090381f4c">Conflux::XboxHDMI::XboxHdmi::GetFirmwareVersion</a></div><div class="ttdeci">bool GetFirmwareVersion(VersionCode *versionCode)</div><div class="ttdoc">Fills out the provided Conflux::VersionCode object with the firmware of the installed HDMI hardware.</div><div class="ttdef"><b>Definition:</b> <a href="_xbox_hdmi_8cpp_source.html#l00062">XboxHdmi.cpp:62</a></div></div>
+<div class="ttc" id="aclass_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi_html_adba53da201dc7743bce34aad63e29229"><div class="ttname"><a href="class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi.html#adba53da201dc7743bce34aad63e29229">Conflux::XboxHDMI::XboxHdmi::IsFeatureSupported</a></div><div class="ttdeci">bool IsFeatureSupported(SupportedFeatures feature)</div><div class="ttdoc">Check to see if this HDMI device supports a specific feature.</div><div class="ttdef"><b>Definition:</b> <a href="_xbox_hdmi_8cpp_source.html#l00112">XboxHdmi.cpp:112</a></div></div>
+<div class="ttc" id="aclass_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi_html"><div class="ttname"><a href="class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi.html">Conflux::XboxHDMI::XboxHdmi</a></div><div class="ttdef"><b>Definition:</b> <a href="_xbox_hdmi_8h_source.html#l00037">XboxHdmi.h:37</a></div></div>
+<div class="ttc" id="aclass_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi_html_ab9da3d657fc416b7eb19f252df7397e6"><div class="ttname"><a href="class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi.html#ab9da3d657fc416b7eb19f252df7397e6">Conflux::XboxHDMI::XboxHdmi::UpdateConfigValues</a></div><div class="ttdeci">bool UpdateConfigValues()</div><div class="ttdoc">Update the current configuration of the hardware in a way that they are applied in the current sessio...</div><div class="ttdef"><b>Definition:</b> <a href="_xbox_hdmi_8cpp_source.html#l00209">XboxHdmi.cpp:209</a></div></div>
+<div class="ttc" id="aclass_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi_html_a363d3a182bf3d400b890366fc98251da"><div class="ttname"><a href="class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi.html#a363d3a182bf3d400b890366fc98251da">Conflux::XboxHDMI::XboxHdmi::UpdateFirmware</a></div><div class="ttdeci">bool UpdateFirmware(UpdateSource updateSource, void(*currentProcess)(const char *currentProcess), void(*percentComplete)(int percentageComplete), void(*errorMessage)(const char *errorMessage), void(*updateComplete)(bool flashSuccessful), const char *pathToFirmware=&quot;&quot;)</div><div class="ttdoc">Calling this function with a valid update source will begin the process of updating the firmware....</div><div class="ttdef"><b>Definition:</b> <a href="_xbox_hdmi_8cpp_source.html#l00091">XboxHdmi.cpp:91</a></div></div>
+<div class="ttc" id="aclass_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi_html_a033c6d63e513858c910aee0ef9e9dd63"><div class="ttname"><a href="class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi.html#a033c6d63e513858c910aee0ef9e9dd63">Conflux::XboxHDMI::XboxHdmi::IsFirmwareUpdateAvailable</a></div><div class="ttdeci">bool IsFirmwareUpdateAvailable(UpdateSource updateSource, const char *firmwareFilePath=&quot;&quot;)</div><div class="ttdoc">Checks to see if a firmware update is available via the provided update source.</div><div class="ttdef"><b>Definition:</b> <a href="_xbox_hdmi_8cpp_source.html#l00051">XboxHdmi.cpp:51</a></div></div>
+<div class="ttc" id="aclass_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi_html_ae94c89f2a13da3d6d4d58c9090381f4c"><div class="ttname"><a href="class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi.html#ae94c89f2a13da3d6d4d58c9090381f4c">Conflux::XboxHDMI::XboxHdmi::GetFirmwareVersion</a></div><div class="ttdeci">bool GetFirmwareVersion(VersionCode *versionCode)</div><div class="ttdoc">Fills out the provided Conflux::VersionCode object with the firmware of the installed HDMI hardware.</div><div class="ttdef"><b>Definition:</b> <a href="_xbox_hdmi_8cpp_source.html#l00117">XboxHdmi.cpp:117</a></div></div>
 <div class="ttc" id="aclass_conflux_1_1_version_code_html"><div class="ttname"><a href="class_conflux_1_1_version_code.html">Conflux::VersionCode</a></div><div class="ttdoc">This class contains functionality for getting and setting version numbers. Used mainly by the HDMI im...</div><div class="ttdef"><b>Definition:</b> <a href="_version_code_8h_source.html#l00030">VersionCode.h:30</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

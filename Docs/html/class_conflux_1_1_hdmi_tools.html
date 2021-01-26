@@ -22,9 +22,9 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Conflux HDMI
-   &#160;<span id="projectnumber">0.0.1</span>
+   &#160;<span id="projectnumber">0.0.2</span>
    </div>
-   <div id="projectbrief">Hardware abstraction layer for internal HDMI devices for the original Xbox.</div>
+   <div id="projectbrief">Hardware abstraction layer for internal HDMI kits for original Xbox</div>
   </td>
  </tr>
  </tbody>
@@ -104,12 +104,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ada3a2e6ca14e6c97f7c36ba77ee70195"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_conflux_1_1_version_code.html">VersionCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_conflux_1_1_hdmi_tools.html#ada3a2e6ca14e6c97f7c36ba77ee70195">GetKernelPatchVersion</a> ()</td></tr>
 <tr class="memdesc:ada3a2e6ca14e6c97f7c36ba77ee70195"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a <a class="el" href="class_conflux_1_1_version_code.html" title="This class contains functionality for getting and setting version numbers. Used mainly by the HDMI im...">VersionCode</a> object filled out with the kernel version.  <a href="class_conflux_1_1_hdmi_tools.html#ada3a2e6ca14e6c97f7c36ba77ee70195">More...</a><br /></td></tr>
 <tr class="separator:ada3a2e6ca14e6c97f7c36ba77ee70195"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a93c5ca76dac15bf9565d201944659405"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_conflux_1_1_hdmi_tools.html#a93c5ca76dac15bf9565d201944659405">IsUpdateAvailable</a> (UpdateSource updateSource)</td></tr>
-<tr class="memdesc:a93c5ca76dac15bf9565d201944659405"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks to see if a firmware update is available via the provided update source.  <a href="class_conflux_1_1_hdmi_tools.html#a93c5ca76dac15bf9565d201944659405">More...</a><br /></td></tr>
-<tr class="separator:a93c5ca76dac15bf9565d201944659405"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac71a1ba6798e61dae0ed5da70466781d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_conflux_1_1_hdmi_tools.html#ac71a1ba6798e61dae0ed5da70466781d">UpdateFirmware</a> (UpdateSource updateSource)</td></tr>
-<tr class="memdesc:ac71a1ba6798e61dae0ed5da70466781d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform firmware update via the proviced update source.  <a href="class_conflux_1_1_hdmi_tools.html#ac71a1ba6798e61dae0ed5da70466781d">More...</a><br /></td></tr>
-<tr class="separator:ac71a1ba6798e61dae0ed5da70466781d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ad32b9741962f1c1d15a68d784a57df"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_conflux_1_1_hdmi_tools.html#a6ad32b9741962f1c1d15a68d784a57df">IsUpdateAvailable</a> (UpdateSource updateSource, const char *pathToFirmware=&quot;&quot;)</td></tr>
+<tr class="memdesc:a6ad32b9741962f1c1d15a68d784a57df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks to see if a firmware update is available via the provided update source.  <a href="class_conflux_1_1_hdmi_tools.html#a6ad32b9741962f1c1d15a68d784a57df">More...</a><br /></td></tr>
+<tr class="separator:a6ad32b9741962f1c1d15a68d784a57df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ce3a945d139b9202b4a10c185012aef"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_conflux_1_1_hdmi_tools.html#a4ce3a945d139b9202b4a10c185012aef">UpdateFirmware</a> (UpdateSource updateSource, void(*currentProcess)(const char *currentProcess), void(*percentComplete)(int percentageComplete), void(*errorMessage)(const char *errorMessage), void(*updateComplete)(bool flashSuccessful), const char *pathToFirmware=&quot; &quot;)</td></tr>
+<tr class="memdesc:a4ce3a945d139b9202b4a10c185012aef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calling this function with a valid update source will begin the process of updating the firmware. This is an async process and updates to the process are provided via callbacks.  <a href="class_conflux_1_1_hdmi_tools.html#a4ce3a945d139b9202b4a10c185012aef">More...</a><br /></td></tr>
+<tr class="separator:a4ce3a945d139b9202b4a10c185012aef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3faee2a140637f44ee64d640c7914cd4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_conflux_1_1_hdmi_tools.html#a3faee2a140637f44ee64d640c7914cd4">GetFeatureValues</a> (SupportedFeatures feature, int *value, int *min, int *max)</td></tr>
 <tr class="memdesc:a3faee2a140637f44ee64d640c7914cd4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current value of a given feature, as well as the valid value range.  <a href="class_conflux_1_1_hdmi_tools.html#a3faee2a140637f44ee64d640c7914cd4">More...</a><br /></td></tr>
 <tr class="separator:a3faee2a140637f44ee64d640c7914cd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -212,7 +212,7 @@ Static Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>const char* name of the feature. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_hdmi_tools_8cpp_source.html#l00246">246</a> of file <a class="el" href="_hdmi_tools_8cpp_source.html">HdmiTools.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hdmi_tools_8cpp_source.html#l00264">264</a> of file <a class="el" href="_hdmi_tools_8cpp_source.html">HdmiTools.cpp</a>.</p>
 
 </div>
 </div>
@@ -268,7 +268,7 @@ Static Public Member Functions</h2></td></tr>
 <dd>
 false otherwise. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_hdmi_tools_8cpp_source.html#l00203">203</a> of file <a class="el" href="_hdmi_tools_8cpp_source.html">HdmiTools.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hdmi_tools_8cpp_source.html#l00221">221</a> of file <a class="el" href="_hdmi_tools_8cpp_source.html">HdmiTools.cpp</a>.</p>
 
 </div>
 </div>
@@ -424,8 +424,8 @@ false otherwise. </dd></dl>
 
 </div>
 </div>
-<a id="a93c5ca76dac15bf9565d201944659405"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a93c5ca76dac15bf9565d201944659405">&#9670;&nbsp;</a></span>IsUpdateAvailable()</h2>
+<a id="a6ad32b9741962f1c1d15a68d784a57df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ad32b9741962f1c1d15a68d784a57df">&#9670;&nbsp;</a></span>IsUpdateAvailable()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -434,8 +434,18 @@ false otherwise. </dd></dl>
           <td class="memname">bool Conflux::HdmiTools::IsUpdateAvailable </td>
           <td>(</td>
           <td class="paramtype">UpdateSource&#160;</td>
-          <td class="paramname"><em>updateSource</em></td><td>)</td>
+          <td class="paramname"><em>updateSource</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>pathToFirmware</em> = <code>&quot;&quot;</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -444,6 +454,7 @@ false otherwise. </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">updateSource</td><td>Enumeration of possible update sources. Indexed by Conflux::UpdateSource. </td></tr>
+    <tr><td class="paramname">pathToFirmware</td><td>Allows the location of the update to be provided by absolute path, if the update source is Conflux::UpdateSource::WORKING_DIRECTORY. </td></tr>
   </table>
   </dd>
 </dl>
@@ -475,7 +486,7 @@ false otherwise. </dd></dl>
 <dd>
 false otherwise. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_hdmi_tools_8cpp_source.html#l00194">194</a> of file <a class="el" href="_hdmi_tools_8cpp_source.html">HdmiTools.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hdmi_tools_8cpp_source.html#l00212">212</a> of file <a class="el" href="_hdmi_tools_8cpp_source.html">HdmiTools.cpp</a>.</p>
 
 </div>
 </div>
@@ -517,7 +528,7 @@ false otherwise. </dd></dl>
 <dd>
 false otherwise. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_hdmi_tools_8cpp_source.html#l00225">225</a> of file <a class="el" href="_hdmi_tools_8cpp_source.html">HdmiTools.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hdmi_tools_8cpp_source.html#l00243">243</a> of file <a class="el" href="_hdmi_tools_8cpp_source.html">HdmiTools.cpp</a>.</p>
 
 </div>
 </div>
@@ -541,12 +552,12 @@ false otherwise. </dd></dl>
 <dd>
 false otherwise. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_hdmi_tools_8cpp_source.html#l00237">237</a> of file <a class="el" href="_hdmi_tools_8cpp_source.html">HdmiTools.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hdmi_tools_8cpp_source.html#l00255">255</a> of file <a class="el" href="_hdmi_tools_8cpp_source.html">HdmiTools.cpp</a>.</p>
 
 </div>
 </div>
-<a id="ac71a1ba6798e61dae0ed5da70466781d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac71a1ba6798e61dae0ed5da70466781d">&#9670;&nbsp;</a></span>UpdateFirmware()</h2>
+<a id="a4ce3a945d139b9202b4a10c185012aef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ce3a945d139b9202b4a10c185012aef">&#9670;&nbsp;</a></span>UpdateFirmware()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -555,30 +566,69 @@ false otherwise. </dd></dl>
           <td class="memname">bool Conflux::HdmiTools::UpdateFirmware </td>
           <td>(</td>
           <td class="paramtype">UpdateSource&#160;</td>
-          <td class="paramname"><em>updateSource</em></td><td>)</td>
+          <td class="paramname"><em>updateSource</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">void(*)(const char *currentProcess)&#160;</td>
+          <td class="paramname"><em>currentProcess</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void(*)(int percentageComplete)&#160;</td>
+          <td class="paramname"><em>percentComplete</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void(*)(const char *errorMessage)&#160;</td>
+          <td class="paramname"><em>errorMessage</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void(*)(bool flashSuccessful)&#160;</td>
+          <td class="paramname"><em>updateComplete</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>pathToFirmware</em> = <code>&quot;&#160;&quot;</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Perform firmware update via the proviced update source. </p>
+<p>Calling this function with a valid update source will begin the process of updating the firmware. This is an async process and updates to the process are provided via callbacks. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">updateSource</td><td>Enumeration of possible update sources. </td></tr>
+    <tr><td class="paramname">updateSource</td><td>Enumeration of possible update sources. Indexed by Conflux::UpdateSource. </td></tr>
+    <tr><td class="paramname">currentProcess</td><td>Callback that provides updates on the current update process. </td></tr>
+    <tr><td class="paramname">percentComplete</td><td>Callback that provides the current percentage complete. </td></tr>
+    <tr><td class="paramname">errorMessage</td><td>Callback that provides any errors encountered during the process. </td></tr>
+    <tr><td class="paramname">updateComplete</td><td>Callback that notifies that the update has completed successfully, or otherwise. </td></tr>
+    <tr><td class="paramname">pathToFirmware</td><td>Allows the location of the update to be provided by absolute path, if the update source is Conflux::UpdateSource::WORKING_DIRECTORY. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>true if update was successful. </dd>
+<dl class="section return"><dt>Returns</dt><dd>true if the Process was started successfully. </dd>
 <dd>
 false otherwise. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_hdmi_tools_8cpp_source.html#l00188">188</a> of file <a class="el" href="_hdmi_tools_8cpp_source.html">HdmiTools.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hdmi_tools_8cpp_source.html#l00194">194</a> of file <a class="el" href="_hdmi_tools_8cpp_source.html">HdmiTools.cpp</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li><a class="el" href="_hdmi_tools_8h_source.html">HdmiTools.h</a></li>
-<li><a class="el" href="_hdmi_tools_8cpp_source.html">HdmiTools.cpp</a></li>
+<li>Source/<a class="el" href="_hdmi_tools_8h_source.html">HdmiTools.h</a></li>
+<li>Source/<a class="el" href="_hdmi_tools_8cpp_source.html">HdmiTools.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

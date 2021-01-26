@@ -23,10 +23,10 @@ Collaboration diagram for Conflux\+::Xbox\+H\+D\+MI\+::Xbox\+Hdmi\+:
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-bool \mbox{\hyperlink{class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi_a328d8137acfff5df87997b16434ab996}{Is\+Firmware\+Update\+Available}} (Update\+Source update\+Source)
+bool \mbox{\hyperlink{class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi_a033c6d63e513858c910aee0ef9e9dd63}{Is\+Firmware\+Update\+Available}} (Update\+Source update\+Source, const char $\ast$firmware\+File\+Path=\char`\"{}\char`\"{})
 \begin{DoxyCompactList}\small\item\em Checks to see if a firmware update is available via the provided update source. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi_af6a9d0171891dc0b1462718df980a834}{Update\+Firmware}} (Update\+Source update\+Source)
-\begin{DoxyCompactList}\small\item\em Calling this function with a valid update source will begin the process of updating the firmware. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi_a363d3a182bf3d400b890366fc98251da}{Update\+Firmware}} (Update\+Source update\+Source, void($\ast$current\+Process)(const char $\ast$current\+Process), void($\ast$percent\+Complete)(int percentage\+Complete), void($\ast$error\+Message)(const char $\ast$error\+Message), void($\ast$update\+Complete)(bool flash\+Successful), const char $\ast$path\+To\+Firmware=\char`\"{}\char`\"{})
+\begin{DoxyCompactList}\small\item\em Calling this function with a valid update source will begin the process of updating the firmware. This is an async process and updates to the process are provided via callbacks. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi_adba53da201dc7743bce34aad63e29229}{Is\+Feature\+Supported}} (Supported\+Features feature)
 \begin{DoxyCompactList}\small\item\em Check to see if this H\+D\+MI device supports a specific feature. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi_ae94c89f2a13da3d6d4d58c9090381f4c}{Get\+Firmware\+Version}} (\mbox{\hyperlink{class_conflux_1_1_version_code}{Version\+Code}} $\ast$version\+Code)
@@ -45,7 +45,7 @@ bool \mbox{\hyperlink{class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi_ae71df45ed93b
 \doxysubsection{Detailed Description}
 
 
-Definition at line 33 of file Xbox\+Hdmi.\+h.
+Definition at line 37 of file Xbox\+Hdmi.\+h.
 
 
 
@@ -76,7 +76,7 @@ Implements \mbox{\hyperlink{class_conflux_1_1_hdmi_interface_a4e4b15ce3e6cdf868e
 
 
 
-Definition at line 62 of file Xbox\+Hdmi.\+cpp.
+Definition at line 117 of file Xbox\+Hdmi.\+cpp.
 
 \mbox{\Hypertarget{class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi_a13c3b7bb5788f90dc007760a12398c18}\label{class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi_a13c3b7bb5788f90dc007760a12398c18}} 
 \index{Conflux::XboxHDMI::XboxHdmi@{Conflux::XboxHDMI::XboxHdmi}!GetName@{GetName}}
@@ -97,7 +97,7 @@ Implements \mbox{\hyperlink{class_conflux_1_1_hdmi_interface_afdb0d03b3401104a22
 
 
 
-Definition at line 87 of file Xbox\+Hdmi.\+cpp.
+Definition at line 142 of file Xbox\+Hdmi.\+cpp.
 
 \mbox{\Hypertarget{class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi_adba53da201dc7743bce34aad63e29229}\label{class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi_adba53da201dc7743bce34aad63e29229}} 
 \index{Conflux::XboxHDMI::XboxHdmi@{Conflux::XboxHDMI::XboxHdmi}!IsFeatureSupported@{IsFeatureSupported}}
@@ -125,13 +125,13 @@ Implements \mbox{\hyperlink{class_conflux_1_1_hdmi_interface_a2565a8917e01bc8826
 
 
 
-Definition at line 57 of file Xbox\+Hdmi.\+cpp.
+Definition at line 112 of file Xbox\+Hdmi.\+cpp.
 
-\mbox{\Hypertarget{class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi_a328d8137acfff5df87997b16434ab996}\label{class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi_a328d8137acfff5df87997b16434ab996}} 
+\mbox{\Hypertarget{class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi_a033c6d63e513858c910aee0ef9e9dd63}\label{class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi_a033c6d63e513858c910aee0ef9e9dd63}} 
 \index{Conflux::XboxHDMI::XboxHdmi@{Conflux::XboxHDMI::XboxHdmi}!IsFirmwareUpdateAvailable@{IsFirmwareUpdateAvailable}}
 \index{IsFirmwareUpdateAvailable@{IsFirmwareUpdateAvailable}!Conflux::XboxHDMI::XboxHdmi@{Conflux::XboxHDMI::XboxHdmi}}
 \doxysubsubsection{\texorpdfstring{IsFirmwareUpdateAvailable()}{IsFirmwareUpdateAvailable()}}
-{\footnotesize\ttfamily bool Conflux\+::\+Xbox\+H\+D\+M\+I\+::\+Xbox\+Hdmi\+::\+Is\+Firmware\+Update\+Available (\begin{DoxyParamCaption}\item[{Update\+Source}]{update\+Source }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily bool Conflux\+::\+Xbox\+H\+D\+M\+I\+::\+Xbox\+Hdmi\+::\+Is\+Firmware\+Update\+Available (\begin{DoxyParamCaption}\item[{Update\+Source}]{update\+Source,  }\item[{const char $\ast$}]{firmware\+File\+Path = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -141,6 +141,8 @@ Checks to see if a firmware update is available via the provided update source.
 \begin{DoxyParams}{Parameters}
 {\em update\+Source} & Enumeration of possible update sources. Indexed by Conflux\+::\+Update\+Source. \\
 \hline
+{\em firmware\+File\+Path} & absolution path to where the firmware file should be located. \\
+\hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 true if an update is available. 
@@ -149,11 +151,11 @@ false otherwise.
 \end{DoxyReturn}
 
 
-Implements \mbox{\hyperlink{class_conflux_1_1_hdmi_interface_a02289e378ce706bb61fabd4363addb61}{Conflux\+::\+Hdmi\+Interface}}.
+Implements \mbox{\hyperlink{class_conflux_1_1_hdmi_interface_a292122028da631927fff766155f9a912}{Conflux\+::\+Hdmi\+Interface}}.
 
 
 
-Definition at line 45 of file Xbox\+Hdmi.\+cpp.
+Definition at line 51 of file Xbox\+Hdmi.\+cpp.
 
 \mbox{\Hypertarget{class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi_ac9f64faedf6f2f0e9fe90127295dcd48}\label{class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi_ac9f64faedf6f2f0e9fe90127295dcd48}} 
 \index{Conflux::XboxHDMI::XboxHdmi@{Conflux::XboxHDMI::XboxHdmi}!LoadConfig@{LoadConfig}}
@@ -176,7 +178,7 @@ Implements \mbox{\hyperlink{class_conflux_1_1_hdmi_interface_a42a2003309b2ba35b3
 
 
 
-Definition at line 92 of file Xbox\+Hdmi.\+cpp.
+Definition at line 147 of file Xbox\+Hdmi.\+cpp.
 
 \mbox{\Hypertarget{class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi_ae71df45ed93b90c6eefa0d07e572e46f}\label{class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi_ae71df45ed93b90c6eefa0d07e572e46f}} 
 \index{Conflux::XboxHDMI::XboxHdmi@{Conflux::XboxHDMI::XboxHdmi}!SaveConfig@{SaveConfig}}
@@ -199,7 +201,7 @@ Implements \mbox{\hyperlink{class_conflux_1_1_hdmi_interface_ad4fdc728c318567be0
 
 
 
-Definition at line 187 of file Xbox\+Hdmi.\+cpp.
+Definition at line 240 of file Xbox\+Hdmi.\+cpp.
 
 \mbox{\Hypertarget{class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi_ab9da3d657fc416b7eb19f252df7397e6}\label{class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi_ab9da3d657fc416b7eb19f252df7397e6}} 
 \index{Conflux::XboxHDMI::XboxHdmi@{Conflux::XboxHDMI::XboxHdmi}!UpdateConfigValues@{UpdateConfigValues}}
@@ -225,39 +227,49 @@ Implements \mbox{\hyperlink{class_conflux_1_1_hdmi_interface_a96c5d0e291b1fa4ca3
 
 
 
-Definition at line 156 of file Xbox\+Hdmi.\+cpp.
+Definition at line 209 of file Xbox\+Hdmi.\+cpp.
 
-\mbox{\Hypertarget{class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi_af6a9d0171891dc0b1462718df980a834}\label{class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi_af6a9d0171891dc0b1462718df980a834}} 
+\mbox{\Hypertarget{class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi_a363d3a182bf3d400b890366fc98251da}\label{class_conflux_1_1_xbox_h_d_m_i_1_1_xbox_hdmi_a363d3a182bf3d400b890366fc98251da}} 
 \index{Conflux::XboxHDMI::XboxHdmi@{Conflux::XboxHDMI::XboxHdmi}!UpdateFirmware@{UpdateFirmware}}
 \index{UpdateFirmware@{UpdateFirmware}!Conflux::XboxHDMI::XboxHdmi@{Conflux::XboxHDMI::XboxHdmi}}
 \doxysubsubsection{\texorpdfstring{UpdateFirmware()}{UpdateFirmware()}}
-{\footnotesize\ttfamily bool Conflux\+::\+Xbox\+H\+D\+M\+I\+::\+Xbox\+Hdmi\+::\+Update\+Firmware (\begin{DoxyParamCaption}\item[{Update\+Source}]{update\+Source }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily bool Conflux\+::\+Xbox\+H\+D\+M\+I\+::\+Xbox\+Hdmi\+::\+Update\+Firmware (\begin{DoxyParamCaption}\item[{Update\+Source}]{update\+Source,  }\item[{void($\ast$)(const char $\ast$current\+Process)}]{current\+Process,  }\item[{void($\ast$)(int percentage\+Complete)}]{percent\+Complete,  }\item[{void($\ast$)(const char $\ast$error\+Message)}]{error\+Message,  }\item[{void($\ast$)(bool flash\+Successful)}]{update\+Complete,  }\item[{const char $\ast$}]{path\+To\+Firmware = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
-Calling this function with a valid update source will begin the process of updating the firmware. 
+Calling this function with a valid update source will begin the process of updating the firmware. This is an async process and updates to the process are provided via callbacks. 
 
 
 \begin{DoxyParams}{Parameters}
 {\em update\+Source} & Enumeration of possible update sources. Indexed by Conflux\+::\+Update\+Source. \\
 \hline
+{\em current\+Process} & Callback that provides updates on the current update process. \\
+\hline
+{\em percent\+Complete} & Callback that provides the current percentage complete. \\
+\hline
+{\em error\+Message} & Callback that provides any errors encountered during the process. \\
+\hline
+{\em update\+Complete} & Callback that notifies that the update has completed successfully, or otherwise. \\
+\hline
+{\em path\+To\+Firmware} & Allows the location of the update to be provided by absolute path, if the update source is Conflux\+::\+Update\+Source\+::\+W\+O\+R\+K\+I\+N\+G\+\_\+\+D\+I\+R\+E\+C\+T\+O\+RY. \\
+\hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-true if the update process was started. 
+true if the Process was started successfully. 
 
 false otherwise. 
 \end{DoxyReturn}
 
 
-Implements \mbox{\hyperlink{class_conflux_1_1_hdmi_interface_a2c1aea6b6098efcc6a034251eb427f00}{Conflux\+::\+Hdmi\+Interface}}.
+Implements \mbox{\hyperlink{class_conflux_1_1_hdmi_interface_a4c4b72786018fb1329d81762376ea10e}{Conflux\+::\+Hdmi\+Interface}}.
 
 
 
-Definition at line 51 of file Xbox\+Hdmi.\+cpp.
+Definition at line 91 of file Xbox\+Hdmi.\+cpp.
 
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-H\+D\+M\+I\+\_\+\+Implementations/\+Xbox\+H\+D\+M\+I/Xbox\+Hdmi.\+h\item 
-H\+D\+M\+I\+\_\+\+Implementations/\+Xbox\+H\+D\+M\+I/Xbox\+Hdmi.\+cpp\end{DoxyCompactItemize}
+Source/\+H\+D\+M\+I\+\_\+\+Implementations/\+Xbox\+H\+D\+M\+I/Xbox\+Hdmi.\+h\item 
+Source/\+H\+D\+M\+I\+\_\+\+Implementations/\+Xbox\+H\+D\+M\+I/Xbox\+Hdmi.\+cpp\end{DoxyCompactItemize}

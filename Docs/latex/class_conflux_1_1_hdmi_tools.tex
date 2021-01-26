@@ -26,10 +26,10 @@ const char $\ast$ \mbox{\hyperlink{class_conflux_1_1_hdmi_tools_a9bd807c5efb7b32
 \begin{DoxyCompactList}\small\item\em Gets a \mbox{\hyperlink{class_conflux_1_1_version_code}{Version\+Code}} object filled out with the firmware version. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{class_conflux_1_1_version_code}{Version\+Code}} \mbox{\hyperlink{class_conflux_1_1_hdmi_tools_ada3a2e6ca14e6c97f7c36ba77ee70195}{Get\+Kernel\+Patch\+Version}} ()
 \begin{DoxyCompactList}\small\item\em Gets a \mbox{\hyperlink{class_conflux_1_1_version_code}{Version\+Code}} object filled out with the kernel version. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{class_conflux_1_1_hdmi_tools_a93c5ca76dac15bf9565d201944659405}{Is\+Update\+Available}} (Update\+Source update\+Source)
+bool \mbox{\hyperlink{class_conflux_1_1_hdmi_tools_a6ad32b9741962f1c1d15a68d784a57df}{Is\+Update\+Available}} (Update\+Source update\+Source, const char $\ast$path\+To\+Firmware=\char`\"{}\char`\"{})
 \begin{DoxyCompactList}\small\item\em Checks to see if a firmware update is available via the provided update source. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{class_conflux_1_1_hdmi_tools_ac71a1ba6798e61dae0ed5da70466781d}{Update\+Firmware}} (Update\+Source update\+Source)
-\begin{DoxyCompactList}\small\item\em Perform firmware update via the proviced update source. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_conflux_1_1_hdmi_tools_a4ce3a945d139b9202b4a10c185012aef}{Update\+Firmware}} (Update\+Source update\+Source, void($\ast$current\+Process)(const char $\ast$current\+Process), void($\ast$percent\+Complete)(int percentage\+Complete), void($\ast$error\+Message)(const char $\ast$error\+Message), void($\ast$update\+Complete)(bool flash\+Successful), const char $\ast$path\+To\+Firmware=\char`\"{} \char`\"{})
+\begin{DoxyCompactList}\small\item\em Calling this function with a valid update source will begin the process of updating the firmware. This is an async process and updates to the process are provided via callbacks. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{class_conflux_1_1_hdmi_tools_a3faee2a140637f44ee64d640c7914cd4}{Get\+Feature\+Values}} (Supported\+Features feature, int $\ast$value, int $\ast$min, int $\ast$max)
 \begin{DoxyCompactList}\small\item\em Get the current value of a given feature, as well as the valid value range. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{class_conflux_1_1_hdmi_tools_aca5e65f2e911ea486ed6975bf8ddb5e9}{Set\+Feature\+Value}} (Supported\+Features feature, int value)
@@ -113,7 +113,7 @@ const char$\ast$ name of the feature.
 \end{DoxyReturn}
 
 
-Definition at line 246 of file Hdmi\+Tools.\+cpp.
+Definition at line 264 of file Hdmi\+Tools.\+cpp.
 
 \mbox{\Hypertarget{class_conflux_1_1_hdmi_tools_a3faee2a140637f44ee64d640c7914cd4}\label{class_conflux_1_1_hdmi_tools_a3faee2a140637f44ee64d640c7914cd4}} 
 \index{Conflux::HdmiTools@{Conflux::HdmiTools}!GetFeatureValues@{GetFeatureValues}}
@@ -143,7 +143,7 @@ false otherwise.
 \end{DoxyReturn}
 
 
-Definition at line 203 of file Hdmi\+Tools.\+cpp.
+Definition at line 221 of file Hdmi\+Tools.\+cpp.
 
 \mbox{\Hypertarget{class_conflux_1_1_hdmi_tools_a6b032f1c575fcdb0f05b7e43c48ef9c6}\label{class_conflux_1_1_hdmi_tools_a6b032f1c575fcdb0f05b7e43c48ef9c6}} 
 \index{Conflux::HdmiTools@{Conflux::HdmiTools}!GetFirmwareVersion@{GetFirmwareVersion}}
@@ -259,11 +259,11 @@ false otherwise.
 
 Definition at line 106 of file Hdmi\+Tools.\+cpp.
 
-\mbox{\Hypertarget{class_conflux_1_1_hdmi_tools_a93c5ca76dac15bf9565d201944659405}\label{class_conflux_1_1_hdmi_tools_a93c5ca76dac15bf9565d201944659405}} 
+\mbox{\Hypertarget{class_conflux_1_1_hdmi_tools_a6ad32b9741962f1c1d15a68d784a57df}\label{class_conflux_1_1_hdmi_tools_a6ad32b9741962f1c1d15a68d784a57df}} 
 \index{Conflux::HdmiTools@{Conflux::HdmiTools}!IsUpdateAvailable@{IsUpdateAvailable}}
 \index{IsUpdateAvailable@{IsUpdateAvailable}!Conflux::HdmiTools@{Conflux::HdmiTools}}
 \doxysubsubsection{\texorpdfstring{IsUpdateAvailable()}{IsUpdateAvailable()}}
-{\footnotesize\ttfamily bool Conflux\+::\+Hdmi\+Tools\+::\+Is\+Update\+Available (\begin{DoxyParamCaption}\item[{Update\+Source}]{update\+Source }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily bool Conflux\+::\+Hdmi\+Tools\+::\+Is\+Update\+Available (\begin{DoxyParamCaption}\item[{Update\+Source}]{update\+Source,  }\item[{const char $\ast$}]{path\+To\+Firmware = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})}
 
 
 
@@ -272,6 +272,8 @@ Checks to see if a firmware update is available via the provided update source.
 
 \begin{DoxyParams}{Parameters}
 {\em update\+Source} & Enumeration of possible update sources. Indexed by Conflux\+::\+Update\+Source. \\
+\hline
+{\em path\+To\+Firmware} & Allows the location of the update to be provided by absolute path, if the update source is Conflux\+::\+Update\+Source\+::\+W\+O\+R\+K\+I\+N\+G\+\_\+\+D\+I\+R\+E\+C\+T\+O\+RY. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -300,7 +302,7 @@ false otherwise.
 \end{DoxyReturn}
 
 
-Definition at line 194 of file Hdmi\+Tools.\+cpp.
+Definition at line 212 of file Hdmi\+Tools.\+cpp.
 
 \mbox{\Hypertarget{class_conflux_1_1_hdmi_tools_aca5e65f2e911ea486ed6975bf8ddb5e9}\label{class_conflux_1_1_hdmi_tools_aca5e65f2e911ea486ed6975bf8ddb5e9}} 
 \index{Conflux::HdmiTools@{Conflux::HdmiTools}!SetFeatureValue@{SetFeatureValue}}
@@ -326,7 +328,7 @@ false otherwise.
 \end{DoxyReturn}
 
 
-Definition at line 225 of file Hdmi\+Tools.\+cpp.
+Definition at line 243 of file Hdmi\+Tools.\+cpp.
 
 \mbox{\Hypertarget{class_conflux_1_1_hdmi_tools_a82d97492a55c51b8c54c57b101da68e4}\label{class_conflux_1_1_hdmi_tools_a82d97492a55c51b8c54c57b101da68e4}} 
 \index{Conflux::HdmiTools@{Conflux::HdmiTools}!UpdateFeatureConfig@{UpdateFeatureConfig}}
@@ -345,35 +347,45 @@ false otherwise.
 \end{DoxyReturn}
 
 
-Definition at line 237 of file Hdmi\+Tools.\+cpp.
+Definition at line 255 of file Hdmi\+Tools.\+cpp.
 
-\mbox{\Hypertarget{class_conflux_1_1_hdmi_tools_ac71a1ba6798e61dae0ed5da70466781d}\label{class_conflux_1_1_hdmi_tools_ac71a1ba6798e61dae0ed5da70466781d}} 
+\mbox{\Hypertarget{class_conflux_1_1_hdmi_tools_a4ce3a945d139b9202b4a10c185012aef}\label{class_conflux_1_1_hdmi_tools_a4ce3a945d139b9202b4a10c185012aef}} 
 \index{Conflux::HdmiTools@{Conflux::HdmiTools}!UpdateFirmware@{UpdateFirmware}}
 \index{UpdateFirmware@{UpdateFirmware}!Conflux::HdmiTools@{Conflux::HdmiTools}}
 \doxysubsubsection{\texorpdfstring{UpdateFirmware()}{UpdateFirmware()}}
-{\footnotesize\ttfamily bool Conflux\+::\+Hdmi\+Tools\+::\+Update\+Firmware (\begin{DoxyParamCaption}\item[{Update\+Source}]{update\+Source }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily bool Conflux\+::\+Hdmi\+Tools\+::\+Update\+Firmware (\begin{DoxyParamCaption}\item[{Update\+Source}]{update\+Source,  }\item[{void($\ast$)(const char $\ast$current\+Process)}]{current\+Process,  }\item[{void($\ast$)(int percentage\+Complete)}]{percent\+Complete,  }\item[{void($\ast$)(const char $\ast$error\+Message)}]{error\+Message,  }\item[{void($\ast$)(bool flash\+Successful)}]{update\+Complete,  }\item[{const char $\ast$}]{path\+To\+Firmware = {\ttfamily \char`\"{}~\char`\"{}} }\end{DoxyParamCaption})}
 
 
 
-Perform firmware update via the proviced update source. 
+Calling this function with a valid update source will begin the process of updating the firmware. This is an async process and updates to the process are provided via callbacks. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em update\+Source} & Enumeration of possible update sources. \\
+{\em update\+Source} & Enumeration of possible update sources. Indexed by Conflux\+::\+Update\+Source. \\
+\hline
+{\em current\+Process} & Callback that provides updates on the current update process. \\
+\hline
+{\em percent\+Complete} & Callback that provides the current percentage complete. \\
+\hline
+{\em error\+Message} & Callback that provides any errors encountered during the process. \\
+\hline
+{\em update\+Complete} & Callback that notifies that the update has completed successfully, or otherwise. \\
+\hline
+{\em path\+To\+Firmware} & Allows the location of the update to be provided by absolute path, if the update source is Conflux\+::\+Update\+Source\+::\+W\+O\+R\+K\+I\+N\+G\+\_\+\+D\+I\+R\+E\+C\+T\+O\+RY. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-true if update was successful. 
+true if the Process was started successfully. 
 
 false otherwise. 
 \end{DoxyReturn}
 
 
-Definition at line 188 of file Hdmi\+Tools.\+cpp.
+Definition at line 194 of file Hdmi\+Tools.\+cpp.
 
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-Hdmi\+Tools.\+h\item 
-Hdmi\+Tools.\+cpp\end{DoxyCompactItemize}
+Source/Hdmi\+Tools.\+h\item 
+Source/Hdmi\+Tools.\+cpp\end{DoxyCompactItemize}
