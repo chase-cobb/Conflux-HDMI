@@ -44,7 +44,7 @@ namespace Conflux
             bool UpdateFirmware(UpdateSource updateSource, void (*currentProcess)(const char* currentProcess)
                                                          , void (*percentComplete)(int percentageComplete)
                                                          , void (*errorMessage)(const char* errorMessage)
-                                                         , void (*updateComplete)(void)
+                                                         , void (*updateComplete)(bool flashSuccessful)
                                                          , const char* pathToFirmware = "");
             bool IsFeatureSupported(SupportedFeatures feature);
             bool GetFirmwareVersion(VersionCode* versionCode);
@@ -61,7 +61,7 @@ namespace Conflux
             void (*m_currentUpdateProcess)(const char* currentProcess);
             void (*m_currentPercentComplete)(int percentComplete);
             void (*m_currentErrorMessage)(const char* errorMessage);
-            void (*m_updateComplete)(void);
+            void (*m_updateComplete)(bool flashSuccessful);
 
             bool GetFirmwareCompileTime(time_t* compileTime);
             bool GetBootMode(BootMode* mode);

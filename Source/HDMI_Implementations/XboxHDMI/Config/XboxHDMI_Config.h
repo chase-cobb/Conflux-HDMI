@@ -29,13 +29,19 @@ namespace Conflux
         const char* const PROG_PROCESS_LOADED_FIRMWARE = "Firmware loaded!!";
         const char* const PROG_ERROR_FAILED_TO_LOAD_FIRMWARE = "Failed to load firmware";
         const char* const PROG_SWITCHING_TO_BOOTROM = "Switching to bootrom";
-        const char* const PROG_WAITING_FOR_BOOTROM = "Waiting for bootrom";
+        const char* const PROG_WAITING_FOR_BOOTROM = "Waiting to reset to bootrom";
         const char* const PROG_CHECKING_BOOT_MODE = "Checking boot mode";
         const char* const PROG_SWAPPED_TO_BOOTROM = "Successfully swapped to bootrom";
         const char* const PROG_FLASHING_FIRMWARE = "Flashing firmware";
         const char* const PROG_WRITING_PAGE_CRC = "Writing page CRC";
         const char* const PROG_WRITING_PAGE_DATA = "Writing page data";
 
+        const char* const BOOT_MODE_HDMI_PROGRAM = "HDMI program mode";
+        const char* const BOOT_MODE_HDMI_BOOTROM = "Bootrom mode";
+        const char* const BOOT_MODE_HDMI_FIRMWARE = "HDMI firmware mode";
+        const char* const BOOT_MODE_HDMI_INVALID = "Invalid boot mode";
+
+        const char* const PROG_ERROR_UNABLE_TO_GET_BOOT_MODE = "Unable to get boot mode";
         const char* const PROG_ERROR_UNABLE_TO_SIGNAL_BOOT_MODE = "Unable to send signal to switch boot mode";
         const char* const PROG_ERROR_UNABLE_TO_SWAP_TO_BOOTROM = "Unable to swap to boot rom";
         const char* const PROG_ERROR_UNABLE_TO_WRITE_PAGE_DATA = "Unable to write page data";

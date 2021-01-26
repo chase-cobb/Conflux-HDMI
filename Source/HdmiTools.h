@@ -137,7 +137,7 @@ namespace Conflux
          * @param errorMessage Callback that provides any errors
          * encountered during the process.
          * @param updateComplete Callback that notifies that the
-         * update has completed successfully.
+         * update has completed successfully, or otherwise.
          * @param pathToFirmware Allows the location of the update
          * to be provided by absolute path, if the update source is 
          * Conflux::UpdateSource::WORKING_DIRECTORY.
@@ -147,7 +147,7 @@ namespace Conflux
         bool UpdateFirmware(UpdateSource updateSource, void (*currentProcess)(const char* currentProcess)
                                                      , void (*percentComplete)(int percentageComplete)
                                                      , void (*errorMessage)(const char* errorMessage)
-                                                     , void (*updateComplete)(void)
+                                                     , void (*updateComplete)(bool flashSuccessful)
                                                      , const char* pathToFirmware = " ");
 
         /**

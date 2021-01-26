@@ -91,7 +91,7 @@ namespace Conflux
         bool XboxHdmi::UpdateFirmware(UpdateSource updateSource, void (*currentProcess)(const char* currentProcess)
                                                                , void (*percentComplete)(int percentageComplete)
                                                                , void (*errorMessage)(const char* errorMessage)
-                                                               , void (*updateComplete)(void)
+                                                               , void (*updateComplete)(bool flashSuccessful)
                                                                , const char* pathToFirmware)
         {
             m_currentUpdateProcess = currentProcess;
@@ -316,6 +316,7 @@ namespace Conflux
             uint8_t* loadedFirmware = nullptr;
             long firmwareFileSize;
             int sleepBetweenOpsInSeconds = 2;
+            bool flashWasSuccessful = true;
 
             m_currentErrorMessage("None");
 
@@ -324,6 +325,7 @@ namespace Conflux
             if(!LoadFirmwareImage(updateSource, loadedFirmware, &firmwareFileSize))
             {
                 m_currentErrorMessage(PROG_ERROR_FAILED_TO_LOAD_FIRMWARE);
+                m_updateComplete(false); // Early out
             }
             std::this_thread::sleep_for (std::chrono::seconds(sleepBetweenOpsInSeconds));
 
@@ -338,37 +340,44 @@ namespace Conflux
             std::this_thread::sleep_for (std::chrono::seconds(sleepBetweenOpsInSeconds));
             
             // Switch to bootloader
-            m_currentUpdateProcess("Checking boot mode");
+            m_currentUpdateProcess(PROG_CHECKING_BOOT_MODE);
             if(!GetBootMode(&bootMode))
             {
-                m_currentErrorMessage("Unable to get boot mode!!");
-                std::this_thread::sleep_for (std::chrono::seconds(sleepBetweenOpsInSeconds));
+                m_currentErrorMessage(PROG_ERROR_UNABLE_TO_GET_BOOT_MODE);
+                m_updateComplete(false); // Early out
             }
             else
             {
                 if(bootMode == BootMode::HDMI_PROGRAM)
                 {
-                    m_currentUpdateProcess("Boot rom needs to be loaded from HDMI program");
+                    m_currentUpdateProcess(BOOT_MODE_HDMI_PROGRAM);
                 }
                 else if(bootMode == BootMode::BOOTROM)
                 {
-                    m_currentUpdateProcess("Boot rom is already loaded");
+                    // Even though it sometimes reports as already in bootrom
+                    // at startup, we still need to switch to bootrom manually
+                    // because the bootrom is loaded by swapping to the
+                    // HDMI_PROGRAM boot mode to make sure the full order of
+                    // operations is followed
+                    m_currentUpdateProcess(BOOT_MODE_HDMI_BOOTROM);
                 }
                 else if(bootMode == BootMode::HDMI_FIRMWARE)
                 {
-                    m_currentUpdateProcess("Boot rom needs to be loaded from HDMI firmware");
+                    m_currentUpdateProcess(BOOT_MODE_HDMI_FIRMWARE);
                 }
                 else if(bootMode == BootMode::INVALID)
                 {
-                    m_currentUpdateProcess("Invalid boot mode detected");
+                    m_currentUpdateProcess(BOOT_MODE_HDMI_INVALID);
                 }
             }
             std::this_thread::sleep_for (std::chrono::seconds(sleepBetweenOpsInSeconds));
             
-
-            if(!SwitchBootMode(BootMode::HDMI_PROGRAM)) // HACK : XboxHDMI actually expects this to switch to bootrom
+            // XboxHDMI actually expects this to switch to bootrom
+            // and not to switch to the bootrom directly
+            if(!SwitchBootMode(BootMode::HDMI_PROGRAM))
             {
                 m_currentErrorMessage(PROG_ERROR_UNABLE_TO_SIGNAL_BOOT_MODE);
+                m_updateComplete(false); // Early out
             }
             // Waiting for boot rom
             m_currentUpdateProcess(PROG_WAITING_FOR_BOOTROM);
@@ -394,7 +403,7 @@ namespace Conflux
 
             // Flashing firmware
             m_currentUpdateProcess(PROG_FLASHING_FIRMWARE);
-            for(uint32_t pageIndex = 0; pageIndex < PROGRAMMABLE_PAGES; ++pageIndex)
+            for(uint32_t pageIndex = 0; pageIndex < PROGRAMMABLE_PAGES; )
             {
                 uint32_t pageOffset = pageIndex * PAGE_SIZE;
                 uint32_t crcValue = CRC_INIT;
@@ -434,39 +443,40 @@ namespace Conflux
                     // Attempt to yield to other threads
                     std::this_thread::yield();
 
-                    // Check program status
-                    if(CheckForProgrammingErrors(&errorStatus))
-                    {
-                        switch (errorStatus)
-                        {
-                            case I2C_PROG_ERROR_ERASE:
-                            {
-                                m_currentErrorMessage(I2C_PROG_ERROR_ERASE_MESSAGE);
-                                break;
-                            }
-                            case I2C_PROG_ERROR_WRITE:
-                            {
-                                m_currentErrorMessage(I2C_PROG_ERROR_WRITE_MESSAGE);
-                                break;
-                            }
-                            default:
-                                break;
-                        }
-                    }
-                    else
-                    {
-                        m_currentErrorMessage(PROG_ERROR_UNABLE_TO_CHECK_ERROR_STATUS);
-                    }
-
                     // Update percentage complete
                     float currentPercentage = ((float)firmwareOffset/(float)totalBytesToWrite) * 100.0f;
                     m_currentPercentComplete((int)currentPercentage);
                 }
 
-                // Check for i2c errors and send them to the client app
-                if(errorStatus == I2C_PROG_ERROR_CRC)
+                // Check program status
+                bool errorFound = false;
+                if(CheckForProgrammingErrors(&errorStatus))
                 {
-                    m_currentErrorMessage(I2C_PROG_ERROR_CRC_MESSAGE);
+                    switch (errorStatus)
+                    {
+                        case I2C_PROG_ERROR_ERASE:
+                        {
+                            m_currentErrorMessage(I2C_PROG_ERROR_ERASE_MESSAGE);
+                            break;
+                        }
+                        case I2C_PROG_ERROR_WRITE:
+                        {
+                            m_currentErrorMessage(I2C_PROG_ERROR_WRITE_MESSAGE);
+                            break;
+                        }
+                        case I2C_PROG_ERROR_CRC:
+                        {
+                            m_currentErrorMessage(I2C_PROG_ERROR_CRC_MESSAGE);
+                            break;
+                        }
+                        default:
+                            ++pageIndex;
+                            break;
+                    }
+                }
+                else
+                {
+                    m_currentErrorMessage(PROG_ERROR_UNABLE_TO_CHECK_ERROR_STATUS);
                 }
 
                 // Sleeping here is required to avoid "failed to erase flash" errors
@@ -481,7 +491,7 @@ namespace Conflux
             }
 
             // Inform the client application that the update is complete.
-            m_updateComplete();
+            m_updateComplete(true);
         }
 
         bool XboxHdmi::LoadFirmwareImage(UpdateSource updateSource, uint8_t*& firmwareImage, long* fileSize, const char* firmwareFilePath)

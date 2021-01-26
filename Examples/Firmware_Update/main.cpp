@@ -18,9 +18,10 @@
 void ProgressUpdate(const char* progressUpdate);
 void PercentComplete(int percentComplete);
 void ErrorMessage(const char* currentErrorMessage);
-void FirmwareUpdateComplete();
+void FirmwareUpdateComplete(bool flashSuccessful);
 
 bool firmwareFlashInProgress = false;
+bool firmwareUpdateCompleted = false;
 bool firmwareWasUpdatedSuccessfully = false;
 int updateCompletionPercentage = 0;
 
@@ -110,17 +111,15 @@ int main(void)
     {
       std::ostringstream oss;
 
-      bool tempFirmwareFlashInProgress = firmwareFlashInProgress;
-
       oss << "Conflux HDMI async firmware update example \n";
       oss << "Firmware: " << hdmiTools->GetFirmwareVersion().GetVersionCodeAsCString() << "\n";
       oss << "Kernel : " << hdmiTools->GetKernelPatchVersion().GetVersionCodeAsCString() << "\n\n";
 
-      if(newFirmwareIsAvailable && !firmwareWasUpdatedSuccessfully)
+      if(newFirmwareIsAvailable)
       {
         // If the firmware is not being flashed, allow
         // the user to start the process by pressing "A"
-        if(!tempFirmwareFlashInProgress)
+        if(!firmwareFlashInProgress && !firmwareUpdateCompleted)
         {
           oss << "\n----Press A:Update Firmware       Press B: Exit----\n";
           if(SDL_GameControllerGetButton(pad, SDL_CONTROLLER_BUTTON_A) == 1)
@@ -138,24 +137,24 @@ int main(void)
             }
           }
         }
-        else if(tempFirmwareFlashInProgress)
+        else if(firmwareFlashInProgress)
         {
           // FLASHING FIRMWARE!! DO NOT POWER OFF YOUR CONSOLE!!
           const char* spin = flashingSpinner[spinnerIndex];
           oss << spin << spin << spin << "  Flashing firmware  " << spin << spin << spin << "\n";
           oss << "Do NOT power off your console!!\n\n";
 
-          //mutexObject.lock();
-          oss << "Flash status     : " << currentProgress << "\n";
-          //mutexObject.unlock();
+          mutexObject.lock();
+            oss << "Flash status     : " << currentProgress << "\n";
+          mutexObject.unlock();
 
           oss << "Overall progress : " << updateCompletionPercentage << " percent complete" << "\n";
           
-          //mutexObject.lock();
-          oss << "Error detected   : " << errorMessage << "\n";
-          //mutexObject.unlock();
+          mutexObject.lock();
+            oss << "Error detected   : " << errorMessage << "\n";
+          mutexObject.unlock();
 
-          // TODO : Update spinner timer with delta time in milliseconds.
+          // Update spinner timer with delta time in milliseconds.
           Duration deltaTime = Clock::now() - previousTime;
           spinnerTimer += (int)deltaTime.count();
 
@@ -178,18 +177,21 @@ int main(void)
         oss << "\n----Press B: Exit----\n";
       }
 
-      if(firmwareWasUpdatedSuccessfully)
-      {
-        oss << "\nFirmware was flashed successfully!\n";
-        oss << "\nPress B to reboot console\n";
-      }
-      
-      if(SDL_GameControllerGetButton(pad, SDL_CONTROLLER_BUTTON_B) == 1 && !tempFirmwareFlashInProgress)
+      if(firmwareUpdateCompleted)
       {
         if(firmwareWasUpdatedSuccessfully)
         {
-          XReboot();
+          oss << "\nFirmware was flashed successfully!\n";
         }
+        else
+        {
+          oss << "\nFirmware update failed!\n";
+        }
+        oss << "\nPlease power off your console console\n";
+      }
+      
+      if(SDL_GameControllerGetButton(pad, SDL_CONTROLLER_BUTTON_B) == 1 && !firmwareFlashInProgress)
+      {
         isRunning = false;
       }
 
@@ -239,9 +241,9 @@ inside these functions!!
 
 void ProgressUpdate(const char* progressUpdate)
 {
-  //mutexObject.lock();
+  mutexObject.lock();
     currentProgress = std::string(progressUpdate);
-  //mutexObject.unlock();
+  mutexObject.unlock();
 }
 
 void PercentComplete(int percentComplete)
@@ -252,18 +254,20 @@ void PercentComplete(int percentComplete)
 
 void ErrorMessage(const char* currentErrorMessage)
 {
-  //mutexObject.lock();
+  mutexObject.lock();
     errorMessage = std::string(currentErrorMessage);
-  //mutexObject.unlock();
+  mutexObject.unlock();
 }
 
-void FirmwareUpdateComplete()
+void FirmwareUpdateComplete(bool flashSuccessful)
 {
-  //mutexObject.lock();
-    firmwareFlashInProgress = false;
-    firmwareWasUpdatedSuccessfully = true;
-    updateCompletionPercentage = 0;
-    currentProgress = "Firmware successfully flashed!! Reboot your console.";
+  updateCompletionPercentage = 0;
+  firmwareWasUpdatedSuccessfully = flashSuccessful;
+  firmwareUpdateCompleted = true;
+  firmwareFlashInProgress = false;
+
+  mutexObject.lock();
+    currentProgress.clear();
     errorMessage.clear();
-  //mutexObject.unlock();
+  mutexObject.unlock();
 }
