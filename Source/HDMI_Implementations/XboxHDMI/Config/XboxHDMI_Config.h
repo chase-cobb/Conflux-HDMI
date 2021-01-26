@@ -21,7 +21,41 @@ namespace Conflux
 {
     namespace XboxHDMI
     {
-        const char* const FirmwareUpdateUrl = "TODO";
+        const char* const DEFAULT_FIRMWARE_WORKING_DIRECTORY = "D:\\firmware.bin";
+        const char* const DEFAULT_FIRMWARE_WORKING_DIRECTORY_OPEN_MODE = "rb";
+
+        const char* const PROG_PROCESS_LOADING_FIRMWARE = "Loading firmware";
+        const char* const PROG_PROCESS_FIRMWARE_FILE_SIZE = "Firmware file size-> ";
+        const char* const PROG_PROCESS_LOADED_FIRMWARE = "Firmware loaded!!";
+        const char* const PROG_ERROR_FAILED_TO_LOAD_FIRMWARE = "Failed to load firmware";
+        const char* const PROG_SWITCHING_TO_BOOTROM = "Switching to bootrom";
+        const char* const PROG_WAITING_FOR_BOOTROM = "Waiting to reset to bootrom";
+        const char* const PROG_CHECKING_BOOT_MODE = "Checking boot mode";
+        const char* const PROG_SWAPPED_TO_BOOTROM = "Successfully swapped to bootrom";
+        const char* const PROG_FLASHING_FIRMWARE = "Flashing firmware";
+        const char* const PROG_WRITING_PAGE_CRC = "Writing page CRC";
+        const char* const PROG_WRITING_PAGE_DATA = "Writing page data";
+
+        const char* const BOOT_MODE_HDMI_PROGRAM = "HDMI program mode";
+        const char* const BOOT_MODE_HDMI_BOOTROM = "Bootrom mode";
+        const char* const BOOT_MODE_HDMI_FIRMWARE = "HDMI firmware mode";
+        const char* const BOOT_MODE_HDMI_INVALID = "Invalid boot mode";
+
+        const char* const PROG_ERROR_UNABLE_TO_GET_BOOT_MODE = "Unable to get boot mode";
+        const char* const PROG_ERROR_UNABLE_TO_SIGNAL_BOOT_MODE = "Unable to send signal to switch boot mode";
+        const char* const PROG_ERROR_UNABLE_TO_SWAP_TO_BOOTROM = "Unable to swap to boot rom";
+        const char* const PROG_ERROR_UNABLE_TO_WRITE_PAGE_DATA = "Unable to write page data";
+        const char* const PROG_ERROR_UNABLE_TO_WRITE_CRC_DATA = "Unable to write CRC data";
+        const char* const PROG_ERROR_UNABLE_TO_CHECK_ERROR_STATUS = "Unable to read error status";
+
+        const char* const I2C_PROG_ERROR_CRC_MESSAGE = "Failed to verify CRC";
+        const char* const I2C_PROG_ERROR_WRITE_MESSAGE = "Failed to write flash";
+        const char* const I2C_PROG_ERROR_ERASE_MESSAGE = "Failed to erase flash";
+
+        const unsigned int PROGRAMMABLE_PAGES = 38;
+        const unsigned int PAGE_SIZE = 1024;
+
+        const unsigned int CRC_INIT = 0xffffffff;
 
         // XboxHDMI addresses were changed to const values from
         // preprocessor defines to allow them to be properly
