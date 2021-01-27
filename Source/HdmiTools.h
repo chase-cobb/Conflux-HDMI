@@ -22,8 +22,6 @@ Copyright 2021 Chase Cobb
 #include "HdmiInterface.h"
 #include <vector>
 
-// TODO : CC - Register callbacks for async update
-
 namespace Conflux
 {
     typedef const std::map<SupportedFeatures, RangedIntValue*> ConstFeatureMap;
