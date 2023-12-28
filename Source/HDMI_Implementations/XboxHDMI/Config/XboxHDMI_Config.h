@@ -53,7 +53,7 @@ namespace Conflux
         const char* const I2C_PROG_ERROR_ERASE_MESSAGE = "Failed to erase flash";
 
         const unsigned int PROGRAMMABLE_PAGES = 38;
-        const unsigned int PAGE_SIZE = 1024;
+        const unsigned int XBOX_HDMI_PAGE_SIZE = 1024;
 
         const unsigned int CRC_INIT = 0xffffffff;
 

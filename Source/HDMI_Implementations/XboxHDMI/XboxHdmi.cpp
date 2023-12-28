@@ -399,19 +399,19 @@ namespace Conflux
             }
             std::this_thread::sleep_for (std::chrono::seconds(sleepBetweenOpsInSeconds));
 
-            int totalBytesToWrite = PROGRAMMABLE_PAGES * PAGE_SIZE;
+            int totalBytesToWrite = PROGRAMMABLE_PAGES * XBOX_HDMI_PAGE_SIZE;
 
             // Flashing firmware
             m_currentUpdateProcess(PROG_FLASHING_FIRMWARE);
             for(uint32_t pageIndex = 0; pageIndex < PROGRAMMABLE_PAGES; )
             {
-                uint32_t pageOffset = pageIndex * PAGE_SIZE;
+                uint32_t pageOffset = pageIndex * XBOX_HDMI_PAGE_SIZE;
                 uint32_t crcValue = CRC_INIT;
                 uint32_t firmwareOffset = 0;
 
                 m_currentUpdateProcess(PROG_WRITING_PAGE_CRC);
                 // Generate CRC and write it for this page
-                for(uint32_t index = 0; index < PAGE_SIZE; ++index)
+                for(uint32_t index = 0; index < XBOX_HDMI_PAGE_SIZE; ++index)
                 {
                     firmwareOffset = index + pageOffset;
 
@@ -429,7 +429,7 @@ namespace Conflux
                 std::this_thread::sleep_for (std::chrono::milliseconds(750));
                 
                 m_currentUpdateProcess(PROG_WRITING_PAGE_DATA);
-                for(uint32_t index = 0; index < PAGE_SIZE; ++index)
+                for(uint32_t index = 0; index < XBOX_HDMI_PAGE_SIZE; ++index)
                 {
                     firmwareOffset = index + pageOffset;
                     
